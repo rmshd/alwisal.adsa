@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DARS_LIST from '../data/dars.json';
 import { CONFIG } from '../config';
 import Button from '../components/Button';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export default function Register() {
   const [step, setStep] = useState(1);
@@ -21,20 +21,20 @@ export default function Register() {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const districtsList = [
-    'മലപ്പുറം',
-    'കോഴിക്കോട്',
-    'വയനാട്',
-    'പാലക്കാട്',
-    'തൃശ്ശൂർ',
-    'കണ്ണൂർ',
-    'കാസർഗോഡ്',
-    'എറണാകുളം',
-    'ഇടുക്കി',
-    'ആലപ്പുഴ',
-    'കോട്ടയം',
-    'പത്തനംതിട്ട',
-    'കൊല്ലം',
-    'തിരുവനന്തപുരം',
+    'Malappuram (മലപ്പുറം)',
+    'Kozhikode (കോഴിക്കോട്)',
+    'Wayanad (വയനാട്)',
+    'Palakkad (പാലക്കാട്)',
+    'Thrissur (തൃശ്ശൂർ)',
+    'Kannur (കണ്ണൂർ)',
+    'Kasaragod (കാസർഗോഡ്)',
+    'Ernakulam (എറണാകുളം)',
+    'Idukki (ഇടുക്കി)',
+    'Alappuzha (ആലപ്പുഴ)',
+    'Kottayam (കോട്ടയം)',
+    'Pathanamthitta (പത്തനംതിട്ട)',
+    'Kollam (കൊല്ലം)',
+    'Thiruvananthapuram (തിരുവനന്തപുരം)',
   ];
 
   const validatePhone = (number) => {
@@ -45,10 +45,10 @@ export default function Register() {
   const validateStep1 = () => {
     const errs = {};
     if (!formData.name.trim()) {
-      errs.name = 'വിദ്യാർത്ഥിയുടെ പേര് രേഖപ്പെടുത്തുക';
+      errs.name = 'Please provide the student full name';
     }
     if (!formData.district) {
-      errs.district = 'ജില്ല തിരഞ്ഞെടുക്കുക';
+      errs.district = 'Please select your native district';
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -57,18 +57,18 @@ export default function Register() {
   const validateStep2 = () => {
     const errs = {};
     if (!formData.dars) {
-      errs.dars = 'ദർസ് തിരഞ്ഞെടുക്കുക';
+      errs.dars = 'Please select your current SUFFA Dars';
     }
     if (!formData.phone.trim()) {
-      errs.phone = 'ഫോൺ / WhatsApp നമ്പർ നൽകുക';
+      errs.phone = 'Please provide mobile/WhatsApp number';
     } else if (!validatePhone(formData.phone)) {
-      errs.phone = 'സാധുവായ 10 അക്ക മൊബൈൽ നമ്പർ നൽകുക';
+      errs.phone = 'Enter valid 10-digit mobile number';
     }
 
     if (!formData.parentPhone.trim()) {
-      errs.parentPhone = 'രക്ഷിതാവിന്റെ ഫോൺ നമ്പർ നൽകുക';
+      errs.parentPhone = 'Please provide parent/guardian phone';
     } else if (!validatePhone(formData.parentPhone)) {
-      errs.parentPhone = 'സാധുവായ 10 അക്ക മൊബൈൽ നമ്പർ നൽകുക';
+      errs.parentPhone = 'Enter valid 10-digit mobile number';
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -126,60 +126,65 @@ export default function Register() {
   };
 
   return (
-    <section id="register" className="full-width-section section-pad bg-[#0B0D12] relative overflow-hidden">
+    <section id="register" className="full-width-section section-pad bg-[#08090C] relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] rounded-full bg-[var(--yellow)]/5 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-[var(--gold)]/5 blur-[160px] pointer-events-none" />
 
       <div className="flex flex-col gap-12 max-w-4xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-2">
           <div className="flex flex-col gap-3">
-            <span className="ds-eyebrow">സൗജന്യ രജിസ്ട്രേഷൻ</span>
-            <h2 className="heading-h2 text-white">
-              ക്യാമ്പിലേക്ക്{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC93C] via-[#FFE27D] to-[#F59E0B]">
-                രജിസ്റ്റർ ചെയ്യൂ
+            <div className="flex items-center gap-3">
+              <span className="ds-eyebrow">REGISTRATION PORTAL</span>
+              <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
+                التَّسْجِيلُ المَجَّانِيُّ
+              </span>
+            </div>
+            <h2 className="heading-section text-white">
+              Candidate Scholar{' '}
+              <span className="gold-gradient-text block">
+                Admission Form
               </span>
             </h2>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400/10 border border-amber-400/25 text-xs font-sora font-bold text-amber-400 shadow-[0_0_15px_rgba(255,201,60,0.15)] self-start sm:self-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--gold)]/10 border border-[var(--gold)]/25 text-xs font-sans font-bold text-[var(--gold-light)] shadow-[0_0_15px_rgba(223,177,91,0.15)] self-start sm:self-auto">
             <span>✨</span>
-            <span>{CONFIG.FEE_LABEL}</span>
+            <span>100% FREE ADMISSION · BOARDING INCLUDED</span>
           </div>
         </div>
 
         {/* Form Container (Glass Terminal) */}
-        <div className="p-6 sm:p-10 rounded-[28px] bg-[#141722]/85 backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] relative">
+        <div className="p-6 sm:p-10 rounded-[28px] bg-[#12151D]/85 backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.7)] relative">
           {isSuccess ? (
             /* SUCCESS STATE */
             <div className="flex flex-col items-center text-center py-8 gap-6">
               <div className="w-18 h-18 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
-                <CheckCircle2 size={36} strokeWidth={1.75} />
+                <CheckCircle2 size={38} strokeWidth={1.75} />
               </div>
 
               <div className="flex flex-col gap-2 max-w-md">
-                <h3 className="heading-h3 text-white text-2xl">
-                  രജിസ്ട്രേഷൻ വിജയകരം!
+                <h3 className="font-sans font-extrabold text-white text-2xl">
+                  Application Received Successfully!
                 </h3>
-                <p className="body-editorial text-sm sm:text-base">
-                  പ്രിയപ്പെട്ട <span className="text-white font-semibold">{formData.name}</span>,
-                  താങ്കളുടെ അപേക്ഷ സ്വീകരിച്ചു. ക്യാമ്പ് സംബന്ധിച്ച ഔദ്യോഗിക വിവരങ്ങൾ WhatsApp വഴി അറിയിക്കും.
+                <p className="font-sans text-sm sm:text-base text-[var(--muted)] leading-relaxed">
+                  Honoured brother <span className="text-white font-bold">{formData.name}</span>,
+                  your candidate admission form has been registered. The camp reception team will reach out with boarding and travel details via WhatsApp.
+                </p>
+                <p className="font-malayalam text-xs text-white/50 mt-1">
+                  താങ്കളുടെ അപേക്ഷ സ്വീകരിച്ചു. വിശദവിവരങ്ങൾ WhatsApp വഴി ഉടൻ അറിയിക്കും.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
+              <div className="flex flex-col sm:flex-row items-center gap-4 mt-3">
                 <a
                   href={CONFIG.WHATSAPP_CHAT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 h-[52px] px-8 rounded-full font-semibold text-base bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-[0_0_20px_rgba(37,211,102,0.3)] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
-                  aria-label="WhatsApp-ൽ ചാറ്റ് ചെയ്യുക"
+                  className="inline-flex items-center gap-2.5 h-[52px] px-8 rounded-full font-sans font-bold text-sm bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-[0_0_20px_rgba(37,211,102,0.3)] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+                  aria-label="Connect on WhatsApp"
                 >
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.04 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.33C9.33 7.33 9.04 7.4 8.78 7.68C8.52 7.96 7.78 8.65 7.78 10.05C7.78 11.45 8.8 12.8 8.94 13C9.08 13.2 10.96 16.07 13.84 17.31C14.52 17.61 15.06 17.79 15.48 17.92C16.17 18.14 16.8 18.11 17.3 18.04C17.85 17.96 18.99 17.35 19.23 16.68C19.47 16 19.47 15.43 19.4 15.31C19.33 15.19 19.14 15.12 18.84 14.97C18.55 14.83 17.11 14.12 16.84 14.02C16.57 13.92 16.38 13.87 16.18 14.17C15.98 14.46 15.42 15.12 15.25 15.31C15.08 15.51 14.91 15.53 14.62 15.39C14.33 15.24 13.39 14.93 12.27 13.93C11.4 13.15 10.81 12.19 10.64 11.9C10.47 11.61 10.62 11.45 10.77 11.31C10.9 11.18 11.06 10.97 11.21 10.8C11.36 10.63 11.41 10.51 11.51 10.31C11.61 10.11 11.56 9.94 11.48 9.79C11.41 9.65 10.81 8.18 10.56 7.59C10.32 7.02 10.07 7.09 9.89 7.09C9.72 7.08 9.53 7.08 9.33 7.08L9.53 7.33Z" />
-                  </svg>
-                  <span>WhatsApp-ൽ ചാറ്റ് ചെയ്യൂ</span>
+                  <span>Chat on WhatsApp Helpline</span>
                 </a>
 
                 <button
@@ -197,9 +202,9 @@ export default function Register() {
                       honeypot: '',
                     });
                   }}
-                  className="text-xs font-sora text-[var(--muted)] hover:text-white underline cursor-pointer"
+                  className="text-xs font-sans text-[var(--muted)] hover:text-white underline cursor-pointer"
                 >
-                  മറ്റൊരു അപേക്ഷ നൽകുക
+                  Submit Another Application
                 </button>
               </div>
             </div>
@@ -221,42 +226,48 @@ export default function Register() {
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/[0.08]">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center font-sora font-bold text-xs ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-sans font-bold text-xs ${
                       step === 1
-                        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B0D12] shadow-[0_0_15px_rgba(255,201,60,0.3)]'
+                        ? 'bg-gradient-to-r from-[#DFB15B] to-[#A37F30] text-[#08090C] shadow-[0_0_15px_rgba(223,177,91,0.3)]'
                         : 'bg-white/20 text-white'
                     }`}
                   >
                     1
                   </div>
-                  <span
-                    className={`font-heading text-sm ${
-                      step === 1 ? 'text-white font-bold' : 'text-[var(--muted)]'
-                    }`}
-                  >
-                    വിദ്യാർത്ഥി വിവരങ്ങൾ
-                  </span>
+                  <div className="flex flex-col">
+                    <span
+                      className={`font-sans text-sm ${
+                        step === 1 ? 'text-white font-bold' : 'text-[var(--muted)] font-medium'
+                      }`}
+                    >
+                      Personal Details
+                    </span>
+                    <span className="font-malayalam text-[10px] text-white/40">വിദ്യാർത്ഥി വിവരങ്ങൾ</span>
+                  </div>
                 </div>
 
-                <div className="w-12 h-[1px] bg-white/10 mx-2 hidden sm:block" />
+                <div className="w-16 h-[1px] bg-white/10 mx-2 hidden sm:block" />
 
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center font-sora font-bold text-xs ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-sans font-bold text-xs ${
                       step === 2
-                        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B0D12] shadow-[0_0_15px_rgba(255,201,60,0.3)]'
+                        ? 'bg-gradient-to-r from-[#DFB15B] to-[#A37F30] text-[#08090C] shadow-[0_0_15px_rgba(223,177,91,0.3)]'
                         : 'bg-white/10 text-[var(--muted)]'
                     }`}
                   >
                     2
                   </div>
-                  <span
-                    className={`font-heading text-sm ${
-                      step === 2 ? 'text-white font-bold' : 'text-[var(--muted)]'
-                    }`}
-                  >
-                    ദർസ് & ബന്ധപ്പെടാൻ
-                  </span>
+                  <div className="flex flex-col">
+                    <span
+                      className={`font-sans text-sm ${
+                        step === 2 ? 'text-white font-bold' : 'text-[var(--muted)] font-medium'
+                      }`}
+                    >
+                      Dars & Verification
+                    </span>
+                    <span className="font-malayalam text-[10px] text-white/40">ദർസ് വിവരങ്ങൾ</span>
+                  </div>
                 </div>
               </div>
 
@@ -266,11 +277,11 @@ export default function Register() {
                   <div className="flex flex-col gap-2">
                     <label
                       htmlFor="name"
-                      className="font-heading font-medium text-sm text-white flex items-center justify-between"
+                      className="font-sans font-semibold text-xs sm:text-sm text-white flex items-center justify-between"
                     >
-                      <span>പൂർണ്ണ നാമം (പേര്) *</span>
+                      <span>Full Name of Student (പൂർണ്ണ നാമം) *</span>
                       {errors.name && (
-                        <span className="text-xs text-[var(--coral)] font-body">
+                        <span className="text-xs text-[var(--coral)] font-sans">
                           {errors.name}
                         </span>
                       )}
@@ -281,8 +292,8 @@ export default function Register() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="മുഹമ്മദ് ഷാഫി..."
-                      className={`h-[50px] px-4 rounded-[12px] bg-white/5 border text-white font-body text-base placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-[var(--yellow)] transition-all ${
+                      placeholder="e.g. Muhammed Shafi..."
+                      className={`h-[52px] px-4 rounded-[14px] bg-[#08090C]/60 border text-white font-sans text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40 focus:border-[var(--gold)] transition-all ${
                         errors.name ? 'border-[var(--coral)]' : 'border-white/10'
                       }`}
                     />
@@ -291,11 +302,11 @@ export default function Register() {
                   <div className="flex flex-col gap-2">
                     <label
                       htmlFor="district"
-                      className="font-heading font-medium text-sm text-white flex items-center justify-between"
+                      className="font-sans font-semibold text-xs sm:text-sm text-white flex items-center justify-between"
                     >
-                      <span>സ്വന്തം ജില്ല *</span>
+                      <span>Native District (സ്വന്തം ജില്ല) *</span>
                       {errors.district && (
-                        <span className="text-xs text-[var(--coral)] font-body">
+                        <span className="text-xs text-[var(--coral)] font-sans">
                           {errors.district}
                         </span>
                       )}
@@ -305,12 +316,12 @@ export default function Register() {
                       name="district"
                       value={formData.district}
                       onChange={handleChange}
-                      className={`h-[50px] px-4 rounded-[12px] bg-[#2A2C31] border text-white font-body text-base focus:outline-none focus:ring-1 focus:ring-[var(--yellow)] transition-all ${
+                      className={`h-[52px] px-4 rounded-[14px] bg-[#12151D] border text-white font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40 focus:border-[var(--gold)] transition-all ${
                         errors.district ? 'border-[var(--coral)]' : 'border-white/10'
                       }`}
                     >
                       <option value="" disabled>
-                        ജില്ല തിരഞ്ഞെടുക്കുക...
+                        Select your native district...
                       </option>
                       {districtsList.map((d) => (
                         <option key={d} value={d}>
@@ -323,10 +334,10 @@ export default function Register() {
                   <div className="flex flex-col gap-2">
                     <label
                       htmlFor="higherStudy"
-                      className="font-heading font-medium text-sm text-white flex items-center justify-between"
+                      className="font-sans font-semibold text-xs sm:text-sm text-white flex items-center justify-between"
                     >
-                      <span>ലക്ഷ്യമിടുന്ന ഉപരിപഠന സ്ഥാപനം (ഐശ്ചികം)</span>
-                      <span className="text-xs text-[var(--muted)] font-sora">Optional</span>
+                      <span>Intended Higher Studies Institution (ഉപരിപഠന ലക്ഷ്യം)</span>
+                      <span className="text-[11px] text-[var(--muted)] font-sans">Optional</span>
                     </label>
                     <input
                       type="text"
@@ -334,8 +345,8 @@ export default function Register() {
                       name="higherStudy"
                       value={formData.higherStudy}
                       onChange={handleChange}
-                      placeholder="ദാറുൽ ഹുദാ / ജാമിഅ നൂരിയ്യ / വാഫി / മർകസ്..."
-                      className="h-[50px] px-4 rounded-[12px] bg-white/5 border border-white/10 text-white font-body text-base placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-[var(--yellow)] transition-all"
+                      placeholder="e.g. Jamia Nooriya / Darul Huda / Wafy / Markaz..."
+                      className="h-[52px] px-4 rounded-[14px] bg-[#08090C]/60 border border-white/10 text-white font-sans text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40 focus:border-[var(--gold)] transition-all"
                     />
                   </div>
 
@@ -343,9 +354,9 @@ export default function Register() {
                     <Button
                       type="submit"
                       variant="primary"
-                      className="w-full sm:w-auto px-8"
+                      className="w-full sm:w-auto px-9 uppercase font-bold text-xs tracking-wider"
                     >
-                      തുടരുക →
+                      Continue to Step 2 →
                     </Button>
                   </div>
                 </div>
@@ -357,11 +368,11 @@ export default function Register() {
                   <div className="flex flex-col gap-2">
                     <label
                       htmlFor="dars"
-                      className="font-heading font-medium text-sm text-white flex items-center justify-between"
+                      className="font-sans font-semibold text-xs sm:text-sm text-white flex items-center justify-between"
                     >
-                      <span>പഠിക്കുന്ന SUFFA ദർസ് *</span>
+                      <span>Current SUFFA Dars Institution (പഠിക്കുന്ന ദർസ്) *</span>
                       {errors.dars && (
-                        <span className="text-xs text-[var(--coral)] font-body">
+                        <span className="text-xs text-[var(--coral)] font-sans">
                           {errors.dars}
                         </span>
                       )}
@@ -371,12 +382,12 @@ export default function Register() {
                       name="dars"
                       value={formData.dars}
                       onChange={handleChange}
-                      className={`h-[50px] px-4 rounded-[12px] bg-[#2A2C31] border text-white font-body text-base focus:outline-none focus:ring-1 focus:ring-[var(--yellow)] transition-all ${
+                      className={`h-[52px] px-4 rounded-[14px] bg-[#12151D] border text-white font-sans text-sm focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40 focus:border-[var(--gold)] transition-all ${
                         errors.dars ? 'border-[var(--coral)]' : 'border-white/10'
                       }`}
                     >
                       <option value="" disabled>
-                        ദർസ് തിരഞ്ഞെടുക്കുക...
+                        Select your affiliated Dars...
                       </option>
                       {DARS_LIST.map((item) => (
                         <option key={item.id} value={item.name}>
@@ -389,11 +400,11 @@ export default function Register() {
                   <div className="flex flex-col gap-2">
                     <label
                       htmlFor="phone"
-                      className="font-heading font-medium text-sm text-white flex items-center justify-between"
+                      className="font-sans font-semibold text-xs sm:text-sm text-white flex items-center justify-between"
                     >
-                      <span>ഫോൺ / WhatsApp നമ്പർ *</span>
+                      <span>Student Phone / WhatsApp Number (ഫോൺ നമ്പർ) *</span>
                       {errors.phone && (
-                        <span className="text-xs text-[var(--coral)] font-body">
+                        <span className="text-xs text-[var(--coral)] font-sans">
                           {errors.phone}
                         </span>
                       )}
@@ -405,8 +416,8 @@ export default function Register() {
                       maxLength={10}
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="9847012345"
-                      className={`h-[50px] px-4 rounded-[12px] bg-white/5 border text-white font-sora text-base placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-[var(--yellow)] transition-all ${
+                      placeholder="e.g. 9847012345"
+                      className={`h-[52px] px-4 rounded-[14px] bg-[#08090C]/60 border text-white font-sans text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40 focus:border-[var(--gold)] transition-all ${
                         errors.phone ? 'border-[var(--coral)]' : 'border-white/10'
                       }`}
                     />
@@ -415,11 +426,11 @@ export default function Register() {
                   <div className="flex flex-col gap-2">
                     <label
                       htmlFor="parentPhone"
-                      className="font-heading font-medium text-sm text-white flex items-center justify-between"
+                      className="font-sans font-semibold text-xs sm:text-sm text-white flex items-center justify-between"
                     >
-                      <span>രക്ഷിതാവിന്റെ ഫോൺ നമ്പർ *</span>
+                      <span>Parent / Guardian Mobile Number (രക്ഷിതാവിന്റെ നമ്പർ) *</span>
                       {errors.parentPhone && (
-                        <span className="text-xs text-[var(--coral)] font-body">
+                        <span className="text-xs text-[var(--coral)] font-sans">
                           {errors.parentPhone}
                         </span>
                       )}
@@ -431,8 +442,8 @@ export default function Register() {
                       maxLength={10}
                       value={formData.parentPhone}
                       onChange={handleChange}
-                      placeholder="9447012345"
-                      className={`h-[50px] px-4 rounded-[12px] bg-white/5 border text-white font-sora text-base placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-[var(--yellow)] transition-all ${
+                      placeholder="e.g. 9447012345"
+                      className={`h-[52px] px-4 rounded-[14px] bg-[#08090C]/60 border text-white font-sans text-sm placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40 focus:border-[var(--gold)] transition-all ${
                         errors.parentPhone ? 'border-[var(--coral)]' : 'border-white/10'
                       }`}
                     />
@@ -442,18 +453,18 @@ export default function Register() {
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="px-6 py-2.5 rounded-full text-sm font-heading font-medium text-white/70 hover:text-white border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+                      className="px-6 py-2.5 rounded-full text-xs font-sans font-bold text-white/70 hover:text-white border border-white/10 hover:border-white/20 transition-all cursor-pointer"
                     >
-                      ← തിരികെ
+                      ← Back to Step 1
                     </button>
 
                     <Button
                       type="submit"
                       variant="primary"
                       disabled={isSubmitting}
-                      className="px-8"
+                      className="px-9 uppercase font-bold text-xs tracking-wider"
                     >
-                      {isSubmitting ? 'രജിസ്റ്റർ ചെയ്യുന്നു...' : 'രജിസ്ട്രേഷൻ പൂർത്തിയാക്കൂ'}
+                      {isSubmitting ? 'Registering...' : 'Complete Registration'}
                     </Button>
                   </div>
                 </div>

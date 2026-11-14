@@ -1,162 +1,119 @@
 import React from 'react';
 import { CONFIG } from '../config';
 import Button from '../components/Button';
-import { MapPin, Compass, Bus, Train, Plane, Phone } from 'lucide-react';
+import { MapPin, Bus, Train, Plane, Phone, Navigation } from 'lucide-react';
 
 export default function Venue() {
   const { VENUE } = CONFIG;
   const hasMapsUrl = VENUE.MAPS_URL && VENUE.MAPS_URL.trim() !== '';
 
   return (
-    <section id="venue" className="full-width-section section-pad bg-[#0E1118] border-y border-white/[0.08] relative overflow-hidden">
+    <section id="venue" className="full-width-section section-pad bg-[#08090C] border-y border-white/[0.08] relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-0 w-[450px] h-[450px] rounded-full bg-[var(--blue)]/5 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full bg-[var(--sky)]/5 blur-[160px] pointer-events-none" />
 
       <div className="flex flex-col gap-12 lg:gap-14 relative z-10">
         {/* Header */}
         <div className="flex flex-col gap-4 max-w-3xl">
-          <span className="ds-eyebrow">വേദി & റൂട്ട്</span>
+          <div className="flex items-center gap-3">
+            <span className="ds-eyebrow">CAMPUS & TRAVEL</span>
+            <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
+              مَقَرُّ المَخَيَّمِ
+            </span>
+          </div>
 
-          <h2 className="heading-h2 text-white">
-            ക്യാമ്പ് നടക്കുന്ന{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC93C] via-[#FFE27D] to-[#F59E0B]">
-              പവിത്ര വേദി
+          <h2 className="heading-section text-white">
+            The Venerated Grounds of{' '}
+            <span className="gold-gradient-text block">
+              Alathurpadi Juma Masjid
             </span>
           </h2>
 
-          <p className="body-editorial">
-            ചരിത്രപ്രസിദ്ധമായ ആലത്തൂർപടി ജുമാമസ്ജിദ് ദർസ് കാമ്പസിലാണ് 7 ദിവസത്തെ റസിഡൻഷ്യൽ ക്യാമ്പ് ഒരുക്കിയിട്ടുള്ളത്.
+          <p className="font-sans text-base sm:text-lg text-[var(--muted)] leading-relaxed">
+            The 7-day residential camp takes place at the historic Alathurpadi Juma Masjid & Dars campus
+            in Melmuri, Malappuram — renowned for its spiritual serenity, expansive courtyard, and scholarly heritage.
           </p>
         </div>
 
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          {/* Details Card (7 cols) */}
-          <div className="lg:col-span-7 p-7 sm:p-9 rounded-[24px] bg-[#141722]/80 backdrop-blur-xl border border-white/[0.08] flex flex-col justify-between shadow-[0_10px_35px_rgba(0,0,0,0.5)]">
-            <div className="flex flex-col gap-6">
-              <div className="flex items-start gap-4">
-                <div className="w-13 h-13 rounded-2xl bg-amber-400/10 border border-amber-400/25 flex items-center justify-center shrink-0 text-amber-400 shadow-[0_0_15px_rgba(255,201,60,0.1)]">
-                  <MapPin size={24} strokeWidth={1.75} />
-                </div>
-                <div>
-                  <span className="text-xs font-sora font-semibold text-[var(--sky)] tracking-wider uppercase">
-                    OFFICIAL VENUE
-                  </span>
-                  <h3 className="heading-h3 text-white text-xl sm:text-2xl mt-0.5">
-                    {VENUE.NAME}
-                  </h3>
-                  <span className="text-xs font-sora text-white/50 block mt-0.5">
-                    {VENUE.NAME_EN}
-                  </span>
-                </div>
-              </div>
+        {/* Real Mosque Photography Featured Card */}
+        <div className="relative rounded-[32px] overflow-hidden border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] aspect-[16/9] sm:aspect-[21/9] bg-[#12151D] group">
+          <img
+            src="/images/masjid-real.jpg"
+            alt="Alathurpadi Juma Masjid Historic Campus"
+            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#08090C] via-[#08090C]/40 to-transparent" />
 
-              <div className="flex flex-col gap-3.5 py-5 border-y border-white/[0.08] font-body text-base text-[var(--text)]">
-                <div className="flex items-start gap-3">
-                  <span className="text-white font-semibold shrink-0">വിലാസം:</span>
-                  <span className="text-[var(--muted)]">{VENUE.ADDRESS}</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-white font-semibold shrink-0">റൂട്ട്:</span>
-                  <span className="text-[var(--muted)]">{VENUE.HOW_TO_REACH}</span>
-                </div>
-              </div>
-
-              {/* Transit Options */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
-                <div className="p-4 rounded-[16px] bg-white/[0.03] border border-white/[0.06] hover:border-white/15 transition-colors">
-                  <div className="flex items-center gap-2 mb-1.5 text-white/90">
-                    <Bus size={17} strokeWidth={1.75} className="text-amber-400" />
-                    <span className="text-xs font-sora font-bold">ബസ്സ്</span>
-                  </div>
-                  <p className="text-xs text-[var(--muted)] leading-relaxed">
-                    മലപ്പുറത്ത് നിന്ന് മേൽമുറി ബസ്സ് വഴി ആലത്തൂർപടി ഇറങ്ങുക.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-[16px] bg-white/[0.03] border border-white/[0.06] hover:border-white/15 transition-colors">
-                  <div className="flex items-center gap-2 mb-1.5 text-white/90">
-                    <Train size={17} strokeWidth={1.75} className="text-sky-400" />
-                    <span className="text-xs font-sora font-bold">ട്രെയിൻ</span>
-                  </div>
-                  <p className="text-xs text-[var(--muted)] leading-relaxed">
-                    അങ്ങാടിപ്പുറം (25 കി.മീ) / പരപ്പനങ്ങാടി (32 കി.മീ).
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-[16px] bg-white/[0.03] border border-white/[0.06] hover:border-white/15 transition-colors">
-                  <div className="flex items-center gap-2 mb-1.5 text-white/90">
-                    <Plane size={17} strokeWidth={1.75} className="text-emerald-400" />
-                    <span className="text-xs font-sora font-bold">വിമാനം</span>
-                  </div>
-                  <p className="text-xs text-[var(--muted)] leading-relaxed">
-                    കോഴിക്കോട് എയർപോർട്ട് (കരിപ്പൂർ - 22 കി.മീ).
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
-              {hasMapsUrl && (
-                <Button
-                  href={VENUE.MAPS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="primary"
-                  className="text-sm px-6 h-[46px]"
-                >
-                  Google Maps
-                </Button>
-              )}
-
-              {CONFIG.CONTACT?.phones?.[0] && (
-                <a
-                  href={`tel:${CONFIG.CONTACT.phones[0].number}`}
-                  className="text-xs font-sora text-[var(--muted)] hover:text-white inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10"
-                >
-                  <Phone size={14} strokeWidth={1.5} className="text-amber-400" />
-                  <span>ഹെൽപ്പ്‌ലൈൻ: {CONFIG.CONTACT.phones[0].display}</span>
-                </a>
-              )}
-            </div>
+          {/* Floating Campus Badge */}
+          <div className="absolute top-6 left-6 flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#08090C]/85 backdrop-blur-md border border-white/15 text-xs font-sans font-bold text-white shadow-xl">
+            <MapPin size={14} className="text-[var(--gold)]" />
+            <span>ALATHOORPADI JUMA MASJID · MELMURI</span>
           </div>
 
-          {/* Location Pinpoint Graphic (5 cols) */}
-          <div className="lg:col-span-5 p-7 sm:p-9 rounded-[24px] bg-[#141722]/80 backdrop-blur-xl border border-white/[0.08] flex flex-col justify-between shadow-[0_10px_35px_rgba(0,0,0,0.5)]">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-sora font-bold text-[var(--sky)] tracking-wider uppercase">
-                  CAMPUS PINPOINT
-                </span>
-                <span className="text-xs font-sora text-white/70">
-                  {VENUE.PLACE}
-                </span>
-              </div>
-
-              {/* Minimal Vector graphic with pulsing target beacon */}
-              <div className="w-full aspect-[4/3] rounded-[18px] bg-[#0E1118] border border-white/10 relative overflow-hidden flex items-center justify-center p-6 shadow-inner">
-                <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#6CB4FF_1px,transparent_1px)] [background-size:16px_16px]" />
-                
-                {/* Glowing target rings */}
-                <div className="absolute w-36 h-36 rounded-full border border-amber-400/20 animate-ping" />
-                <div className="absolute w-24 h-24 rounded-full border border-sky-400/30" />
-
-                <div className="relative z-10 bg-[#141722]/95 backdrop-blur-md p-5 rounded-[16px] border border-white/15 text-center max-w-[240px] shadow-2xl">
-                  <div className="w-10 h-10 rounded-full bg-amber-400/15 border border-amber-400/30 flex items-center justify-center text-amber-400 mx-auto mb-2">
-                    <Compass size={20} strokeWidth={1.75} />
-                  </div>
-                  <span className="font-heading font-bold text-base text-white block">
-                    {VENUE.NAME}
-                  </span>
-                  <span className="text-xs text-[var(--muted)] font-sora block mt-0.5">
-                    Melmuri, Malappuram
-                  </span>
-                </div>
-              </div>
+          {/* Bottom Details Overlay */}
+          <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="flex flex-col">
+              <span className="font-arabic text-sm text-[var(--gold)]">
+                المَسْجِدُ الجَامِعُ بِالأَلْثُورْبَادِي
+              </span>
+              <h3 className="font-sans font-extrabold text-xl sm:text-3xl text-white">
+                Alathurpadi Dars Campus
+              </h3>
+              <p className="font-sans text-xs sm:text-sm text-white/80 mt-0.5">
+                Melmuri Post, Malappuram, Kerala, India — PIN 676517
+              </p>
             </div>
 
-            <p className="text-xs text-[var(--muted)] mt-6 text-center leading-relaxed">
-              ക്യാമ്പ് വേദിയിലേക്ക് എത്തുന്ന വിദ്യാർത്ഥികൾക്ക് റെയിൽവേ സ്റ്റേഷനിലും ബസ് സ്റ്റാൻഡിലും സഹായത്തിന് വോളണ്ടിയർമാർ ഉണ്ടായിരിക്കും.
+            {hasMapsUrl && (
+              <Button
+                href={VENUE.MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                className="text-xs uppercase tracking-wider font-extrabold px-6 h-[46px] shrink-0"
+              >
+                Open Google Maps ↗
+              </Button>
+            )}
+          </div>
+        </div>
+
+        {/* Transit Routes Grid in Poppins */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="p-6 sm:p-7 rounded-[24px] bg-[#12151D]/80 backdrop-blur-xl border border-white/[0.08] hover:border-[var(--gold)]/35 transition-all">
+            <div className="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 mb-4">
+              <Bus size={22} strokeWidth={1.75} />
+            </div>
+            <h4 className="font-sans font-extrabold text-base text-white mb-1.5">
+              By Road / Bus
+            </h4>
+            <p className="font-sans text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+              Arrive at Malappuram KSRTC / Municipal Bus Stand, then board any Melmuri / Vengara bus directly to Alathurpadi stop (3 km).
+            </p>
+          </div>
+
+          <div className="p-6 sm:p-7 rounded-[24px] bg-[#12151D]/80 backdrop-blur-xl border border-white/[0.08] hover:border-[var(--gold)]/35 transition-all">
+            <div className="w-12 h-12 rounded-2xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-sky-400 mb-4">
+              <Train size={22} strokeWidth={1.75} />
+            </div>
+            <h4 className="font-sans font-extrabold text-base text-white mb-1.5">
+              By Railway
+            </h4>
+            <p className="font-sans text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+              Angadipuram Railway Station (25 km) or Parappanangadi Railway Station (32 km). Direct bus and taxi connections are readily accessible.
+            </p>
+          </div>
+
+          <div className="p-6 sm:p-7 rounded-[24px] bg-[#12151D]/80 backdrop-blur-xl border border-white/[0.08] hover:border-[var(--gold)]/35 transition-all">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 mb-4">
+              <Plane size={22} strokeWidth={1.75} />
+            </div>
+            <h4 className="font-sans font-extrabold text-base text-white mb-1.5">
+              By Air
+            </h4>
+            <p className="font-sans text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
+              Calicut International Airport (CCJ / Karipur) is located just 22 km away. Camp reception volunteers will assist arriving scholar candidates.
             </p>
           </div>
         </div>

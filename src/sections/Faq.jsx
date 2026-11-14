@@ -1,34 +1,39 @@
 import React, { useState } from 'react';
 import FAQ_ITEMS from '../data/faq.json';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 export default function Faq() {
-  const [openIndex, setOpenIndex] = useState(0); // first item open by default
+  const [openIndex, setOpenIndex] = useState(0);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="full-width-section section-pad bg-[#0E1118] border-y border-white/[0.08] relative overflow-hidden">
+    <section id="faq" className="full-width-section section-pad bg-[#0B0D12] border-y border-white/[0.08] relative overflow-hidden">
       <div className="flex flex-col gap-12 lg:gap-14 max-w-4xl mx-auto w-full relative z-10">
         {/* Header */}
         <div className="flex flex-col gap-4 text-center items-center">
-          <span className="ds-eyebrow">സംശയങ്ങളും മറുപടികളും</span>
+          <div className="flex items-center gap-3">
+            <span className="ds-eyebrow">ESSENTIAL INFORMATION</span>
+            <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
+              الأَسْئِلَةُ الشَّائِعَةُ
+            </span>
+          </div>
 
-          <h2 className="heading-h2 text-white">
-            ക്യാമ്പിനെക്കുറിച്ച്{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC93C] via-[#FFE27D] to-[#F59E0B]">
-              അറിയേണ്ടവ
+          <h2 className="heading-section text-white">
+            Frequently Asked{' '}
+            <span className="gold-gradient-text block">
+              Camp Inquiries
             </span>
           </h2>
 
-          <p className="body-editorial max-w-2xl">
-            ക്യാമ്പിൽ പങ്കെടുക്കാൻ ആഗ്രഹിക്കുന്ന വിദ്യാർത്ഥികൾ സാധാരണയായി ചോദിക്കുന്ന പ്രധാന സംശയങ്ങൾ.
+          <p className="font-sans text-base sm:text-lg text-[var(--muted)] max-w-2xl">
+            Everything candidate students and parents need to know regarding admission, boarding, and academic rules.
           </p>
         </div>
 
-        {/* 6 Accordion Items */}
+        {/* 6 Accordion Items in Poppins */}
         <div className="flex flex-col gap-3.5 w-full">
           {FAQ_ITEMS.map((item, idx) => {
             const isOpen = openIndex === idx;
@@ -36,9 +41,9 @@ export default function Faq() {
             return (
               <div
                 key={item.id}
-                className={`rounded-[20px] bg-[#141722]/80 backdrop-blur-xl border transition-all duration-300 overflow-hidden ${
+                className={`rounded-[22px] bg-[#12151D]/80 backdrop-blur-xl border transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'border-amber-400/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+                    ? 'border-[var(--gold)]/40 shadow-[0_12px_30px_rgba(0,0,0,0.5)]'
                     : 'border-white/[0.08] hover:border-white/20'
                 }`}
               >
@@ -50,8 +55,8 @@ export default function Faq() {
                   aria-controls={`faq-answer-${item.id}`}
                 >
                   <span
-                    className={`font-heading font-bold text-base sm:text-lg transition-colors ${
-                      isOpen ? 'text-[var(--yellow)]' : 'text-white'
+                    className={`font-sans font-bold text-base sm:text-lg transition-colors ${
+                      isOpen ? 'text-[var(--gold)]' : 'text-white'
                     }`}
                   >
                     {item.q}
@@ -60,7 +65,7 @@ export default function Faq() {
                   <span
                     className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
                       isOpen
-                        ? 'rotate-180 bg-amber-400/15 text-amber-400 border border-amber-400/30'
+                        ? 'rotate-180 bg-[var(--gold)]/15 text-[var(--gold)] border border-[var(--gold)]/30'
                         : 'bg-white/5 text-[var(--muted)] border border-white/5'
                     }`}
                   >
@@ -71,7 +76,7 @@ export default function Faq() {
                 {isOpen && (
                   <div
                     id={`faq-answer-${item.id}`}
-                    className="px-6 pb-6 pt-1 font-body text-sm sm:text-base text-[var(--muted)] leading-relaxed border-t border-white/[0.06]"
+                    className="px-6 pb-6 pt-1 font-sans text-sm sm:text-base text-[var(--muted)] leading-relaxed border-t border-white/[0.06]"
                   >
                     {item.a}
                   </div>
