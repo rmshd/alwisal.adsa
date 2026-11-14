@@ -1,198 +1,124 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import NestedDiamonds from '../art/NestedDiamonds';
-import DotGrid from '../art/DotGrid';
-import { isReducedMotion } from '../lib/motion';
+import React from 'react';
+import { BookOpen, Calendar, Users, Home } from 'lucide-react';
 
 export default function About() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    if (isReducedMotion() || !sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.about-reveal',
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            once: true,
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       id="about"
-      ref={sectionRef}
-      className="relative w-full bg-[var(--canvas)] text-[var(--ink)] font-['Poppins'] py-20 md:py-28"
+      className="relative w-full bg-[#FAF9F6] text-slate-900 font-['Poppins'] py-24 sm:py-32"
       style={{ paddingInline: 'var(--gutter)' }}
     >
-      <div className="max-w-[1400px] mx-auto space-y-16">
+      <div className="max-w-6xl mx-auto space-y-16">
 
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-[var(--ink)] pb-6">
-          <div>
-            <span className="text-xs uppercase tracking-widest font-extrabold text-[var(--orange)] block mb-1">
-              THE VISION & CALLING
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200/80 pb-6">
+          <div className="space-y-1">
+            <span className="text-xs uppercase tracking-widest font-semibold text-amber-700">
+              Vision & Tradition
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[var(--ink)]">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
               Sacred Knowledge Sanctuary
             </h2>
           </div>
           <div className="text-right">
-            <span className="font-['Noto_Serif_Arabic'] text-2xl font-bold text-[var(--ink)] block" dir="rtl">
+            <span className="font-['Noto_Serif_Arabic'] text-xl text-amber-800 font-medium block" dir="rtl">
               رِحَابُ العِلْمِ وَالتَّزْكِيَةِ
             </span>
-            <span className="text-xs font-semibold text-[var(--muted)]">
-              Alathurpadi Dars Heritage
+            <span className="text-xs text-slate-500 font-medium">
+              Alathurpadi Dars Campus
             </span>
           </div>
         </div>
 
-        {/* Main Grid: Left Tile Composition, Right Text */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        {/* 2-Column Story: Mosque Photo Left, Text Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
-          {/* Left Tile Column (Hamish geometric composition) */}
-          <div className="lg:col-span-5 about-reveal">
-            <div className="grid grid-cols-2 gap-3 max-w-md mx-auto lg:mx-0">
-              {/* Nested Diamonds Tile */}
-              <div className="aspect-square bg-white border-2 border-[var(--ink)] p-4 shadow-[4px_4px_0px_#0F172A] flex items-center justify-center">
-                <NestedDiamonds className="w-full h-full text-[var(--orange)]" />
-              </div>
-
-              {/* Dot Grid Tile */}
-              <div className="aspect-square bg-[#FED000] border-2 border-[var(--ink)] p-4 shadow-[4px_4px_0px_#0F172A] flex items-center justify-center">
-                <DotGrid className="w-full h-full text-[var(--ink)]" />
-              </div>
-
-              {/* Real Campus Photo Tile */}
-              <div className="col-span-2 relative aspect-[16/9] overflow-hidden bg-[var(--ink)] border-2 border-[var(--ink)] shadow-[5px_5px_0px_#0F172A] group">
-                <img
-                  src="/images/masjid.jpg"
-                  alt="Alathurpadi Campus"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/90 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
-                  <div>
-                    <span className="text-[10px] uppercase font-black tracking-widest text-[var(--yellow)] block">
-                      Historic Venue
-                    </span>
-                    <span className="text-sm font-bold block">
-                      Alathurpadi Juma Masjid Campus
-                    </span>
-                  </div>
-                  <span className="text-xs px-2.5 py-1 bg-white/20 backdrop-blur-sm border border-white/30 text-white font-mono">
-                    Melmuri
-                  </span>
-                </div>
+          {/* Left: Serene Campus Photo */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-slate-100 shadow-[0_12px_32px_rgba(0,0,0,0.05)] border border-slate-200/80 group">
+              <img
+                src="/images/masjid.jpg"
+                alt="Alathurpadi Juma Masjid Campus"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-5 right-5 text-white">
+                <span className="text-[11px] font-semibold text-amber-300 uppercase tracking-wider block">
+                  Historic Venue
+                </span>
+                <span className="text-sm font-semibold block mt-0.5">
+                  Alathurpadi Juma Masjid Campus · Melmuri
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Right Text Panel */}
-          <div className="lg:col-span-7 space-y-6 about-reveal text-left">
-            <div className="space-y-3">
-              <span className="px-3 py-1 bg-[var(--yellow)] text-[var(--ink)] text-xs font-black uppercase tracking-wider inline-block">
-                Seven Mornings · One Master Teacher
-              </span>
+          {/* Right: Narrative */}
+          <div className="lg:col-span-7 space-y-5 text-left">
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 leading-snug">
+              Seven dawns, one Master Teacher, and a fellowship of seekers.
+            </h3>
 
-              <h3 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase leading-snug text-[var(--ink)]">
-                Rekindling the Classical Dars Spirit in Fellowship.
-              </h3>
-            </div>
+            <p className="text-base text-slate-600 leading-relaxed font-normal">
+              ADSA Camp is an intentional seven-day residential retreat curated exclusively for graduated scholars of the SUFFA Dars network. It provides a peaceful sanctuary to step back from routine responsibilities and immerse in sacred scholarship, spiritual introspection, and deep fraternal bonding.
+            </p>
 
-            <div className="space-y-4 text-[var(--ink)]/80 text-base sm:text-lg leading-relaxed font-normal">
-              <p>
-                ADSA Camp is an intentional residential retreat designed exclusively for graduated scholars of the SUFFA Dars fraternity. It creates a serene spiritual environment where graduates disconnect from worldly noise to deepen their connection with the sacred sciences.
-              </p>
-              <p>
-                Guided each dawn by <strong>Dr. C.K. Abdurahman Faizy</strong>, the sessions encompass rigorous textual readings of <em>Sahih al-Bukhari</em>, scholarly debates on contemporary issues, and heart-to-heart discussions on leadership and community welfare.
-              </p>
-            </div>
+            <p className="text-base text-slate-600 leading-relaxed font-normal">
+              Under the direct guidance of <strong>Dr. C.K. Abdurahman Faizy</strong>, each day commences at dawn with meticulous study of <em>Sahih al-Bukhari</em>, followed by seminars on classical fiqh, contemporary community challenges, and spiritual tazkiyah.
+            </p>
 
-            {/* Core Values Strip */}
-            <div className="pt-4 border-t border-[var(--ink)]/10 flex flex-wrap gap-2">
-              {['Authentic Sunnah', 'Classical Isnad', 'Spiritual Tazkiyah', 'Fraternal Bond', 'Intellectual Rigor'].map((tag) => (
+            {/* Core Values Pills */}
+            <div className="pt-2 flex flex-wrap gap-2">
+              {['Sahih al-Bukhari Sabaq', 'Classical Isnad', 'Spiritual Tazkiyah', 'Scholarly Fraternal Unity'].map((tag) => (
                 <span
                   key={tag}
-                  className="px-3.5 py-1.5 bg-white border border-[var(--ink)]/20 text-xs font-bold text-[var(--ink)] shadow-[2px_2px_0px_#0F172A]"
+                  className="px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-medium text-slate-700 shadow-sm"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
+
         </div>
 
-        {/* 3 Bold Stat Tiles (No Dars reference) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 about-reveal">
-          {/* Stat 1 */}
-          <div className="bg-white border-2 border-[var(--ink)] p-8 flex items-center justify-between gap-4 shadow-[5px_5px_0px_#0F172A]">
-            <div>
-              <span className="block text-4xl sm:text-5xl font-black text-[var(--ink)] uppercase tracking-tight">
-                07
-              </span>
-              <span className="text-xs font-bold text-[var(--orange)] uppercase tracking-wider mt-1 block">
-                Days of Dawn Sabaq
-              </span>
-              <span className="text-xs text-[var(--muted)] mt-0.5 block">
-                Dec 20 – Dec 26, 2026
-              </span>
+        {/* 3 Minimal Metric Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+
+          <div className="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3">
+            <div className="w-10 h-10 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-700">
+              <Calendar size={20} />
             </div>
-            <div className="w-16 h-16 bg-[#FF5A1F]/15 border-2 border-[var(--orange)] flex items-center justify-center">
-              <span className="text-[var(--orange)] text-2xl font-black">VII</span>
+            <div>
+              <span className="text-3xl sm:text-4xl font-bold text-slate-900 block tracking-tight">07</span>
+              <span className="text-sm font-semibold text-slate-800 block mt-1">Days of Dawn Sabaq</span>
+              <span className="text-xs text-slate-500 font-normal block mt-0.5">December 20 to 26, 2026</span>
             </div>
           </div>
 
-          {/* Stat 2 */}
-          <div className="bg-white border-2 border-[var(--ink)] p-8 flex items-center justify-between gap-4 shadow-[5px_5px_0px_#0F172A]">
-            <div>
-              <span className="block text-4xl sm:text-5xl font-black text-[var(--ink)] uppercase tracking-tight">
-                200+
-              </span>
-              <span className="text-xs font-bold text-[#1E40AF] uppercase tracking-wider mt-1 block">
-                Graduated Scholars
-              </span>
-              <span className="text-xs text-[var(--muted)] mt-0.5 block">
-                Delegates Across Kerala
-              </span>
+          <div className="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3">
+            <div className="w-10 h-10 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-700">
+              <Users size={20} />
             </div>
-            <div className="w-16 h-16 bg-[#1E40AF]/15 border-2 border-[#1E40AF] flex items-center justify-center">
-              <span className="text-[#1E40AF] text-2xl font-black">CC+</span>
+            <div>
+              <span className="text-3xl sm:text-4xl font-bold text-slate-900 block tracking-tight">200+</span>
+              <span className="text-sm font-semibold text-slate-800 block mt-1">Graduated Scholars</span>
+              <span className="text-xs text-slate-500 font-normal block mt-0.5">Delegates from across Kerala</span>
             </div>
           </div>
 
-          {/* Stat 3 */}
-          <div className="bg-white border-2 border-[var(--ink)] p-8 flex items-center justify-between gap-4 shadow-[5px_5px_0px_#0F172A]">
-            <div>
-              <span className="block text-4xl sm:text-5xl font-black text-[var(--ink)] uppercase tracking-tight">
-                100%
-              </span>
-              <span className="text-xs font-bold text-[#4D6A34] uppercase tracking-wider mt-1 block">
-                Residential Camp
-              </span>
-              <span className="text-xs text-[var(--muted)] mt-0.5 block">
-                Full Boarding & Guidance
-              </span>
+          <div className="p-8 rounded-3xl bg-white border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] space-y-3">
+            <div className="w-10 h-10 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-700">
+              <Home size={20} />
             </div>
-            <div className="w-16 h-16 bg-[#4D6A34]/15 border-2 border-[#4D6A34] flex items-center justify-center">
-              <span className="text-[#4D6A34] text-2xl font-black">∞</span>
+            <div>
+              <span className="text-3xl sm:text-4xl font-bold text-slate-900 block tracking-tight">100%</span>
+              <span className="text-sm font-semibold text-slate-800 block mt-1">Residential Sanctuary</span>
+              <span className="text-xs text-slate-500 font-normal block mt-0.5">Complete Boarding & Guidance</span>
             </div>
           </div>
+
         </div>
 
       </div>

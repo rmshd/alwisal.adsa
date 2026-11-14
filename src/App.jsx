@@ -11,23 +11,12 @@ import Register from './sections/Register';
 import Venue from './sections/Venue';
 import Gallery from './sections/Gallery';
 import Closing from './sections/Closing';
-import ArtPreview from './sections/ArtPreview';
 import { initMotion } from './lib/motion';
 
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isArtRoute, setIsArtRoute] = useState(false);
 
   useEffect(() => {
-    // Check if on /art or #art preview
-    if (
-      typeof window !== 'undefined' &&
-      (window.location.pathname === '/art' || window.location.hash === '#art')
-    ) {
-      setIsArtRoute(true);
-      return;
-    }
-
     const lenis = initMotion();
 
     const handleScroll = () => {
@@ -46,25 +35,15 @@ export default function App() {
     };
   }, []);
 
-  if (isArtRoute) {
-    return <ArtPreview />;
-  }
-
   return (
-    <div className="min-h-screen bg-[var(--canvas)] text-[var(--ink)] relative selection:bg-[var(--yellow)] selection:text-[var(--ink)] overflow-x-hidden font-['Poppins']">
-      {/* 1.8s Once-only Intro Animation */}
+    <div className="min-h-screen bg-[#FAF9F6] text-slate-900 relative selection:bg-amber-100 selection:text-amber-900 overflow-x-hidden font-['Poppins']">
+      {/* Subtle Intro Animation */}
       <Intro />
 
       {/* Top Scroll Progress Bar */}
       <div
-        className="fixed top-0 left-0 right-0 h-[3px] z-50 bg-[var(--orange)] origin-left pointer-events-none transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-amber-600 origin-left pointer-events-none transition-transform duration-75 ease-out"
         style={{ transform: `scaleX(${scrollProgress})` }}
-        aria-hidden="true"
-      />
-
-      {/* Subtle Film Grain Texture Overlay */}
-      <div
-        className="pointer-events-none fixed inset-0 z-50 bg-grain select-none"
         aria-hidden="true"
       />
 

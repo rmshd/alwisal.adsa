@@ -39,7 +39,7 @@ export function SocialIcon({ id, className = "w-4 h-4" }) {
   }
 }
 
-export default function SocialLinksRow({ className = "flex items-center gap-3" }) {
+export default function SocialLinksRow({ className = "flex items-center gap-2.5" }) {
   const activeSocials = SOCIALS.filter((item) => item.url && item.url.trim() !== '');
 
   if (activeSocials.length === 0) return null;
@@ -53,7 +53,7 @@ export default function SocialLinksRow({ className = "flex items-center gap-3" }
           target="_blank"
           rel="noopener noreferrer"
           aria-label={MALAYALAM_LABELS[item.id] || `${item.label} Page`}
-          className="w-10 h-10 bg-white border-2 border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--orange)] hover:text-white shadow-[2px_2px_0px_#0F172A] transition-all flex items-center justify-center focus-visible:outline-none cursor-pointer"
+          className="w-9 h-9 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-amber-800 hover:border-amber-300 shadow-sm transition-all flex items-center justify-center focus-visible:outline-none cursor-pointer"
         >
           <SocialIcon id={item.id} className="w-4 h-4" />
         </a>

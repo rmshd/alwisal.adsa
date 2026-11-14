@@ -1,21 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #F8F6F0;
-  --color-canvas-subtle: #F0EDE4;
-  --color-ink: #0F172A;
+  --color-canvas: #FAF9F6;
+  --color-canvas-subtle: #F3F1EC;
   --color-surface: #FFFFFF;
-  --color-orange: #FF5A1F;
-  --color-yellow: #FED000;
-  --color-cobalt: #1E40AF;
-  --color-sky: #38BDF8;
-  --color-terracotta: #D9381E;
-  --color-olive: #4D6A34;
-  --color-teal: #0D9488;
-  --color-purple: #7C3AED;
-  --color-cream: #FAF5E8;
-  --color-white: #FFFFFF;
+  --color-ink: #0F172A;
   --color-muted: #64748B;
+  --color-accent: #B45309;
+  --color-accent-light: #FEF3C7;
+  --color-emerald: #047857;
 
   --font-sans: 'Poppins', sans-serif;
   --font-heading: 'Poppins', sans-serif;
@@ -24,32 +17,24 @@
 }
 
 :root {
-  --canvas: #F8F6F0;
-  --canvas-subtle: #F0EDE4;
-  --ink: #0F172A;
+  --canvas: #FAF9F6;
+  --canvas-subtle: #F3F1EC;
   --surface: #FFFFFF;
-  --orange: #FF5A1F;
-  --yellow: #FED000;
-  --cobalt: #1E40AF;
-  --sky: #38BDF8;
-  --terracotta: #D9381E;
-  --olive: #4D6A34;
-  --teal: #0D9488;
-  --purple: #7C3AED;
-  --cream: #FAF5E8;
-  --white: #FFFFFF;
+  --ink: #0F172A;
   --muted: #64748B;
-  --border-light: rgba(15, 23, 42, 0.1);
-  --border-strong: #0F172A;
+  --accent: #B45309;
+  --accent-hover: #92400E;
+  --accent-light: #FEF3C7;
+  --border: rgba(15, 23, 42, 0.08);
 
-  --gutter: clamp(16px, 4vw, 1.25cm);
+  --gutter: clamp(16px, 5vw, 2rem);
 }
 
 html {
   background-color: var(--canvas);
   color: var(--ink);
   font-family: 'Poppins', sans-serif;
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
@@ -61,46 +46,7 @@ body {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
   width: 100%;
-}
-
-/* Responsive Gutter */
-.site-gutter {
-  padding-inline: var(--gutter);
-}
-
-.full-width-section {
-  width: 100%;
-  padding-inline: var(--gutter);
-  position: relative;
-}
-
-/* Crisp 0px radius on tiles */
-.mosaic-tile {
-  border-radius: 0px;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.25s ease, background-color 0.25s ease;
-}
-
-/* Stepped Staircase Edges */
-.stepped-top {
-  clip-path: polygon(
-    0% 20px, 5% 20px, 5% 10px, 10% 10px, 10% 0px, 90% 0px, 90% 10px, 95% 10px, 95% 20px, 100% 20px,
-    100% 100%, 0% 100%
-  );
-}
-
-.stepped-bottom {
-  clip-path: polygon(
-    0% 0%, 100% 0%,
-    100% calc(100% - 20px), 95% calc(100% - 20px), 95% calc(100% - 10px), 90% calc(100% - 10px), 90% 100%,
-    10% 100%, 10% calc(100% - 10px), 5% calc(100% - 10px), 5% calc(100% - 20px), 0% calc(100% - 20px)
-  );
-}
-
-/* Subtle editorial paper grain */
-.bg-grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Typography styles */
@@ -112,22 +58,7 @@ body {
   font-family: 'Noto Serif Malayalam', serif;
 }
 
-/* Section Spacing */
-.section-pad {
-  padding-block: clamp(64px, 8vw, 110px);
-}
-
-/* Pill buttons - 999px radius strictly for buttons */
-.btn-pill {
-  border-radius: 999px;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  transition: all 0.2s ease;
-}
-
-/* Reduced motion preference */
+/* Subtle smooth animation */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,

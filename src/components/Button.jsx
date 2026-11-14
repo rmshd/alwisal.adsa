@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Button({
   children,
-  variant = 'primary', // 'primary' (vivid orange), 'yellow', 'dark', 'secondary' (clean outline)
+  variant = 'primary', // 'primary' (slate-900), 'accent' (amber), 'secondary' (clean border), 'white'
   href,
   onClick,
   className = '',
@@ -14,20 +14,18 @@ export default function Button({
   ...props
 }) {
   const baseStyles =
-    'group inline-flex items-center justify-center gap-2 rounded-full font-["Poppins"] font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer select-none whitespace-nowrap active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] disabled:opacity-50 disabled:pointer-events-none shadow-sm hover:shadow-md';
+    'group inline-flex items-center justify-center gap-2 rounded-full font-["Poppins"] font-semibold text-xs sm:text-sm tracking-wide transition-all duration-200 cursor-pointer select-none whitespace-nowrap active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
 
   let variantStyles = '';
-  if (variant === 'primary' || variant === 'orange') {
-    variantStyles = 'bg-[var(--orange)] text-white hover:bg-[#e04810]';
-  } else if (variant === 'yellow' || variant === 'gold') {
-    variantStyles = 'bg-[var(--yellow)] text-slate-900 hover:brightness-105';
-  } else if (variant === 'dark' || variant === 'ink') {
-    variantStyles = 'bg-[var(--ink)] text-white hover:bg-slate-800';
+  if (variant === 'primary' || variant === 'dark') {
+    variantStyles = 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm hover:shadow';
+  } else if (variant === 'accent' || variant === 'orange' || variant === 'amber') {
+    variantStyles = 'bg-amber-600 text-white hover:bg-amber-700 shadow-sm hover:shadow';
   } else if (variant === 'white') {
-    variantStyles = 'bg-white text-[var(--ink)] hover:bg-[var(--canvas-subtle)] border border-slate-200';
+    variantStyles = 'bg-white text-slate-900 hover:bg-slate-50 border border-slate-200 shadow-sm';
   } else {
     // secondary / outline
-    variantStyles = 'bg-transparent hover:bg-slate-900/5 border-2 border-[var(--ink)] text-[var(--ink)]';
+    variantStyles = 'bg-transparent hover:bg-slate-100/80 border border-slate-300 text-slate-800';
   }
 
   const combinedClasses = `${baseStyles} ${variantStyles} ${className}`.trim();
@@ -43,8 +41,9 @@ export default function Button({
       <path
         d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5"
         stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="square"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
