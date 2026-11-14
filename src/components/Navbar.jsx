@@ -5,7 +5,6 @@ import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'About', href: '#about', id: 'about' },
-  { label: 'Daily Routine', href: '#daily', id: 'daily' },
   { label: 'Schedule', href: '#schedule', id: 'schedule' },
   { label: 'Scholars', href: '#guests', id: 'guests' },
   { label: 'Dars Network', href: '#dars', id: 'dars' },
@@ -45,7 +44,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    const sectionIds = ['about', 'daily', 'schedule', 'guests', 'dars', 'venue', 'register'];
+    const sectionIds = ['about', 'schedule', 'guests', 'dars', 'venue', 'register'];
     const observers = [];
 
     sectionIds.forEach((id) => {

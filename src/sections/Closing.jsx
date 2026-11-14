@@ -125,9 +125,6 @@ export default function Closing() {
             <a href="#about" onClick={(e) => { e.preventDefault(); smoothScrollTo('#about'); }} className="hover:text-white transition-colors">
               About
             </a>
-            <a href="#daily" onClick={(e) => { e.preventDefault(); smoothScrollTo('#daily'); }} className="hover:text-white transition-colors">
-              Daily Routine
-            </a>
             <a href="#schedule" onClick={(e) => { e.preventDefault(); smoothScrollTo('#schedule'); }} className="hover:text-white transition-colors">
               Schedule
             </a>

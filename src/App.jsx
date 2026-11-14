@@ -5,7 +5,6 @@ import TrustStrip from './components/TrustStrip';
 import Vine from './art/Vine';
 import Hero from './sections/Hero';
 import About from './sections/About';
-import Daily from './sections/Daily';
 import Schedule from './sections/Schedule';
 import Guests from './sections/Guests';
 import Organisers from './sections/Organisers';
@@ -69,7 +68,6 @@ export default function App() {
         <Hero />
         <TrustStrip />
         <About />
-        <Daily />
         <Schedule />
         <Guests />
         <Organisers />

@@ -141,10 +141,10 @@ export default function Hero() {
             </Button>
 
             <Button
-              href="#daily"
+              href="#venue"
               onClick={(e) => {
                 e.preventDefault();
-                smoothScrollTo('#daily');
+                smoothScrollTo('#venue');
               }}
               variant="green"
               className="text-sm px-8 h-[52px]"
