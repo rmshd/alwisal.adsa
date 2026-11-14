@@ -449,3 +449,23 @@ export function resetDemoData() {
   saveStore(fresh);
   return fresh;
 }
+
+export function getSchedule() {
+  const store = loadStore();
+  return store.sessions || SEED_SESSIONS;
+}
+
+export function getSpeakers() {
+  const store = loadStore();
+  return store.speakers || SEED_SPEAKERS;
+}
+
+export function getFAQs() {
+  const store = loadStore();
+  return store.faqs || SEED_FAQS;
+}
+
+export function getDarsList() {
+  const store = loadStore();
+  return store.dars || DARS_DATA;
+}

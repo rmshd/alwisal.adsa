@@ -1,41 +1,314 @@
 [
-  { "id": 1, "code": "DARS-01", "name": "Dars 01 - Markaz Aripra", "arabic": "مركز أريبرا", "place": "Aripra", "district": "Malappuram" },
-  { "id": 2, "code": "DARS-02", "name": "Dars 02 - Majlis Angadipuram", "arabic": "مجلس أنكاديبورم", "place": "Angadipuram", "district": "Malappuram" },
-  { "id": 3, "code": "DARS-03", "name": "Dars 03 - Noorul Islam Melattur", "arabic": "نور الإسلام ميلاتور", "place": "Melattur", "district": "Malappuram" },
-  { "id": 4, "code": "DARS-04", "name": "Dars 04 - Hidayathul Muslimeen Manjeri", "arabic": "هداية المسلمين منجيري", "place": "Manjeri", "district": "Malappuram" },
-  { "id": 5, "code": "DARS-05", "name": "Dars 05 - Taleemul Islam Perinthalmanna", "arabic": "تعليم الإسلام بيرنتلمنة", "place": "Perinthalmanna", "district": "Malappuram" },
-  { "id": 6, "code": "DARS-06", "name": "Dars 06 - Darul Hidaya Tirur", "arabic": "دار الهداية تيرور", "place": "Tirur", "district": "Malappuram" },
-  { "id": 7, "code": "DARS-07", "name": "Dars 07 - Jamia Kottakkal", "arabic": "جامعة كوتاكل", "place": "Kottakkal", "district": "Malappuram" },
-  { "id": 8, "code": "DARS-08", "name": "Dars 08 - Anwarul Huda Kondotty", "arabic": "أنوار الهدى كوندوتي", "place": "Kondotty", "district": "Malappuram" },
-  { "id": 9, "code": "DARS-09", "name": "Dars 09 - Badriyya Nilambur", "arabic": "بدرية نيلمبور", "place": "Nilambur", "district": "Malappuram" },
-  { "id": 10, "code": "DARS-10", "name": "Dars 10 - Falahul Muslimeen Wandoor", "arabic": "فلاح المسلمين واندور", "place": "Wandoor", "district": "Malappuram" },
-  { "id": 11, "code": "DARS-11", "name": "Dars 11 - Sirajul Huda Valanchery", "arabic": "سراج الهدى والانجيري", "place": "Valanchery", "district": "Malappuram" },
-  { "id": 12, "code": "DARS-12", "name": "Dars 12 - Quwwathul Islam Ponnani", "arabic": "قوة الإسلام بوناني", "place": "Ponnani", "district": "Malappuram" },
-  { "id": 13, "code": "DARS-13", "name": "Dars 13 - Mishkath Kozhikode", "arabic": "مشكاة كوزيكود", "place": "Palayam", "district": "Kozhikode" },
-  { "id": 14, "code": "DARS-14", "name": "Dars 14 - Al-Madina Vadakara", "arabic": "المدينة واداكارا", "place": "Vadakara", "district": "Kozhikode" },
-  { "id": 15, "code": "DARS-15", "name": "Dars 15 - Sunniyya Koyilandy", "arabic": "السنية كوييلاندي", "place": "Koyilandy", "district": "Kozhikode" },
-  { "id": 16, "code": "DARS-16", "name": "Dars 16 - Raudathul Uloom Feroke", "arabic": "روضة العلوم فاروك", "place": "Feroke", "district": "Kozhikode" },
-  { "id": 17, "code": "DARS-17", "name": "Dars 17 - Irshadiyya Thamarassery", "arabic": "إرشادية تاماراسيري", "place": "Thamarassery", "district": "Kozhikode" },
-  { "id": 18, "code": "DARS-18", "name": "Dars 18 - Madrasathul Huda Koduvally", "arabic": "مدرسة الهدى كودووالي", "place": "Koduvally", "district": "Kozhikode" },
-  { "id": 19, "code": "DARS-19", "name": "Dars 19 - Darussalam Sulthan Bathery", "arabic": "دار السلام باتيري", "place": "Bathery", "district": "Wayanad" },
-  { "id": 20, "code": "DARS-20", "name": "Dars 20 - Anwarul Islam Kalpetta", "arabic": "أنوار الإسلام كالبتا", "place": "Kalpetta", "district": "Wayanad" },
-  { "id": 21, "code": "DARS-21", "name": "Dars 21 - Badrul Huda Mananthavady", "arabic": "بدر الهدى مانانتافادي", "place": "Mananthavady", "district": "Wayanad" },
-  { "id": 22, "code": "DARS-22", "name": "Dars 22 - Hidayathul Anam Meppadi", "arabic": "هداية الأنام ميبادي", "place": "Meppadi", "district": "Wayanad" },
-  { "id": 23, "code": "DARS-23", "name": "Dars 23 - Jamia Mannarkkad", "arabic": "جامعة مناركاد", "place": "Mannarkkad", "district": "Palakkad" },
-  { "id": 24, "code": "DARS-24", "name": "Dars 24 - Darul Uloom Ottapalam", "arabic": "دار العلوم أوتابالم", "place": "Ottapalam", "district": "Palakkad" },
-  { "id": 25, "code": "DARS-25", "name": "Dars 25 - Markazul Huda Pattambi", "arabic": "مركز الهدى باتامبي", "place": "Pattambi", "district": "Palakkad" },
-  { "id": 26, "code": "DARS-26", "name": "Dars 26 - Noorul Huda Cherpulassery", "arabic": "نور الهدى تشيربولاسيري", "place": "Cherpulassery", "district": "Palakkad" },
-  { "id": 27, "code": "DARS-27", "name": "Dars 27 - Sirajul Islam Chavakkad", "arabic": "سراج الإسلام تشافاكاد", "place": "Chavakkad", "district": "Thrissur" },
-  { "id": 28, "code": "DARS-28", "name": "Dars 28 - Hidayathul Muslimeen Kodungallur", "arabic": "هداية المسلمين كودونغالور", "place": "Kodungallur", "district": "Thrissur" },
-  { "id": 29, "code": "DARS-29", "name": "Dars 29 - Markaz Kunnamkulam", "arabic": "مركز كونامكولام", "place": "Kunnamkulam", "district": "Thrissur" },
-  { "id": 30, "code": "DARS-30", "name": "Dars 30 - Darul Uloom Guruvayur", "arabic": "دار العلوم غورووايور", "place": "Guruvayur", "district": "Thrissur" },
-  { "id": 31, "code": "DARS-31", "name": "Dars 31 - Jamia Thalassery", "arabic": "جامعة تالاسيري", "place": "Thalassery", "district": "Kannur" },
-  { "id": 32, "code": "DARS-32", "name": "Dars 32 - Markazul Ma'arif Payyanur", "arabic": "مركز المعارف بايانور", "place": "Payyanur", "district": "Kannur" },
-  { "id": 33, "code": "DARS-33", "name": "Dars 33 - Darul Hasanath Taliparamba", "arabic": "دار الحسنات تاليبارامبا", "place": "Taliparamba", "district": "Kannur" },
-  { "id": 34, "code": "DARS-34", "name": "Dars 34 - Hidayathul Islam Mattannur", "arabic": "هداية الإسلام ماتانور", "place": "Mattannur", "district": "Kannur" },
-  { "id": 35, "code": "DARS-35", "name": "Dars 35 - Sa'adiyya Kanhangad", "arabic": "السعدية كانهانغاد", "place": "Kanhangad", "district": "Kasaragod" },
-  { "id": 36, "code": "DARS-36", "name": "Dars 36 - Sirajul Huda Uppala", "arabic": "سراج الهدى أوبالا", "place": "Uppala", "district": "Kasaragod" },
-  { "id": 37, "code": "DARS-37", "name": "Dars 37 - Darul Uloom Kasaragod Town", "arabic": "دار العلوم كاسارغود", "place": "Kasaragod", "district": "Kasaragod" },
-  { "id": 38, "code": "DARS-38", "name": "Dars 38 - Al-Bayan Aluva", "arabic": "البيان ألوا", "place": "Aluva", "district": "Ernakulam" },
-  { "id": 39, "code": "DARS-39", "name": "Dars 39 - Tuhfatul Ward Alathurpadi", "arabic": "تحفة الورد الآلثوربادي", "place": "Alathurpadi", "district": "Malappuram" }
+  {
+    "id": 1,
+    "code": "DARS-01",
+    "name": "Dars 01 - Markaz Aripra",
+    "arabic": "مركز أريبرا",
+    "place": "Aripra",
+    "district": "Malappuram"
+  },
+  {
+    "id": 2,
+    "code": "DARS-02",
+    "name": "Dars 02 - Majlis Angadipuram",
+    "arabic": "مجلس أنكاديبورم",
+    "place": "Angadipuram",
+    "district": "Malappuram"
+  },
+  {
+    "id": 3,
+    "code": "DARS-03",
+    "name": "Dars 03 - Noorul Islam Melattur",
+    "arabic": "نور الإسلام ميلاتور",
+    "place": "Melattur",
+    "district": "Malappuram"
+  },
+  {
+    "id": 4,
+    "code": "DARS-04",
+    "name": "Dars 04 - Hidayathul Muslimeen Manjeri",
+    "arabic": "هداية المسلمين منجيري",
+    "place": "Manjeri",
+    "district": "Malappuram"
+  },
+  {
+    "id": 5,
+    "code": "DARS-05",
+    "name": "Dars 05 - Taleemul Islam Perinthalmanna",
+    "arabic": "تعليم الإسلام بيرنتلمنة",
+    "place": "Perinthalmanna",
+    "district": "Malappuram"
+  },
+  {
+    "id": 6,
+    "code": "DARS-06",
+    "name": "Dars 06 - Darul Hidaya Tirur",
+    "arabic": "دار الهداية تيرور",
+    "place": "Tirur",
+    "district": "Malappuram"
+  },
+  {
+    "id": 7,
+    "code": "DARS-07",
+    "name": "Dars 07 - Jamia Kottakkal",
+    "arabic": "جامعة كوتاكل",
+    "place": "Kottakkal",
+    "district": "Malappuram"
+  },
+  {
+    "id": 8,
+    "code": "DARS-08",
+    "name": "Dars 08 - Anwarul Huda Kondotty",
+    "arabic": "أنوار الهدى كوندوتي",
+    "place": "Kondotty",
+    "district": "Malappuram"
+  },
+  {
+    "id": 9,
+    "code": "DARS-09",
+    "name": "Dars 09 - Badriyya Nilambur",
+    "arabic": "بدرية نيلمبور",
+    "place": "Nilambur",
+    "district": "Malappuram"
+  },
+  {
+    "id": 10,
+    "code": "DARS-10",
+    "name": "Dars 10 - Falahul Muslimeen Wandoor",
+    "arabic": "فلاح المسلمين واندور",
+    "place": "Wandoor",
+    "district": "Malappuram"
+  },
+  {
+    "id": 11,
+    "code": "DARS-11",
+    "name": "Dars 11 - Sirajul Huda Valanchery",
+    "arabic": "سراج الهدى والانجيري",
+    "place": "Valanchery",
+    "district": "Malappuram"
+  },
+  {
+    "id": 12,
+    "code": "DARS-12",
+    "name": "Dars 12 - Quwwathul Islam Ponnani",
+    "arabic": "قوة الإسلام بوناني",
+    "place": "Ponnani",
+    "district": "Malappuram"
+  },
+  {
+    "id": 13,
+    "code": "DARS-13",
+    "name": "Dars 13 - Mishkath Kozhikode",
+    "arabic": "مشكاة كوزيكود",
+    "place": "Palayam",
+    "district": "Kozhikode"
+  },
+  {
+    "id": 14,
+    "code": "DARS-14",
+    "name": "Dars 14 - Al-Madina Vadakara",
+    "arabic": "المدينة واداكارا",
+    "place": "Vadakara",
+    "district": "Kozhikode"
+  },
+  {
+    "id": 15,
+    "code": "DARS-15",
+    "name": "Dars 15 - Sunniyya Koyilandy",
+    "arabic": "السنية كوييلاندي",
+    "place": "Koyilandy",
+    "district": "Kozhikode"
+  },
+  {
+    "id": 16,
+    "code": "DARS-16",
+    "name": "Dars 16 - Raudathul Uloom Feroke",
+    "arabic": "روضة العلوم فاروك",
+    "place": "Feroke",
+    "district": "Kozhikode"
+  },
+  {
+    "id": 17,
+    "code": "DARS-17",
+    "name": "Dars 17 - Irshadiyya Thamarassery",
+    "arabic": "إرشادية تاماراسيري",
+    "place": "Thamarassery",
+    "district": "Kozhikode"
+  },
+  {
+    "id": 18,
+    "code": "DARS-18",
+    "name": "Dars 18 - Madrasathul Huda Koduvally",
+    "arabic": "مدرسة الهدى كودووالي",
+    "place": "Koduvally",
+    "district": "Kozhikode"
+  },
+  {
+    "id": 19,
+    "code": "DARS-19",
+    "name": "Dars 19 - Darussalam Sulthan Bathery",
+    "arabic": "دار السلام باتيري",
+    "place": "Bathery",
+    "district": "Wayanad"
+  },
+  {
+    "id": 20,
+    "code": "DARS-20",
+    "name": "Dars 20 - Anwarul Islam Kalpetta",
+    "arabic": "أنوار الإسلام كالبتا",
+    "place": "Kalpetta",
+    "district": "Wayanad"
+  },
+  {
+    "id": 21,
+    "code": "DARS-21",
+    "name": "Dars 21 - Badrul Huda Mananthavady",
+    "arabic": "بدر الهدى مانانتافادي",
+    "place": "Mananthavady",
+    "district": "Wayanad"
+  },
+  {
+    "id": 22,
+    "code": "DARS-22",
+    "name": "Dars 22 - Hidayathul Anam Meppadi",
+    "arabic": "هداية الأنام ميبادي",
+    "place": "Meppadi",
+    "district": "Wayanad"
+  },
+  {
+    "id": 23,
+    "code": "DARS-23",
+    "name": "Dars 23 - Jamia Mannarkkad",
+    "arabic": "جامعة مناركاد",
+    "place": "Mannarkkad",
+    "district": "Palakkad"
+  },
+  {
+    "id": 24,
+    "code": "DARS-24",
+    "name": "Dars 24 - Darul Uloom Ottapalam",
+    "arabic": "دار العلوم أوتابالم",
+    "place": "Ottapalam",
+    "district": "Palakkad"
+  },
+  {
+    "id": 25,
+    "code": "DARS-25",
+    "name": "Dars 25 - Markazul Huda Pattambi",
+    "arabic": "مركز الهدى باتامبي",
+    "place": "Pattambi",
+    "district": "Palakkad"
+  },
+  {
+    "id": 26,
+    "code": "DARS-26",
+    "name": "Dars 26 - Noorul Huda Cherpulassery",
+    "arabic": "نور الهدى تشيربولاسيري",
+    "place": "Cherpulassery",
+    "district": "Palakkad"
+  },
+  {
+    "id": 27,
+    "code": "DARS-27",
+    "name": "Dars 27 - Sirajul Islam Chavakkad",
+    "arabic": "سراج الإسلام تشافاكاد",
+    "place": "Chavakkad",
+    "district": "Thrissur"
+  },
+  {
+    "id": 28,
+    "code": "DARS-28",
+    "name": "Dars 28 - Hidayathul Muslimeen Kodungallur",
+    "arabic": "هداية المسلمين كودونغالور",
+    "place": "Kodungallur",
+    "district": "Thrissur"
+  },
+  {
+    "id": 29,
+    "code": "DARS-29",
+    "name": "Dars 29 - Markaz Kunnamkulam",
+    "arabic": "مركز كونامكولام",
+    "place": "Kunnamkulam",
+    "district": "Thrissur"
+  },
+  {
+    "id": 30,
+    "code": "DARS-30",
+    "name": "Dars 30 - Darul Uloom Guruvayur",
+    "arabic": "دار العلوم غورووايور",
+    "place": "Guruvayur",
+    "district": "Thrissur"
+  },
+  {
+    "id": 31,
+    "code": "DARS-31",
+    "name": "Dars 31 - Jamia Thalassery",
+    "arabic": "جامعة تالاسيري",
+    "place": "Thalassery",
+    "district": "Kannur"
+  },
+  {
+    "id": 32,
+    "code": "DARS-32",
+    "name": "Dars 32 - Markazul Ma'arif Payyanur",
+    "arabic": "مركز المعارف بايانور",
+    "place": "Payyanur",
+    "district": "Kannur"
+  },
+  {
+    "id": 33,
+    "code": "DARS-33",
+    "name": "Dars 33 - Darul Hasanath Taliparamba",
+    "arabic": "دار الحسنات تاليبارامبا",
+    "place": "Taliparamba",
+    "district": "Kannur"
+  },
+  {
+    "id": 34,
+    "code": "DARS-34",
+    "name": "Dars 34 - Hidayathul Islam Mattannur",
+    "arabic": "هداية الإسلام ماتانور",
+    "place": "Mattannur",
+    "district": "Kannur"
+  },
+  {
+    "id": 35,
+    "code": "DARS-35",
+    "name": "Dars 35 - Sa'adiyya Kanhangad",
+    "arabic": "السعدية كانهانغاد",
+    "place": "Kanhangad",
+    "district": "Kasaragod"
+  },
+  {
+    "id": 36,
+    "code": "DARS-36",
+    "name": "Dars 36 - Sirajul Huda Uppala",
+    "arabic": "سراج الهدى أوبالا",
+    "place": "Uppala",
+    "district": "Kasaragod"
+  },
+  {
+    "id": 37,
+    "code": "DARS-37",
+    "name": "Dars 37 - Darul Uloom Kasaragod Town",
+    "arabic": "دار العلوم كاسارغود",
+    "place": "Kasaragod",
+    "district": "Kasaragod"
+  },
+  {
+    "id": 38,
+    "code": "DARS-38",
+    "name": "Dars 38 - Al-Bayan Aluva",
+    "arabic": "البيان ألوا",
+    "place": "Aluva",
+    "district": "Ernakulam"
+  },
+  {
+    "id": 39,
+    "code": "DARS-39",
+    "name": "Dars 39 - Tuhfatul Ward Alathurpadi",
+    "arabic": "تحفة الورد الآلثوربادي",
+    "place": "Alathurpadi",
+    "district": "Malappuram"
+  }
 ]

@@ -16,17 +16,17 @@ export const CAMP_FACTS = {
   // Camp Dates
   startDate: '2026-12-24',
   endDate: '2026-12-30',
-  startDateISO: '2026-12-24T05:00:00+05:30',
-  endDateISO: '2026-12-30T21:00:00+05:30',
+  startDateISO: '2026-12-24T09:00:00+05:30',
+  endDateISO: '2026-12-30T17:00:00+05:30',
   deadlineDate: '2026-12-10',
   deadlineDateISO: '2026-12-10T23:59:59+05:30',
   durationDays: 7,
   timezone: 'Asia/Kolkata',
 
   // Venue & Capacity
-  venueName: 'Alathurpadi Dars',
+  venueName: 'Alathurpadi Dars Campus',
   venuePlace: 'Melmuri, Malappuram, Kerala',
-  venueFull: 'Alathurpadi Dars, Melmuri, Malappuram, Kerala',
+  venueFull: 'Alathurpadi Dars Campus, Melmuri, Malappuram, Kerala 676517',
   venuePin: '676517',
   capacity: 100,
   suffaDarsCount: '39+',
@@ -45,7 +45,7 @@ export const CAMP_FACTS = {
     receptionNote: 'An ADSA reception team coordinates arrivals on 24 Dec.'
   },
 
-  // Public Contact Details (Public contact ONLY, never a login)
+  // Public Contact Details
   contact: {
     phone: '+91 90745 25205',
     phoneRaw: '+919074525205',
@@ -64,11 +64,13 @@ export const CAMP_FACTS = {
     { id: 'youtube', label: 'YouTube', handle: 'alathurpadidars', url: 'https://www.youtube.com/alathurpadidars' },
   ],
 
-  // Demo Credentials (Shown clearly in login boxes)
+  // Demo Credentials (Supports both admin logins)
   demoCredentials: {
     admin: {
-      email: 'admin@alwisal.demo',
-      password: 'Wisal@2026',
+      email: 'alathurpadidars@gmail.com',
+      password: 'adsa2026@admin',
+      altEmail: 'admin@alwisal.demo',
+      altPassword: 'Wisal@2026',
       label: 'Admin Portal',
     },
     student: {
@@ -82,7 +84,6 @@ export const CAMP_FACTS = {
   },
 };
 
-// Shorthand exports for backwards compatibility across existing components
 export const CONTACT = {
   phones: [
     { label: 'Helpline / Office', number: CAMP_FACTS.contact.phoneRaw, display: CAMP_FACTS.contact.phone },
@@ -119,6 +120,24 @@ export const CONFIG = {
     'Al-Wisal ക്യാമ്പിനെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു'
   )}`,
   FORM_ENDPOINT: import.meta.env.VITE_FORM_ENDPOINT || '',
+};
+
+export const CAMP = {
+  ...CAMP_FACTS,
+  venue: CAMP_FACTS.venueFull,
+  mapsUrl: CAMP_FACTS.mapsLink,
+  socials: {
+    facebook: 'https://www.facebook.com/alathoorpadidars/',
+    instagram: 'https://www.instagram.com/alathurpadi_dars',
+    x: 'https://x.com/ALATHURPADARS',
+    website: 'https://alathurpadidars.in/',
+  },
+  contact: {
+    ...CAMP_FACTS.contact,
+    whatsapp: `https://wa.me/${CAMP_FACTS.contact.whatsappClean}?text=${encodeURIComponent(
+      "Assalamu Alaikum, I have an inquiry regarding Al-Wisal '26"
+    )}`,
+  },
 };
 
 export function getDaysRemaining() {

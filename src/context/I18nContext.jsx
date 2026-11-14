@@ -39,7 +39,17 @@ export function I18nProvider({ children }) {
   };
 
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t, isRtl: language === 'ar' }}>
+    <I18nContext.Provider
+      value={{
+        language,
+        setLanguage,
+        lang: language,
+        setLang: setLanguage,
+        t,
+        isRtl: language === 'ar',
+        isRTL: language === 'ar',
+      }}
+    >
       {children}
     </I18nContext.Provider>
   );
@@ -51,9 +61,14 @@ export function useT() {
     return {
       t: (key) => en[key] || key,
       language: 'en',
+      lang: 'en',
       setLanguage: () => {},
-      isRtl: false
+      setLang: () => {},
+      isRtl: false,
+      isRTL: false,
     };
   }
   return ctx;
 }
+
+export const useI18n = useT;

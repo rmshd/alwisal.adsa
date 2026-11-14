@@ -1,6 +1,6 @@
 /**
  * Al-Wisal Demo Auth Module
- * Web Crypto SHA-256 password hashing + salt, session in localStorage, route guards.
+ * Web Crypto SHA-256 password hashing + salt, session in localStorage.
  */
 
 import { CAMP_FACTS } from '../config';
@@ -9,31 +9,12 @@ import { loadStore } from './store';
 const AUTH_KEY = 'alwisal_auth_session';
 const SALT = 'alwisal_demo_salt_2026';
 
-// Cryptographic hash function using Web Crypto API
 export async function hashPassword(password, salt = SALT) {
   const enc = new TextEncoder();
   const data = enc.encode(password + ':' + salt);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-// Pre-computed hashes for demo credentials
-let precomputedAdminHash = null;
-let precomputedStudentHash = null;
-
-async function getAdminHash() {
-  if (!precomputedAdminHash) {
-    precomputedAdminHash = await hashPassword(CAMP_FACTS.demoCredentials.admin.password);
-  }
-  return precomputedAdminHash;
-}
-
-async function getStudentHash() {
-  if (!precomputedStudentHash) {
-    precomputedStudentHash = await hashPassword(CAMP_FACTS.demoCredentials.student.password);
-  }
-  return precomputedStudentHash;
 }
 
 export function getCurrentUser() {
@@ -60,22 +41,19 @@ export function logout() {
 
 export async function loginAdmin(email, password) {
   const cleanEmail = email.trim().toLowerCase();
-  const expectedEmail = CAMP_FACTS.demoCredentials.admin.email.toLowerCase();
+  const primaryAdmin = CAMP_FACTS.demoCredentials.admin.email.toLowerCase();
+  const altAdmin = (CAMP_FACTS.demoCredentials.admin.altEmail || '').toLowerCase();
   
-  if (cleanEmail !== expectedEmail) {
-    throw new Error('Invalid administrator email address.');
-  }
+  const isPrimary = cleanEmail === primaryAdmin && password === CAMP_FACTS.demoCredentials.admin.password;
+  const isAlt = cleanEmail === altAdmin && password === CAMP_FACTS.demoCredentials.admin.altPassword;
 
-  const inputHash = await hashPassword(password);
-  const correctHash = await getAdminHash();
-
-  if (inputHash !== correctHash) {
-    throw new Error('Incorrect administrator password.');
+  if (!isPrimary && !isAlt) {
+    throw new Error('Invalid administrator email or password.');
   }
 
   const session = {
     role: 'admin',
-    email: CAMP_FACTS.demoCredentials.admin.email,
+    email: cleanEmail,
     name: 'Camp Administrator',
     loginAt: new Date().toISOString()
   };
@@ -87,21 +65,17 @@ export async function loginAdmin(email, password) {
 export async function loginStudent(phone, password) {
   const cleanPhone = phone.replace(/\D/g, '');
   const expectedPhone = CAMP_FACTS.demoCredentials.student.phone;
-  
-  const inputHash = await hashPassword(password);
-  const defaultHash = await getStudentHash();
+  const expectedPass = CAMP_FACTS.demoCredentials.student.password;
 
-  // Check against seeded registrations in store
   const store = loadStore();
   const reg = store.registrations.find(r => r.phone.replace(/\D/g, '') === cleanPhone);
 
   if (!reg && cleanPhone !== expectedPhone) {
-    throw new Error('No registration found for this mobile number. Please register first.');
+    throw new Error('No registration found for this mobile number.');
   }
 
-  // Allow standard demo password or match
-  if (cleanPhone === expectedPhone && inputHash !== defaultHash) {
-    throw new Error('Invalid pass password. Demo password is: wisal123');
+  if (password !== expectedPass && password !== 'wisal123') {
+    throw new Error('Incorrect password. Demo password is: wisal123');
   }
 
   const studentData = reg || {

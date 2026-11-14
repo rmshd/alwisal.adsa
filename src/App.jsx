@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import FloatingWhatsApp from './components/FloatingWhatsApp';
+import AIAssistant from './components/AIAssistant';
 import PreferencesModal from './components/PreferencesModal';
 import { PreferencesProvider } from './context/PreferencesContext';
 import { I18nProvider } from './context/I18nContext';
+import { ReminderProvider } from './context/ReminderContext';
 import { initMotion } from './lib/motion';
 
 import HomePage from './pages/HomePage';
@@ -52,12 +53,12 @@ function MainLayout() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-canvas,#0B1520)] text-[var(--text-main,#FFFFFF)] relative selection:bg-[#FDB913] selection:text-[#0B1520] overflow-x-hidden font-['Poppins'] flex flex-col justify-between">
+    <div className="min-h-screen bg-[#0B1520] text-white relative selection:bg-[#FDB913] selection:text-[#0B1520] overflow-x-hidden font-['Poppins'] flex flex-col justify-between">
       <ScrollToTop />
 
       {/* Top Scroll Progress Bar */}
       <div
-        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-[#F28A2E] origin-left pointer-events-none transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-[#FDB913] origin-left pointer-events-none transition-transform duration-75 ease-out"
         style={{ transform: `scaleX(${scrollProgress})` }}
         aria-hidden="true"
       />
@@ -67,9 +68,6 @@ function MainLayout() {
 
       {/* Preferences Dialog */}
       <PreferencesModal />
-
-      {/* Floating WhatsApp Action Button */}
-      <FloatingWhatsApp />
 
       {/* Main Routed Content */}
       <main className="w-full flex-grow relative z-10">
@@ -87,6 +85,9 @@ function MainLayout() {
         </Routes>
       </main>
 
+      {/* AI Assistant (Bottom-Right Floating Launcher) */}
+      <AIAssistant />
+
       {/* Global Footer */}
       <Footer />
     </div>
@@ -97,9 +98,11 @@ export default function App() {
   return (
     <PreferencesProvider>
       <I18nProvider>
-        <BrowserRouter>
-          <MainLayout />
-        </BrowserRouter>
+        <ReminderProvider>
+          <BrowserRouter>
+            <MainLayout />
+          </BrowserRouter>
+        </ReminderProvider>
       </I18nProvider>
     </PreferencesProvider>
   );

@@ -1,237 +1,382 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import AlWisalMark from '../art/AlWisalMark';
-import Button from './Button';
+import {
+  Search,
+  Share2,
+  Globe,
+  Sun,
+  Moon,
+  Laptop,
+  SlidersHorizontal,
+  Compass,
+  LogIn,
+  User,
+  Menu,
+  X,
+  Calendar,
+  Building2,
+  BookOpen,
+} from 'lucide-react';
+import AudioPill from './AudioPill';
+import ReminderPillBadge from './ReminderPillBadge';
+import SearchModal from './SearchModal';
+import ShareModal from './ShareModal';
+import UnifiedLoginModal from './UnifiedLoginModal';
+import PreferencesModal from './PreferencesModal';
 import { usePreferences } from '../context/PreferencesContext';
-import { useT } from '../context/I18nContext';
+import { useI18n } from '../context/I18nContext';
 import { getCurrentUser } from '../lib/auth';
-import { Menu, X, SlidersHorizontal, User, Sparkles } from 'lucide-react';
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const [isThemeOpen, setIsThemeOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const [user, setUser] = useState(getCurrentUser());
   const location = useLocation();
 
-  const { openPanel } = usePreferences();
-  const { t } = useT();
+  const { preferences, setPreferences, isPanelOpen, openPanel, closePanel } = usePreferences();
+  const { lang, setLang, t, isRTL } = useI18n();
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 40);
-
-      if (currentScrollY > 150) {
-        if (currentScrollY > lastScrollY && !mobileMenuOpen) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-      } else {
-        setIsVisible(true);
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    const handleAuthChange = (e) => {
-      setUser(e.detail);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    const handleAuthChange = (e) => setUser(e.detail);
     window.addEventListener('alwisal_auth_changed', handleAuthChange);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('alwisal_auth_changed', handleAuthChange);
-    };
-  }, [mobileMenuOpen]);
+    return () => window.removeEventListener('alwisal_auth_changed', handleAuthChange);
+  }, []);
 
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const navLinks = [
-    { label: t('navHome'), path: '/' },
-    { label: t('navAbout'), path: '/about' },
-    { label: t('navSchedule'), path: '/schedule' },
-    { label: t('navDars'), path: '/dars' },
-    { label: t('navGuide'), path: '/guide' },
-  ];
+  const handleRegisterClick = (e) => {
+    const regEl = document.getElementById('register');
+    if (regEl) {
+      e.preventDefault();
+      regEl.scrollIntoView({ behavior: 'smooth' });
+    } else if (location.pathname !== '/') {
+      window.location.href = '/#register';
+    }
+  };
 
   return (
     <>
+      {/* FLOATING PILL NAVBAR - DESKTOP & TABLET */}
       <header
-        className={`fixed top-0 left-0 right-0 z-40 h-[72px] transition-transform duration-300 font-['Poppins'] ${
-          isVisible ? 'translate-y-0' : '-translate-y-full'
-        } ${
-          isScrolled
-            ? 'bg-[#0B1520]/95 backdrop-blur-md border-b border-white/10 shadow-lg'
-            : 'bg-[#0B1520]/60 backdrop-blur-sm'
-        }`}
-        style={{ paddingInline: 'var(--gutter)' }}
+        role="banner"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-40 hidden md:inline-flex items-center gap-2 lg:gap-2.5 px-3.5 py-1.5 rounded-full bg-[#121E2D]/85 backdrop-blur-md shadow-2xl shadow-black/40 border border-[#FDB913]/35 hover:border-[#FDB913]/60 transition-all duration-300 w-auto max-w-fit"
       >
-        <div className="w-full h-full flex items-center justify-between max-w-[1400px] mx-auto">
-          {/* Brand Link */}
-          <Link
-            to="/"
-            className="flex items-center group focus-visible:outline-none"
-            aria-label="Al-Wisal Home"
+        {/* Brand / Logo + Title */}
+        <Link
+          to="/"
+          className="flex items-center gap-2 group focus:outline-none rounded-full px-1 py-0.5 hover:opacity-90 transition-opacity shrink-0"
+          aria-label="Al-Wisal '26 Home"
+        >
+          <div className="relative w-7 h-7 rounded-full overflow-hidden flex items-center justify-center bg-[#0B1520] p-1 shadow-inner border border-[#FDB913]/30 group-hover:border-[#FDB913] transition-colors">
+            <img
+              src="/images/favicon.png"
+              alt="Al-Wisal Logo"
+              className="w-5 h-5 object-contain"
+            />
+          </div>
+          <div className="flex flex-col text-left">
+            <span className="font-['Poppins'] font-bold text-xs tracking-wide text-white leading-tight">
+              AL-WISAL ’26
+            </span>
+            <span className="font-arabic text-[10px] text-[#FDB913] font-medium leading-none">
+              الوصال
+            </span>
+          </div>
+        </Link>
+
+        {/* Subtle Vertical Hairline Separator */}
+        <div className="w-[1px] h-4 bg-white/15 mx-0.5 shrink-0" />
+
+        {/* Tools Cluster: Search, Share, Audio, Reminders, Lang, Theme, Settings, Guide, Login, Register */}
+        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          {/* Global Search Button */}
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            className="p-2 rounded-full text-neutral-300 hover:text-[#FDB913] hover:bg-white/5 transition-colors focus:outline-none"
+            aria-label="Search camp details (Cmd+K)"
+            title="Search camp details (Cmd+K)"
           >
-            <AlWisalMark variant="nav" color="#F28A2E" secondaryColor="#FDB913" />
+            <Search className="w-4 h-4" />
+          </button>
+
+          {/* Share Hub Button */}
+          <button
+            onClick={() => setIsShareOpen(true)}
+            className="p-2 rounded-full text-neutral-300 hover:text-[#FDB913] hover:bg-white/5 transition-colors focus:outline-none"
+            aria-label="Share Al-Wisal '26"
+            title="Share Al-Wisal '26"
+          >
+            <Share2 className="w-4 h-4" />
+          </button>
+
+          {/* Background Audio / Nasheed Pill */}
+          <AudioPill />
+
+          {/* Camp Reminders Pill */}
+          <ReminderPillBadge />
+
+          {/* Language Selector Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => {
+                setIsLangOpen(!isLangOpen);
+                setIsThemeOpen(false);
+              }}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium text-neutral-300 hover:bg-white/5 transition-colors focus:outline-none"
+              aria-label="Change Language"
+            >
+              <Globe className="w-3.5 h-3.5 text-[#FDB913]" />
+              <span className="uppercase text-[11px] font-semibold">{lang}</span>
+            </button>
+
+            {isLangOpen && (
+              <div className="absolute top-full mt-2.5 right-0 w-32 py-1.5 rounded-2xl bg-[#121E2D] shadow-2xl border border-[#FDB913]/30 flex flex-col z-50 animate-scale-in">
+                <button
+                  onClick={() => {
+                    setLang('en');
+                    setIsLangOpen(false);
+                  }}
+                  className={`px-3 py-1.5 text-xs text-left hover:bg-[#FDB913]/15 transition-colors ${
+                    lang === 'en' ? 'font-bold text-[#FDB913]' : 'text-neutral-300'
+                  }`}
+                >
+                  English
+                </button>
+                <button
+                  onClick={() => {
+                    setLang('ml');
+                    setIsLangOpen(false);
+                  }}
+                  className={`px-3 py-1.5 text-xs text-left hover:bg-[#FDB913]/15 transition-colors ${
+                    lang === 'ml' ? 'font-bold text-[#FDB913]' : 'text-neutral-300'
+                  }`}
+                >
+                  മലയാളം
+                </button>
+                <button
+                  onClick={() => {
+                    setLang('ar');
+                    setIsLangOpen(false);
+                  }}
+                  className={`px-3 py-1.5 text-xs text-left font-arabic hover:bg-[#FDB913]/15 transition-colors ${
+                    lang === 'ar' ? 'font-bold text-[#FDB913]' : 'text-neutral-300'
+                  }`}
+                >
+                  العربية
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Theme Selector Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => {
+                setIsThemeOpen(!isThemeOpen);
+                setIsLangOpen(false);
+              }}
+              className="p-2 rounded-full text-neutral-300 hover:text-[#FDB913] hover:bg-white/5 transition-colors focus:outline-none"
+              aria-label="Toggle Theme"
+              title="Toggle Theme"
+            >
+              {preferences.theme === 'light' ? (
+                <Sun className="w-4 h-4 text-[#FDB913]" />
+              ) : preferences.theme === 'system' ? (
+                <Laptop className="w-4 h-4" />
+              ) : (
+                <Moon className="w-4 h-4 text-[#FDB913]" />
+              )}
+            </button>
+
+            {isThemeOpen && (
+              <div className="absolute top-full mt-2.5 right-0 w-28 py-1.5 rounded-2xl bg-[#121E2D] shadow-2xl border border-[#FDB913]/30 flex flex-col z-50 animate-scale-in">
+                <button
+                  onClick={() => {
+                    setPreferences({ theme: 'dark' });
+                    setIsThemeOpen(false);
+                  }}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-300 hover:bg-[#FDB913]/15 transition-colors"
+                >
+                  <Moon className="w-3.5 h-3.5 text-[#FDB913]" /> Dark
+                </button>
+                <button
+                  onClick={() => {
+                    setPreferences({ theme: 'light' });
+                    setIsThemeOpen(false);
+                  }}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-300 hover:bg-[#FDB913]/15 transition-colors"
+                >
+                  <Sun className="w-3.5 h-3.5 text-amber-500" /> Light
+                </button>
+                <button
+                  onClick={() => {
+                    setPreferences({ theme: 'system' });
+                    setIsThemeOpen(false);
+                  }}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs text-neutral-300 hover:bg-[#FDB913]/15 transition-colors"
+                >
+                  <Laptop className="w-3.5 h-3.5" /> System
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Global Preferences / Settings Button */}
+          <button
+            onClick={openPanel}
+            className="p-2 rounded-full text-neutral-300 hover:text-[#FDB913] hover:bg-white/5 transition-colors focus:outline-none"
+            aria-label="Preferences (Ctrl+,)"
+            title="Preferences (Ctrl+,)"
+          >
+            <SlidersHorizontal className="w-4 h-4" />
+          </button>
+
+          {/* Interactive Guide Link */}
+          <Link
+            to="/guide"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-semibold text-[#FDB913] hover:text-[#FDB913]/80 bg-[#FDB913]/10 hover:bg-[#FDB913]/20 border border-[#FDB913]/30 transition-colors focus:outline-none"
+            title="Interactive Guide & Experience Manual"
+          >
+            <Compass className="w-3.5 h-3.5" />
+            <span className="hidden xl:inline">Guide</span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6" aria-label="Main Navigation">
-            <ul className="flex items-center gap-1 list-none m-0 p-0">
-              {navLinks.map((link) => {
-                const isActive = location.pathname === link.path;
-                return (
-                  <li key={link.path}>
-                    <Link
-                      to={link.path}
-                      className={`text-xs uppercase tracking-widest font-bold px-3 py-2 transition-colors ${
-                        isActive
-                          ? 'text-[#FDB913]'
-                          : 'text-[#9FB0C3] hover:text-white'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-
-            {/* Quick Actions */}
-            <div className="flex items-center gap-2.5 border-l border-white/15 pl-4">
-              {/* Preferences Button */}
-              <button
-                type="button"
-                onClick={openPanel}
-                className="p-2 text-[#9FB0C3] hover:text-white rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
-                title="Preferences (Ctrl+,)"
-                aria-label="Open Preferences"
-              >
-                <SlidersHorizontal size={18} />
-              </button>
-
-              {/* Login / Dashboard Link */}
-              {user ? (
-                <Link
-                  to={user.role === 'admin' ? '/admin' : '/dashboard'}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-bold text-white border border-white/15 transition-colors"
-                >
-                  <User size={14} className="text-[#FDB913]" />
-                  <span>{user.role === 'admin' ? 'Admin Portal' : 'My Pass'}</span>
-                </Link>
-              ) : (
-                <Link
-                  to="/login"
-                  className="text-xs uppercase tracking-wider font-bold text-[#9FB0C3] hover:text-white px-3 py-2 transition-colors"
-                >
-                  {t('navLogin')}
-                </Link>
-              )}
-
-              {/* Primary Register Button */}
-              <Button
-                href="/#register"
-                variant="primary"
-                className="h-9 px-5 text-xs font-bold bg-[#F28A2E] text-[#0B1520] hover:brightness-110"
-              >
-                {t('navRegister')}
-              </Button>
-            </div>
-          </nav>
-
-          {/* Mobile hamburger */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <button
-              type="button"
-              onClick={openPanel}
-              className="p-2 text-[#9FB0C3] hover:text-white"
-              aria-label="Open Preferences"
+          {/* Unified Login Button */}
+          {user ? (
+            <Link
+              to={user.role === 'admin' ? '/admin' : '/dashboard'}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-white hover:text-[#FDB913] bg-white/5 hover:bg-white/10 transition-colors border border-white/10"
+              title="Open Portal"
             >
-              <SlidersHorizontal size={20} />
-            </button>
-
+              <User className="w-3.5 h-3.5 text-[#FDB913]" />
+              <span className="hidden lg:inline">{user.name?.split(' ')[0]}</span>
+            </Link>
+          ) : (
             <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-white/80 hover:text-white focus:outline-none"
-              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+              onClick={() => setIsLoginModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-neutral-200 hover:text-[#FDB913] hover:bg-white/5 transition-colors border border-white/10"
+              title="Portal Login (Student & Admin)"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <LogIn className="w-3.5 h-3.5 text-[#FDB913]" />
+              <span className="hidden lg:inline">Login</span>
             </button>
-          </div>
+          )}
+
+          {/* Register Action CTA Button (Gold Pill) */}
+          <a
+            href="#register"
+            onClick={handleRegisterClick}
+            className="px-4 py-1.5 rounded-full text-xs font-semibold bg-[#FDB913] hover:bg-[#FDB913]/90 text-[#0B1520] shadow-sm hover:shadow transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+          >
+            Register
+          </a>
         </div>
       </header>
 
-      {/* Full-screen Mobile Menu */}
-      <div
-        className={`fixed inset-0 z-50 bg-[#0B1520] transition-opacity duration-300 lg:hidden ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <div className="flex flex-col h-full p-6 pt-20">
-          <div className="flex items-center justify-between pb-6 border-b border-white/10">
-            <AlWisalMark variant="nav" color="#F28A2E" secondaryColor="#FDB913" />
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(false)}
-              className="p-2 text-white/80 hover:text-white"
-              aria-label="Close Menu"
-            >
-              <X size={24} />
-            </button>
-          </div>
+      {/* MOBILE COMPACT FLOATING BAR */}
+      <header className="fixed top-3 left-4 right-4 z-40 md:hidden flex items-center justify-between px-3.5 py-2 rounded-full bg-[#121E2D]/90 backdrop-blur-md shadow-2xl border border-[#FDB913]/35 text-white">
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/images/favicon.png" alt="Logo" className="w-6 h-6 object-contain" />
+          <span className="font-['Poppins'] font-bold text-xs text-white">AL-WISAL ’26</span>
+        </Link>
 
-          <nav className="flex-1 py-8">
-            <ul className="space-y-4">
-              {navLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="block text-2xl uppercase tracking-wider font-extrabold text-white hover:text-[#FDB913] transition-colors py-2"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <div className="flex items-center gap-1">
+          <AudioPill compact={true} />
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            className="p-1.5 rounded-full text-neutral-300 hover:text-[#FDB913]"
+          >
+            <Search className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-1.5 rounded-full text-neutral-300 hover:text-[#FDB913]"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-x-4 top-16 z-40 md:hidden p-5 rounded-3xl bg-[#121E2D] border border-[#FDB913]/30 shadow-2xl space-y-4 text-white animate-scale-in">
+          <nav className="flex flex-col space-y-2 text-sm font-semibold">
+            <Link
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl hover:bg-white/5"
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl hover:bg-white/5"
+            >
+              About Camp &amp; Ustad
+            </Link>
+            <Link
+              to="/schedule"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl hover:bg-white/5"
+            >
+              7-Day Schedule
+            </Link>
+            <Link
+              to="/dars"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl hover:bg-white/5"
+            >
+              SUFFA Dars Directory
+            </Link>
+            <Link
+              to="/guide"
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-xl hover:bg-white/5 text-[#FDB913]"
+            >
+              Interactive Guide
+            </Link>
           </nav>
 
-          <div className="pt-6 border-t border-white/10 space-y-3">
-            {user ? (
-              <Link
-                to={user.role === 'admin' ? '/admin' : '/dashboard'}
-                className="w-full h-12 flex items-center justify-center rounded-full bg-white/10 text-white font-bold text-sm border border-white/15"
-              >
-                {user.role === 'admin' ? 'Open Admin Portal' : 'My Pass Dashboard'}
-              </Link>
-            ) : (
-              <Link
-                to="/login"
-                className="w-full h-12 flex items-center justify-center rounded-full bg-white/10 text-white font-bold text-sm border border-white/15"
-              >
-                Student / Admin Login
-              </Link>
-            )}
-
-            <Button
-              href="/#register"
-              variant="primary"
-              className="w-full h-12 text-sm font-bold bg-[#F28A2E] text-[#0B1520]"
+          <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setIsLoginModalOpen(true);
+              }}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 text-xs text-neutral-200"
             >
-              {t('navRegister')}
-            </Button>
+              <LogIn className="w-3.5 h-3.5 text-[#FDB913]" />
+              <span>Portal Login</span>
+            </button>
+
+            <a
+              href="#register"
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleRegisterClick(e);
+              }}
+              className="px-5 py-2 rounded-full bg-[#FDB913] text-[#0B1520] font-bold text-xs"
+            >
+              Register Now
+            </a>
           </div>
         </div>
-      </div>
+      )}
+
+      {/* Global Modals */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <ShareModal isOpen={isShareOpen} onClose={() => setIsShareOpen(false)} />
+      <UnifiedLoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
+      <PreferencesModal isOpen={isPanelOpen} onClose={closePanel} />
     </>
   );
 }
