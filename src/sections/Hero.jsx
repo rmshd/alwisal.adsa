@@ -1,82 +1,44 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import SevenMark from '../art/SevenMark';
-import Panorama from '../art/Panorama';
 import Button from '../components/Button';
-import { KitabIcon, StarIcon, LampIcon, BananaLeafIcon, FlowerA } from '../art/Icons';
 import { CONFIG, getDaysRemaining } from '../config';
 import { isReducedMotion, smoothScrollTo } from '../lib/motion';
 
 export default function Hero() {
   const heroRef = useRef(null);
-  const headlineLine1Ref = useRef(null);
-  const headlineLine2Ref = useRef(null);
-  const subtextRef = useRef(null);
-  const buttonsRef = useRef(null);
-  const stickersRef = useRef(null);
-  const ustadGroupRef = useRef(null);
-
+  const leftColRef = useRef(null);
+  const visualRef = useRef(null);
   const daysRemaining = getDaysRemaining();
 
   useEffect(() => {
     if (isReducedMotion() || !heroRef.current) return;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.1 });
-
-      // Line-by-line headline reveal from overflow mask
-      tl.fromTo(
-        [headlineLine1Ref.current, headlineLine2Ref.current],
-        { yPercent: 110, opacity: 0 },
+      // Clean, single reveal animation with power3.out
+      gsap.fromTo(
+        leftColRef.current?.children || [],
+        { opacity: 0, y: 30 },
         {
-          yPercent: 0,
           opacity: 1,
+          y: 0,
           duration: 0.9,
-          stagger: 0.14,
+          stagger: 0.1,
           ease: 'power3.out',
+          delay: 0.1,
         }
       );
 
-      // Subtext slide up
-      tl.fromTo(
-        subtextRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-        '-=0.5'
+      gsap.fromTo(
+        visualRef.current,
+        { opacity: 0, scale: 0.95 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 1.1,
+          ease: 'power3.out',
+          delay: 0.25,
+        }
       );
-
-      // Buttons reveal
-      tl.fromTo(
-        buttonsRef.current,
-        { y: 25, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' },
-        '-=0.4'
-      );
-
-      // Ustad portrait & blob float in
-      tl.fromTo(
-        ustadGroupRef.current,
-        { scale: 0.9, opacity: 0, y: 30 },
-        { scale: 1, opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' },
-        '-=0.8'
-      );
-
-      // Stickers pop with a small overshoot
-      if (stickersRef.current) {
-        tl.fromTo(
-          stickersRef.current.children,
-          { scale: 0, opacity: 0, rotation: (i) => (i % 2 === 0 ? -12 : 12) },
-          {
-            scale: 1,
-            opacity: 1,
-            rotation: (i) => (i === 1 ? -4 : i === 0 ? 3 : -2),
-            duration: 0.7,
-            stagger: 0.1,
-            ease: 'back.out(2)',
-          },
-          '-=0.6'
-        );
-      }
     }, heroRef);
 
     return () => ctx.revert();
@@ -86,163 +48,157 @@ export default function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative w-full min-h-screen flex flex-col justify-between pt-24 lg:pt-28 overflow-hidden bg-[var(--bg)]"
+      className="relative w-full h-[100svh] min-h-[640px] max-h-[1080px] flex items-center bg-[var(--bg)] overflow-hidden pt-[72px]"
+      style={{ paddingInline: 'var(--gutter)' }}
     >
-      {/* Decorative ambient flat shapes in background */}
-      <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-[var(--navy)]/30 blur-3xl pointer-events-none -z-0" />
-      <div className="absolute top-1/3 left-10 w-80 h-80 rounded-full bg-[var(--blue)]/15 blur-3xl pointer-events-none -z-0" />
+      {/* Subtle background glow */}
+      <div className="absolute top-1/4 left-1/4 w-[480px] h-[480px] rounded-full bg-[var(--blue)]/10 blur-[120px] pointer-events-none -z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[var(--yellow)]/5 blur-[120px] pointer-events-none -z-0" />
 
-      {/* Main Hero Content: Full-width editorial asymmetric layout */}
-      <div
-        className="w-full relative z-10 flex-1 flex flex-col justify-center"
-        style={{ paddingInline: 'var(--gutter)' }}
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left ~55%: Giant SevenMark */}
-          <div className="lg:col-span-6 xl:col-span-7 flex justify-center lg:justify-start">
-            <SevenMark className="w-full" />
+      {/* 12-Column Full-Width Grid (Left 7 cols, Right 5 cols) */}
+      <div className="w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto">
+        {/* LEFT 7 COLS: Eyebrow + Stickers + Headline + Text + Buttons */}
+        <div
+          ref={leftColRef}
+          className="lg:col-span-7 flex flex-col justify-center gap-5 sm:gap-6 min-w-0"
+        >
+          {/* Eyebrow & Stickers Row */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 select-none">
+            <span className="text-xs font-sora font-semibold tracking-wider text-[var(--sky)] uppercase bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+              SUFFA DARS NETWORK
+            </span>
+
+            {/* Red Date Label */}
+            <div className="bg-[var(--coral)] text-white px-3.5 py-1 rounded-full font-heading font-bold text-xs tracking-wide shadow-sm">
+              {CONFIG.CAMP_DATES_LABEL}
+            </div>
+
+            {/* Tilted Yellow Countdown */}
+            <div className="bg-[var(--yellow)] text-[var(--bg)] px-3.5 py-1 rounded-full font-sora font-extrabold text-xs tracking-wider uppercase shadow-sm">
+              {daysRemaining > 0 ? `${daysRemaining} ദിവസം ബാക്കി` : 'ക്യാമ്പ് തുടങ്ങി'}
+            </div>
+
+            {/* Free Badge */}
+            <div className="bg-white/10 border border-white/15 text-white/90 px-3 py-1 rounded-full font-heading font-medium text-xs">
+              {CONFIG.FEE_LABEL}
+            </div>
           </div>
 
-          {/* Right ~45%: Headline, Stickers, Ustad Cutout & Buttons */}
-          <div className="lg:col-span-6 xl:col-span-5 flex flex-col gap-6 lg:gap-8">
-            {/* TORN-EDGE STICKERS ROW */}
-            <div
-              ref={stickersRef}
-              className="flex flex-wrap items-center gap-3 select-none"
+          {/* Headline (clamp font size, text-wrap balance, no overflow) */}
+          <h1 className="font-heading font-bold text-[clamp(2.4rem,4.8vw,5.2rem)] leading-[1.12] text-white tracking-tight [text-wrap:balance] max-w-3xl">
+            ഉസ്താദിനൊപ്പം{' '}
+            <span className="text-[var(--yellow)] whitespace-nowrap">ഏഴ് ദിനങ്ങൾ</span>
+          </h1>
+
+          {/* Subtext (Malayalam-safe line-height 1.4) */}
+          <p className="font-body text-[clamp(1.05rem,1.6vw,1.35rem)] text-[var(--muted)] leading-[1.4] max-w-2xl [text-wrap:balance]">
+            {CONFIG.SUBTITLE_MALAYALAM}. ഉസ്താദ് ഡോ. സി.കെ അബ്ദുറഹ്മാൻ ഫൈസി അരിപ്രക്കൊപ്പം
+            നേരിട്ടുള്ള ബുഖാരി സബഖും ആത്മീയ സഹവാസവും.
+          </p>
+
+          {/* Buttons Row */}
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <Button
+              href="#register"
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo('#register');
+              }}
+              variant="primary"
+              className="text-base px-8 h-[52px]"
             >
-              {/* Red Date Label */}
-              <div className="sticker-torn-red bg-[var(--coral)] text-white px-4 py-1.5 font-heading font-bold text-sm tracking-wide shadow-md">
-                {CONFIG.CAMP_DATES_LABEL}
-              </div>
+              രജിസ്റ്റർ ചെയ്യൂ
+            </Button>
 
-              {/* Tilted Yellow Countdown */}
-              <div className="sticker-torn-yellow bg-[var(--yellow)] text-[var(--bg)] px-4 py-1.5 font-sora font-extrabold text-sm tracking-wider uppercase shadow-md transform -rotate-3">
-                {daysRemaining > 0 ? `${daysRemaining} ദിവസം ബാക്കി` : 'ക്യാമ്പ് ആരംഭിച്ചു!'}
-              </div>
-
-              {/* Green Free Badge */}
-              <div className="sticker-torn-green bg-[var(--green)] text-white px-3.5 py-1.5 font-heading font-bold text-xs tracking-wide shadow-md">
-                {CONFIG.FEE_LABEL}
-              </div>
-            </div>
-
-            {/* HEADLINE WITH OVERFLOW MASKS FOR LINE REVEAL */}
-            <div className="flex flex-col">
-              <div className="overflow-hidden">
-                <h1
-                  ref={headlineLine1Ref}
-                  className="heading-hero text-[var(--yellow)] tracking-tight leading-[1.08]"
-                >
-                  ഉസ്താദിനൊപ്പം
-                </h1>
-              </div>
-              <div className="overflow-hidden">
-                <h2
-                  ref={headlineLine2Ref}
-                  className="heading-hero text-[var(--yellow)] tracking-tight leading-[1.08]"
-                >
-                  ഏഴ് ദിനങ്ങൾ
-                </h2>
-              </div>
-            </div>
-
-            {/* 2 Short White Lines */}
-            <div ref={subtextRef} className="flex flex-col gap-1 text-white/90">
-              <p className="font-body text-lg sm:text-xl lg:text-2xl font-medium leading-relaxed">
-                SUFFA ദർസ് വിദ്യാർത്ഥികൾക്കായി ADSA ഒരുക്കുന്ന
-              </p>
-              <p className="font-body text-base sm:text-lg lg:text-xl text-[var(--text)]/80 leading-relaxed">
-                ഏഴ് ദിവസത്തെ സവിശേഷ അനുഭവ ക്യാമ്പ്
-              </p>
-            </div>
-
-            {/* USTAD CUT-OUT PORTRAIT COMPOSITION */}
-            <div
-              ref={ustadGroupRef}
-              className="relative w-full max-w-[380px] my-2 select-none"
+            <Button
+              href="#about"
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollTo('#about');
+              }}
+              variant="secondary"
+              className="text-base px-7 h-[52px]"
             >
-              {/* Flat Blue Blob Behind */}
-              <div className="absolute inset-0 -top-6 -left-6 w-full h-[115%] bg-[var(--blue)] rounded-[48%_52%_42%_58%/55%_45%_55%_45%] -z-10 opacity-90 shadow-xl" />
+              ക്യാമ്പ് അറിയൂ
+            </Button>
+          </div>
+        </div>
 
-              {/* Decorative shapes behind Ustad */}
-              <div className="absolute -top-4 -right-4 -z-0">
-                <StarIcon className="w-10 h-10 text-[var(--yellow)]" color="#FFC93C" />
-              </div>
-              <div className="absolute top-16 -left-5 -z-0">
-                <LampIcon className="w-9 h-9" color="#FFC93C" />
-              </div>
-              <div className="absolute top-2 -left-3 -z-0">
-                <KitabIcon className="w-9 h-9" color="#6CB4FF" />
-              </div>
+        {/* RIGHT 5 COLS: Visual composition with clean outline 7 and Ustad's Cutout */}
+        <div
+          ref={visualRef}
+          className="lg:col-span-5 flex items-center justify-center lg:justify-end min-w-0"
+        >
+          <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] aspect-[460/540] flex items-center justify-center">
+            {/* SVG Outline "7" with Campus Texture Mask */}
+            <svg
+              viewBox="0 0 460 540"
+              className="w-full h-full absolute inset-0 overflow-visible"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                {/* Clean Geometric 7 Clip Path */}
+                <clipPath id="hero-seven-clip">
+                  <path d="M 40 40 H 420 V 140 L 230 500 H 110 L 280 140 H 40 Z" />
+                </clipPath>
+                <linearGradient id="hero-seven-fade" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#2A2C31" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#1E1F22" stopOpacity="0.95" />
+                </linearGradient>
+              </defs>
 
-              {/* Ustad Cutout Image (Clean transparent cut-out, NO frame, NO arch) */}
-              <div className="relative z-10 flex flex-col items-center">
-                <img
-                  src="/images/ustad-cutout.webp"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = '/images/ustad-cutout.svg';
-                  }}
-                  alt={CONFIG.USTAD_NAME}
-                  className="w-full max-w-[320px] h-auto object-contain filter drop-shadow-xl"
-                  width="320"
-                  height="380"
-                  loading="eager"
+              {/* Background fill inside the 7 */}
+              <path
+                d="M 40 40 H 420 V 140 L 230 500 H 110 L 280 140 H 40 Z"
+                fill="url(#hero-seven-fade)"
+              />
+
+              {/* Campus architectural graphic clipped inside 7 */}
+              <g clipPath="url(#hero-seven-clip)" opacity="0.45">
+                <image
+                  href="/images/gallery/campus-dawn.svg"
+                  x="0"
+                  y="0"
+                  width="460"
+                  height="540"
+                  preserveAspectRatio="xMidYMid slice"
                 />
+              </g>
 
-                {/* Overlapping lower edge decorative icons */}
-                <div className="absolute -bottom-3 left-2 z-20">
-                  <BananaLeafIcon className="w-12 h-12" color="#27A66B" />
-                </div>
-                <div className="absolute -bottom-2 right-4 z-20">
-                  <FlowerA className="w-10 h-10" color="#F0584B" />
-                </div>
+              {/* Crisp golden outline of 7 */}
+              <path
+                d="M 40 40 H 420 V 140 L 230 500 H 110 L 280 140 H 40 Z"
+                stroke="#FFC93C"
+                strokeWidth="2"
+                strokeOpacity="0.75"
+              />
+            </svg>
 
-                {/* Caption Badge under portrait */}
-                <div className="mt-3 px-4 py-1.5 rounded-full bg-[var(--card)]/90 backdrop-blur-sm border border-white/10 text-center">
-                  <span className="font-heading font-bold text-sm text-white">
-                    {CONFIG.USTAD_NAME}
-                  </span>
-                </div>
+            {/* Ustad Transparent Cutout in foreground */}
+            <div className="relative z-10 w-[78%] flex flex-col items-center select-none pt-4">
+              <img
+                src="/images/ustad-cutout.webp"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/images/ustad-cutout.svg';
+                }}
+                alt={CONFIG.USTAD_NAME}
+                className="w-full h-auto object-contain filter drop-shadow-2xl"
+                width="340"
+                height="420"
+                loading="eager"
+              />
+
+              {/* Floating Caption Pill under portrait */}
+              <div className="mt-3 px-4 py-1 rounded-full bg-[#1E1F22]/90 backdrop-blur-md border border-white/10 text-center">
+                <span className="font-heading font-medium text-xs sm:text-sm text-white">
+                  {CONFIG.USTAD_NAME}
+                </span>
               </div>
-            </div>
-
-            {/* ACTION BUTTONS ROW */}
-            <div
-              ref={buttonsRef}
-              className="flex flex-wrap items-center gap-4 pt-2"
-            >
-              <Button
-                href="#register"
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo('#register');
-                }}
-                variant="primary"
-                className="text-base sm:text-lg"
-              >
-                രജിസ്റ്റർ ചെയ്യൂ
-              </Button>
-
-              <Button
-                href="#about"
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo('#about');
-                }}
-                variant="secondary"
-                className="text-base sm:text-lg"
-              >
-                ക്യാമ്പ് അറിയൂ
-              </Button>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* BOTTOM PANORAMA WITH SCROLL PARALLAX */}
-      <div className="w-full mt-12 relative z-10">
-        <Panorama />
       </div>
     </section>
   );
