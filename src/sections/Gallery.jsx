@@ -38,14 +38,17 @@ export default function Gallery() {
   }, [activeImageIndex, handleClose, handleNext, handlePrev]);
 
   return (
-    <section id="gallery" className="full-width-section section-pad bg-[#222428] border-y border-white/[0.08]">
-      <div className="flex flex-col gap-12 lg:gap-14">
+    <section id="gallery" className="full-width-section section-pad bg-[#0B0D12] border-y border-white/[0.08] relative overflow-hidden">
+      <div className="flex flex-col gap-12 lg:gap-14 relative z-10">
         {/* Header */}
         <div className="flex flex-col gap-4 max-w-3xl">
-          <span className="ds-eyebrow">ഗാലറി</span>
+          <span className="ds-eyebrow">ക്യാമ്പ് ഗാലറി</span>
 
           <h2 className="heading-h2 text-white">
-            ദർസ് ജീവിതത്തിന്റെ <span className="text-[var(--yellow)]">നിമിഷങ്ങൾ</span>
+            ദർസ് ജീവിതത്തിന്റെ{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC93C] via-[#FFE27D] to-[#F59E0B]">
+              സുവർണ്ണ നിമിഷങ്ങൾ
+            </span>
           </h2>
 
           <p className="body-editorial">
@@ -53,7 +56,7 @@ export default function Gallery() {
           </p>
         </div>
 
-        {/* Masonry / Responsive Grid (16px radius, 1px border, no shadows) */}
+        {/* Responsive Grid with Glass Hover Depth */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {GALLERY_ITEMS.map((item, idx) => (
             <div
@@ -67,25 +70,25 @@ export default function Gallery() {
                   setActiveImageIndex(idx);
                 }
               }}
-              className="rounded-[16px] overflow-hidden border border-white/[0.08] hover:border-white/20 transition-all duration-300 bg-[#1E1F22] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] group"
+              className="rounded-[22px] overflow-hidden border border-white/[0.08] hover:border-amber-400/40 bg-[#141722]/80 backdrop-blur-xl transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 group shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
             >
-              <div className="w-full aspect-[4/3] bg-[#1A1D23] overflow-hidden relative">
+              <div className="w-full aspect-[4/3] bg-[#0E1118] overflow-hidden relative">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                   loading="lazy"
                 />
-                <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-sora font-semibold bg-[#1E1F22]/90 border border-white/10 text-white/90">
+                <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-sora font-semibold bg-[#0B0D12]/80 backdrop-blur-md border border-white/10 text-white/90">
                   {item.category}
                 </span>
               </div>
 
-              <div className="p-5 flex flex-col justify-between">
-                <h3 className="font-heading font-bold text-base text-white">
+              <div className="p-5 sm:p-6 flex flex-col justify-between">
+                <h3 className="font-heading font-bold text-base sm:text-lg text-white group-hover:text-[var(--yellow)] transition-colors">
                   {item.title}
                 </h3>
-                <p className="font-body text-xs text-[var(--muted)] mt-1 line-clamp-1">
+                <p className="font-body text-xs text-[var(--muted)] mt-1.5 line-clamp-1">
                   {item.caption}
                 </p>
               </div>

@@ -126,36 +126,45 @@ export default function Register() {
   };
 
   return (
-    <section id="register" className="full-width-section section-pad bg-[#222428] border-y border-white/[0.08]">
-      <div className="flex flex-col gap-12 max-w-4xl mx-auto">
+    <section id="register" className="full-width-section section-pad bg-[#0B0D12] relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] rounded-full bg-[var(--yellow)]/5 blur-[160px] pointer-events-none" />
+
+      <div className="flex flex-col gap-12 max-w-4xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-2">
           <div className="flex flex-col gap-3">
             <span className="ds-eyebrow">സൗജന്യ രജിസ്ട്രേഷൻ</span>
-            <h2 className="heading-h2 text-white">രജിസ്റ്റർ ചെയ്യൂ</h2>
+            <h2 className="heading-h2 text-white">
+              ക്യാമ്പിലേക്ക്{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFC93C] via-[#FFE27D] to-[#F59E0B]">
+                രജിസ്റ്റർ ചെയ്യൂ
+              </span>
+            </h2>
           </div>
 
-          <span className="text-xs font-sora font-semibold text-white/80 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full self-start sm:self-auto">
-            {CONFIG.FEE_LABEL}
-          </span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400/10 border border-amber-400/25 text-xs font-sora font-bold text-amber-400 shadow-[0_0_15px_rgba(255,201,60,0.15)] self-start sm:self-auto">
+            <span>✨</span>
+            <span>{CONFIG.FEE_LABEL}</span>
+          </div>
         </div>
 
-        {/* Form Container (16px radius, no shadows) */}
-        <div className="ds-card relative">
+        {/* Form Container (Glass Terminal) */}
+        <div className="p-6 sm:p-10 rounded-[28px] bg-[#141722]/85 backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] relative">
           {isSuccess ? (
             /* SUCCESS STATE */
             <div className="flex flex-col items-center text-center py-8 gap-6">
-              <div className="w-16 h-16 rounded-full bg-[var(--blue)]/15 border border-[var(--blue)]/30 flex items-center justify-center text-[var(--blue)]">
-                <CheckCircle2 size={32} strokeWidth={1.5} />
+              <div className="w-18 h-18 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+                <CheckCircle2 size={36} strokeWidth={1.75} />
               </div>
 
               <div className="flex flex-col gap-2 max-w-md">
-                <h3 className="heading-h3 text-white">
-                  രജിസ്ട്രേഷൻ പൂർത്തിയായി!
+                <h3 className="heading-h3 text-white text-2xl">
+                  രജിസ്ട്രേഷൻ വിജയകരം!
                 </h3>
                 <p className="body-editorial text-sm sm:text-base">
                   പ്രിയപ്പെട്ട <span className="text-white font-semibold">{formData.name}</span>,
-                  താങ്കളുടെ അപേക്ഷ സ്വീകരിച്ചു. ക്യാമ്പ് സംബന്ധിച്ച വിവരങ്ങൾ WhatsApp വഴി അറിയിക്കും.
+                  താങ്കളുടെ അപേക്ഷ സ്വീകരിച്ചു. ക്യാമ്പ് സംബന്ധിച്ച ഔദ്യോഗിക വിവരങ്ങൾ WhatsApp വഴി അറിയിക്കും.
                 </p>
               </div>
 
@@ -164,7 +173,7 @@ export default function Register() {
                   href={CONFIG.WHATSAPP_CHAT_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 h-[52px] px-8 rounded-full font-semibold text-base bg-[#25D366] hover:bg-[#20BD5A] text-white transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)]"
+                  className="inline-flex items-center gap-2.5 h-[52px] px-8 rounded-full font-semibold text-base bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-[0_0_20px_rgba(37,211,102,0.3)] transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   aria-label="WhatsApp-ൽ ചാറ്റ് ചെയ്യുക"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -212,9 +221,9 @@ export default function Register() {
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/[0.08]">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center font-sora font-semibold text-xs ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-sora font-bold text-xs ${
                       step === 1
-                        ? 'bg-[var(--blue)] text-white'
+                        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B0D12] shadow-[0_0_15px_rgba(255,201,60,0.3)]'
                         : 'bg-white/20 text-white'
                     }`}
                   >
@@ -233,9 +242,9 @@ export default function Register() {
 
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center font-sora font-semibold text-xs ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center font-sora font-bold text-xs ${
                       step === 2
-                        ? 'bg-[var(--blue)] text-white'
+                        ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-[#0B0D12] shadow-[0_0_15px_rgba(255,201,60,0.3)]'
                         : 'bg-white/10 text-[var(--muted)]'
                     }`}
                   >

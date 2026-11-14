@@ -5,7 +5,7 @@ const TRUST_ITEMS = [
   {
     icon: Award,
     title: 'ADSA',
-    desc: 'ആലത്തൂർപടി ദർസ് സ്റ്റുഡന്റ്സ് അസോസിയേഷൻ',
+    desc: 'ആലത്തൂർപ്പടി ദർസ് സ്റ്റുഡന്റ്സ് അസോസിയേഷൻ',
   },
   {
     icon: Building2,
@@ -26,20 +26,26 @@ const TRUST_ITEMS = [
 
 export default function TrustStrip() {
   return (
-    <section className="w-full border-y border-white/[0.08] bg-[#222428] py-8" style={{ paddingInline: 'var(--gutter)' }}>
+    <section
+      className="w-full border-y border-white/[0.08] bg-[#0E1118]/80 backdrop-blur-md py-6 sm:py-7 relative z-20"
+      style={{ paddingInline: 'var(--gutter)' }}
+    >
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-center">
         {TRUST_ITEMS.map((item, idx) => {
           const Icon = item.icon;
           return (
-            <div key={idx} className="flex items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-white/80">
-                <Icon size={20} strokeWidth={1.5} />
+            <div
+              key={idx}
+              className="flex items-center gap-3.5 group transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              <div className="w-11 h-11 rounded-2xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center shrink-0 text-[var(--yellow)] shadow-[0_0_15px_rgba(255,201,60,0.1)] group-hover:bg-amber-400/15 group-hover:border-amber-400/35 transition-all">
+                <Icon size={20} strokeWidth={1.75} />
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="font-sora font-semibold text-xs text-white uppercase tracking-wider truncate">
+                <span className="font-sora font-bold text-xs text-white uppercase tracking-wider truncate group-hover:text-[var(--yellow)] transition-colors">
                   {item.title}
                 </span>
-                <span className="font-body text-xs text-[var(--muted)] truncate">
+                <span className="font-body text-xs text-[var(--muted)] truncate mt-0.5">
                   {item.desc}
                 </span>
               </div>

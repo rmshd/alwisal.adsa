@@ -113,11 +113,11 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 h-[72px] transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 h-[76px] transition-all duration-300 ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${
           isScrolled
-            ? 'bg-[#1E1F22]/90 backdrop-blur-md border-b border-white/[0.08]'
+            ? 'bg-[#0B0D12]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)]'
             : 'bg-transparent'
         }`}
         style={{ paddingInline: 'var(--gutter)' }}
@@ -127,29 +127,32 @@ export default function Navbar() {
           <a
             href="#hero"
             onClick={(e) => handleLinkClick(e, '#hero')}
-            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] rounded-xl py-1 px-1.5"
+            className="flex items-center gap-3.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] rounded-xl py-1 px-1.5"
             aria-label="ADSA ക്യാമ്പ് ഹോംപേജ്"
           >
-            <img
-              src="/images/logo.svg"
-              alt="ADSA Logo"
-              className="w-9 h-9 transition-transform duration-200 group-hover:scale-105 shrink-0"
-              width="36"
-              height="36"
-            />
+            <div className="relative">
+              <div className="absolute -inset-1 rounded-full bg-[var(--yellow)]/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img
+                src="/images/logo.svg"
+                alt="ADSA Logo"
+                className="w-10 h-10 relative transition-transform duration-300 group-hover:scale-105 shrink-0"
+                width="40"
+                height="40"
+              />
+            </div>
             <div className="flex flex-col">
-              <span className="font-heading font-extrabold text-lg text-white tracking-tight leading-tight">
+              <span className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight leading-tight group-hover:text-[var(--yellow)] transition-colors">
                 ADSA ക്യാമ്പ്
               </span>
-              <span className="text-[10px] font-sora font-medium text-[var(--sky)] tracking-wider uppercase leading-none">
-                SUFFA Dars
+              <span className="text-[10px] font-sora font-semibold text-[var(--sky)] tracking-widest uppercase leading-none">
+                SUFFA DARS
               </span>
             </div>
           </a>
 
           {/* Desktop Nav Links (Hidden < 1024px) */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main Navigation">
-            <ul className="flex items-center gap-6 list-none m-0 p-0">
+            <ul className="flex items-center gap-2 list-none m-0 p-1 rounded-full bg-white/[0.03] border border-white/[0.07] backdrop-blur-md">
               {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
@@ -157,14 +160,16 @@ export default function Navbar() {
                     <a
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className={`relative font-body text-sm py-2 px-1 transition-colors duration-200 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] rounded-md ${
-                        isActive ? 'text-white font-semibold' : 'text-[var(--text)]/80 hover:text-white'
+                      className={`relative font-body text-sm py-2 px-4 rounded-full transition-all duration-200 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] ${
+                        isActive
+                          ? 'text-white font-semibold bg-white/10 shadow-inner'
+                          : 'text-[var(--text)]/75 hover:text-white hover:bg-white/5'
                       }`}
                     >
                       {link.label}
                       {isActive && (
                         <span
-                          className="w-1.5 h-1.5 rounded-full bg-[var(--yellow)] inline-block"
+                          className="w-1.5 h-1.5 rounded-full bg-[var(--yellow)] shadow-[0_0_8px_#FFC93C] inline-block"
                           aria-hidden="true"
                         />
                       )}
@@ -179,7 +184,7 @@ export default function Navbar() {
               href="#register"
               onClick={(e) => handleLinkClick(e, '#register')}
               variant="primary"
-              className="h-[42px] px-6 text-xs"
+              className="h-[44px] px-6 text-xs tracking-wide"
             >
               രജിസ്റ്റർ ചെയ്യൂ
             </Button>
