@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import AIAssistant from './components/AIAssistant';
 import PreferencesModal from './components/PreferencesModal';
 import { PreferencesProvider } from './context/PreferencesContext';
 import { I18nProvider } from './context/I18nContext';
@@ -84,9 +83,6 @@ function MainLayout() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-
-      {/* AI Assistant (Bottom-Right Floating Launcher) */}
-      <AIAssistant />
 
       {/* Global Footer */}
       <Footer />

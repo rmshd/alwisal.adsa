@@ -469,3 +469,15 @@ export function getDarsList() {
   const store = loadStore();
   return store.dars || DARS_DATA;
 }
+
+export function addRegistration(regData) {
+  const store = loadStore();
+  const newReg = {
+    id: `reg_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+    passRef: `AW26-${Math.floor(100000 + Math.random() * 900000)}`,
+    ...regData,
+  };
+  store.registrations = [newReg, ...(store.registrations || [])];
+  saveStore(store);
+  return newReg;
+}

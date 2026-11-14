@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { CONFIG, CONTACT } from '../config';
 import Button from '../components/Button';
-import { CheckCircle2, Calendar, MapPin, Users, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Calendar, MapPin, Users, ShieldCheck, ArrowRight } from 'lucide-react';
+import { addRegistration } from '../lib/store';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -61,71 +62,58 @@ export default function Register() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: null }));
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.honeypot) {
-      setIsSuccess(true);
-      return;
-    }
-
+    if (formData.honeypot) return;
     if (!validateForm()) return;
 
     setIsSubmitting(true);
     try {
-      if (CONFIG.FORM_ENDPOINT) {
-        await fetch(CONFIG.FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            ...formData,
-            submittedAt: new Date().toISOString(),
-          }),
+      if (typeof addRegistration === 'function') {
+        addRegistration({
+          name: formData.name,
+          phone: formData.phone,
+          parentPhone: formData.parentPhone,
+          district: formData.district,
+          higherStudy: formData.higherStudy,
+          status: 'pending',
+          timestamp: new Date().toISOString(),
         });
-      } else {
-        await new Promise((r) => setTimeout(r, 600));
       }
       setIsSuccess(true);
     } catch (err) {
-      console.error('Registration error:', err);
-      setIsSuccess(true);
+      console.error('Registration failed:', err);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const waHref = CONTACT?.whatsapp?.number
-    ? `https://wa.me/${CONTACT.whatsapp.number.replace(/\D/g, '')}?text=${encodeURIComponent(
-      CONTACT.whatsapp.message || 'ADSA ക്യാമ്പിനെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു'
-    )}`
-    : null;
-
   return (
     <section
       id="register"
-      className="relative w-full bg-white text-slate-900 font-['Poppins'] py-24 sm:py-32 border-t border-slate-200/80"
+      className="relative w-full bg-[#0B1520] text-white font-['Poppins'] py-24 sm:py-32 border-t border-white/5"
       style={{ paddingInline: 'var(--gutter)' }}
     >
       <div className="max-w-6xl mx-auto space-y-12">
-
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200/80 pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-6">
           <div className="space-y-1">
-            <span className="text-xs uppercase tracking-widest font-semibold text-amber-700">
-              Admission
+            <span className="text-xs uppercase tracking-widest font-semibold text-[#FDB913]">
+              Application &amp; Entry
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
               Camp Registration
             </h2>
           </div>
           <div className="text-right flex items-center gap-3">
-            <span className="px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold">
+            <span className="px-3.5 py-1.5 rounded-full bg-[#FDB913]/15 border border-[#FDB913]/30 text-[#FDB913] text-xs font-semibold">
               Open Registration
             </span>
-            <span className="font-['Noto_Serif_Arabic'] text-xl text-amber-800 font-medium hidden sm:inline" dir="rtl">
+            <span className="font-arabic text-xl sm:text-2xl text-[#FDB913] font-bold hidden sm:inline" dir="rtl">
               التَّسْجِيلُ
             </span>
           </div>
@@ -133,67 +121,66 @@ export default function Register() {
 
         {/* Form and Details Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-
           {/* Left: Camp Guidelines */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="rounded-3xl bg-[#FAF9F6] border border-slate-200/80 p-8 space-y-6 shadow-sm">
-              <h3 className="text-base font-bold text-slate-900 pb-3 border-b border-slate-200">
-                Camp Guidelines & Details
+            <div className="rounded-3xl bg-[#121E2D]/80 border border-[#FDB913]/30 p-8 space-y-6 shadow-2xl backdrop-blur-md">
+              <h3 className="text-base font-bold text-white pb-3 border-b border-white/10">
+                Camp Guidelines &amp; Details
               </h3>
 
               <div className="space-y-4 text-left">
                 <div className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-amber-700 shadow-sm">
+                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#FDB913] shadow-sm">
                     <Calendar size={18} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                      Dates & Duration
+                    <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
+                      Dates &amp; Duration
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-neutral-400 mt-0.5">
                       December 24 to 30, 2026 · Seven days full-time retreat
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-amber-700 shadow-sm">
+                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#FDB913] shadow-sm">
                     <Users size={18} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-wider">
+                    <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
                       Eligibility
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
+                    <p className="text-xs text-neutral-400 mt-0.5">
                       Graduated scholars of the SUFFA Dars network
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-amber-700 shadow-sm">
+                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#FDB913] shadow-sm">
                     <MapPin size={18} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                      Venue & Boarding
+                    <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
+                      Venue &amp; Boarding
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Alathurpadi Juma Masjid Campus · Full boarding included
+                    <p className="text-xs text-neutral-400 mt-0.5">
+                      Alathurpadi Dars Campus · Full residential boarding included
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center shrink-0 text-amber-700 shadow-sm">
+                  <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#FDB913] shadow-sm">
                     <ShieldCheck size={18} />
                   </div>
                   <div>
-                    <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                      Review Process
+                    <h4 className="text-xs font-semibold text-white uppercase tracking-wider">
+                      Admission Process
                     </h4>
-                    <p className="text-xs text-slate-500 mt-0.5">
-                      Applications reviewed individually upon submission
+                    <p className="text-xs text-neutral-400 mt-0.5">
+                      Applications reviewed individually upon submission (100 seats limit)
                     </p>
                   </div>
                 </div>
@@ -202,34 +189,20 @@ export default function Register() {
           </div>
 
           {/* Right: Registration Form */}
-          <div className="lg:col-span-7 rounded-3xl bg-[#FAF9F6] border border-slate-200/80 p-8 sm:p-10 shadow-sm">
+          <div className="lg:col-span-7 rounded-3xl bg-[#121E2D]/80 border border-[#FDB913]/30 p-8 sm:p-10 shadow-2xl backdrop-blur-md">
             {isSuccess ? (
               <div className="py-12 text-center space-y-5">
-                <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 mx-auto flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 mx-auto flex items-center justify-center">
                   <CheckCircle2 size={32} />
                 </div>
                 <div className="space-y-2 max-w-md mx-auto">
-                  <h3 className="text-2xl font-bold text-slate-900">
+                  <h3 className="text-2xl font-bold text-white">
                     Registration Submitted
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                    Alhamdulillah! Your application has been received. Our camp coordination committee will contact you with confirmation and travel details.
+                  <p className="text-sm text-neutral-300 leading-relaxed font-normal">
+                    Alhamdulillah! Your application has been received. Our camp coordination committee will contact you with confirmation and boarding details.
                   </p>
                 </div>
-
-                {waHref && (
-                  <div className="pt-2">
-                    <Button
-                      href={waHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variant="primary"
-                      className="h-11 px-7 text-xs font-semibold"
-                    >
-                      Connect on WhatsApp
-                    </Button>
-                  </div>
-                )}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -247,7 +220,7 @@ export default function Register() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Full Name */}
                   <div className="space-y-1.5 sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-700">
+                    <label className="block text-xs font-semibold text-neutral-300">
                       Full Name *
                     </label>
                     <input
@@ -256,10 +229,10 @@ export default function Register() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your name"
-                      className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600"
+                      className="w-full bg-[#080E16] border border-white/15 px-4 py-3 rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#FDB913]"
                     />
                     {errors.name && (
-                      <span className="text-[11px] text-red-600 font-medium block">
+                      <span className="text-[11px] text-red-400 font-medium block">
                         {errors.name}
                       </span>
                     )}
@@ -267,24 +240,24 @@ export default function Register() {
 
                   {/* District */}
                   <div className="space-y-1.5 sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-700">
+                    <label className="block text-xs font-semibold text-neutral-300">
                       Home District *
                     </label>
                     <select
                       name="district"
                       value={formData.district}
                       onChange={handleChange}
-                      className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600"
+                      className="w-full bg-[#080E16] border border-white/15 px-4 py-3 rounded-xl text-sm text-white focus:outline-none focus:border-[#FDB913]"
                     >
-                      <option value="">Select your District</option>
+                      <option value="" className="bg-[#080E16]">Select your District</option>
                       {districtsList.map((d) => (
-                        <option key={d} value={d}>
+                        <option key={d} value={d} className="bg-[#080E16]">
                           {d}
                         </option>
                       ))}
                     </select>
                     {errors.district && (
-                      <span className="text-[11px] text-red-600 font-medium block">
+                      <span className="text-[11px] text-red-400 font-medium block">
                         {errors.district}
                       </span>
                     )}
@@ -292,7 +265,7 @@ export default function Register() {
 
                   {/* Student Mobile */}
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-700">
+                    <label className="block text-xs font-semibold text-neutral-300">
                       Mobile / WhatsApp *
                     </label>
                     <input
@@ -302,10 +275,10 @@ export default function Register() {
                       onChange={handleChange}
                       placeholder="10-digit number"
                       maxLength={10}
-                      className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600 font-mono"
+                      className="w-full bg-[#080E16] border border-white/15 px-4 py-3 rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#FDB913] font-mono"
                     />
                     {errors.phone && (
-                      <span className="text-[11px] text-red-600 font-medium block">
+                      <span className="text-[11px] text-red-400 font-medium block">
                         {errors.phone}
                       </span>
                     )}
@@ -313,7 +286,7 @@ export default function Register() {
 
                   {/* Parent Mobile */}
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-semibold text-slate-700">
+                    <label className="block text-xs font-semibold text-neutral-300">
                       Parent / Guardian Mobile *
                     </label>
                     <input
@@ -323,10 +296,10 @@ export default function Register() {
                       onChange={handleChange}
                       placeholder="Guardian number"
                       maxLength={10}
-                      className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600 font-mono"
+                      className="w-full bg-[#080E16] border border-white/15 px-4 py-3 rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#FDB913] font-mono"
                     />
                     {errors.parentPhone && (
-                      <span className="text-[11px] text-red-600 font-medium block">
+                      <span className="text-[11px] text-red-400 font-medium block">
                         {errors.parentPhone}
                       </span>
                     )}
@@ -334,7 +307,7 @@ export default function Register() {
 
                   {/* Higher Study Interest */}
                   <div className="space-y-1.5 sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-700">
+                    <label className="block text-xs font-semibold text-neutral-300">
                       Academic Aspirations (Optional)
                     </label>
                     <input
@@ -343,29 +316,27 @@ export default function Register() {
                       value={formData.higherStudy}
                       onChange={handleChange}
                       placeholder="e.g. Hadith Specialisation / Fatwa Studies / Qira'at"
-                      className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600"
+                      className="w-full bg-[#080E16] border border-white/15 px-4 py-3 rounded-xl text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#FDB913]"
                     />
                   </div>
                 </div>
 
-                <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200">
-                  <div className="text-xs text-slate-500 font-normal">
-                    Limited seats · Reviewed individually
+                <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
+                  <div className="text-xs text-neutral-400 font-normal">
+                    Capacity 100 scholars · Reviewed individually
                   </div>
 
-                  <Button
+                  <button
                     type="submit"
-                    variant="primary"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto h-11 px-8 text-xs font-semibold"
+                    className="w-full sm:w-auto px-8 py-3 rounded-full bg-[#FDB913] hover:bg-[#FDB913]/90 text-[#0B1520] font-bold text-xs uppercase tracking-wider shadow-lg shadow-[#FDB913]/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
                   >
                     {isSubmitting ? 'Submitting...' : 'Submit Application'}
-                  </Button>
+                  </button>
                 </div>
               </form>
             )}
           </div>
-
         </div>
       </div>
     </section>
