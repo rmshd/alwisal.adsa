@@ -41,9 +41,9 @@ export default function About() {
       style={{ paddingInline: 'var(--gutter)' }}
     >
       <div className="max-w-[1400px] mx-auto space-y-20">
-        {/* Main Grid: Left Tile Column (4 cols), Right Editorial Text (8 cols) */}
+        {/* Main Grid: Left Tile Column, Right Text */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-          {/* Left Tile Column: NestedDiamonds, DotGrid, masjid.jpg tile */}
+          {/* Left Tile Column */}
           <div className="lg:col-span-4 about-reveal">
             <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto lg:mx-0">
               <div className="aspect-square bg-[var(--surface)] border border-white/10 p-3">
@@ -69,18 +69,13 @@ export default function About() {
 
           {/* Right Text Panel */}
           <div className="lg:col-span-8 space-y-6 about-reveal text-left">
-            <div className="flex items-center gap-3">
-              <span className="text-xs uppercase tracking-widest font-semibold text-[var(--orange)]">
-                About The Camp
-              </span>
-              <span className="text-white/20">/</span>
-              <span className="font-['Reem_Kufi'] text-lg text-[var(--yellow)]">
-                العِلْمُ نُورٌ
-              </span>
-            </div>
+            <span className="text-xs uppercase tracking-widest font-semibold text-[var(--orange)]">
+              About The Camp
+            </span>
 
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight uppercase leading-tight text-white">
-              Seven mornings, <span className="text-[var(--orange)]">one Ustad.</span>
+              Seven mornings,<br />
+              <span className="text-[var(--orange)]">one Ustad.</span>
             </h2>
 
             <div className="space-y-4 max-w-2xl text-[var(--muted)] text-base sm:text-lg leading-relaxed font-normal">
@@ -94,33 +89,36 @@ export default function About() {
           </div>
         </div>
 
-        {/* 3 Stats as Big Orange BlockNumerals */}
+        {/* 3 Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10 border-t border-white/10 about-reveal">
-          {/* Stat 1: 07 Days */}
-          <div className="bg-[var(--surface)] border border-white/10 p-6 flex items-center justify-between gap-4">
+          <div className="bg-[var(--surface)] border border-white/10 p-8 flex items-center justify-between gap-4">
             <div>
-              <span className="block text-2xl font-bold text-white uppercase tracking-tight">Days</span>
-              <span className="text-xs text-[var(--muted)] uppercase tracking-wider">Dawn to Dusk Sessions</span>
+              <span className="block text-3xl font-black text-white uppercase tracking-tight">7</span>
+              <span className="text-xs text-[var(--muted)] uppercase tracking-wider mt-1 block">Days</span>
             </div>
-            <BlockNumeral value="07" className="h-16 w-auto shrink-0" />
+            <div className="w-16 h-16 bg-[var(--orange)]/10 border border-[var(--orange)]/30 flex items-center justify-center">
+              <span className="text-[var(--orange)] text-2xl font-black">VII</span>
+            </div>
           </div>
 
-          {/* Stat 2: 30 Dars */}
-          <div className="bg-[var(--surface)] border border-white/10 p-6 flex items-center justify-between gap-4">
+          <div className="bg-[var(--surface)] border border-white/10 p-8 flex items-center justify-between gap-4">
             <div>
-              <span className="block text-2xl font-bold text-white uppercase tracking-tight">Dars Network</span>
-              <span className="text-xs text-[var(--muted)] uppercase tracking-wider">Affiliated Institutes</span>
+              <span className="block text-3xl font-black text-white uppercase tracking-tight">40</span>
+              <span className="text-xs text-[var(--muted)] uppercase tracking-wider mt-1 block">Dars Network</span>
             </div>
-            <BlockNumeral value="30" className="h-16 w-auto shrink-0" />
+            <div className="w-16 h-16 bg-[var(--yellow)]/10 border border-[var(--yellow)]/30 flex items-center justify-center">
+              <span className="text-[var(--yellow)] text-2xl font-black">XL</span>
+            </div>
           </div>
 
-          {/* Stat 3: 200+ Students */}
-          <div className="bg-[var(--surface)] border border-white/10 p-6 flex items-center justify-between gap-4">
+          <div className="bg-[var(--surface)] border border-white/10 p-8 flex items-center justify-between gap-4">
             <div>
-              <span className="block text-2xl font-bold text-white uppercase tracking-tight">Students</span>
-              <span className="text-xs text-[var(--muted)] uppercase tracking-wider">Convening Scholars</span>
+              <span className="block text-3xl font-black text-white uppercase tracking-tight">200+</span>
+              <span className="text-xs text-[var(--muted)] uppercase tracking-wider mt-1 block">Scholars</span>
             </div>
-            <BlockNumeral value="200+" className="h-16 w-auto shrink-0" />
+            <div className="w-16 h-16 bg-[var(--teal)]/10 border border-[var(--teal)]/30 flex items-center justify-center">
+              <span className="text-[var(--teal)] text-2xl font-black">∞</span>
+            </div>
           </div>
         </div>
       </div>

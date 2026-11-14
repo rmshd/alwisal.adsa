@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DARS_DATA from '../data/dars.json';
-import CircuitLines from '../art/CircuitLines';
+
+// Group by district
+const groupByDistrict = (dars) => {
+  return dars.reduce((acc, d) => {
+    if (!acc[d.district]) acc[d.district] = [];
+    acc[d.district].push(d);
+    return acc;
+  }, {});
+};
 
 export default function Dars() {
-  const [hoveredDars, setHoveredDars] = useState(null);
+  const grouped = groupByDistrict(DARS_DATA);
 
   return (
     <section
@@ -19,104 +27,73 @@ export default function Dars() {
               Consortium
             </span>
             <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white mt-1">
-              30 Dars, One Network.
+              40 Dars Network
             </h2>
           </div>
           <div className="text-right">
-            <span className="font-['Reem_Kufi'] text-2xl text-[var(--yellow)] block">
+            <p className="font-['Noto_Serif_Arabic'] text-2xl text-[var(--yellow)]">
               شَبَكَةُ الصُّفَّةِ
-            </span>
+            </p>
             <span className="text-xs uppercase tracking-wider text-[var(--muted)]">
-              Traditional Institutes of Sacred Learning
+              40 Affiliated Institutes
             </span>
           </div>
         </div>
 
-        {/* Desktop Circuit Node Map (Hidden on mobile) */}
-        <div className="hidden md:block relative bg-[var(--surface)] border border-white/10 p-8 overflow-hidden min-h-[440px]">
-          {/* Background Circuit lines */}
-          <div className="absolute inset-0 opacity-30 pointer-events-none flex flex-col justify-between py-6">
-            <CircuitLines className="w-full h-24" />
-            <CircuitLines className="w-full h-24 rotate-180" />
-          </div>
-
-          {/* Interactive 30 Node Grid */}
-          <div className="relative z-10 grid grid-cols-6 lg:grid-cols-10 gap-3">
-            {DARS_DATA.map((dars) => {
-              const isHovered = hoveredDars?.id === dars.id;
-              const nodeNum = String(dars.id).padStart(2, '0');
-
-              return (
-                <div
-                  key={dars.id}
-                  onMouseEnter={() => setHoveredDars(dars)}
-                  onMouseLeave={() => setHoveredDars(null)}
-                  className={`aspect-square p-2 border transition-all duration-200 cursor-pointer flex flex-col items-center justify-center select-none ${
-                    isHovered
-                      ? 'bg-[var(--orange)] text-[var(--ink)] border-[var(--orange)] scale-105 z-20'
-                      : 'bg-[var(--ink)]/80 text-white border-white/10 hover:border-[var(--yellow)]'
-                  }`}
-                >
-                  <span className="text-xs font-mono font-bold">{nodeNum}</span>
-                  <span className="text-[9px] uppercase tracking-wider opacity-70 truncate max-w-[50px]">
-                    {dars.place}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Dynamic Inspector Panel */}
-          <div className="relative z-10 mt-8 pt-6 border-t border-white/10 flex items-center justify-between min-h-[60px]">
-            {hoveredDars ? (
-              <div className="flex items-center gap-4">
-                <span className="text-2xl font-bold text-[var(--orange)] font-mono">
-                  #{String(hoveredDars.id).padStart(2, '0')}
+        {/* Two-row marquee of dars names */}
+        <div className="overflow-hidden space-y-3 py-4">
+          {/* Row 1: left scroll */}
+          <div className="flex gap-3 animate-marquee-left whitespace-nowrap">
+            {[...DARS_DATA, ...DARS_DATA].map((d, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--surface)] border border-white/10 text-xs font-semibold uppercase tracking-wide shrink-0 hover:border-[var(--orange)] transition-colors"
+              >
+                <span className="text-[var(--orange)] font-mono font-bold text-[10px]">
+                  {String(d.id).padStart(2, '0')}
                 </span>
-                <div>
-                  <h4 className="text-base font-bold text-white tracking-wide">
-                    {hoveredDars.name}
-                  </h4>
-                  <span className="text-xs text-[var(--yellow)]">
-                    {hoveredDars.place}, {hoveredDars.district}
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <div className="text-xs text-[var(--muted)] uppercase tracking-wider flex items-center gap-2">
-                <span className="w-2 h-2 bg-[var(--yellow)] rounded-full animate-ping" />
-                Hover any node to inspect affiliated Dars details
-              </div>
-            )}
-
-            <div className="text-right text-xs uppercase tracking-widest text-[var(--muted)] font-semibold">
-              30 Affiliates Active
-            </div>
+                <span className="font-['Noto_Serif_Arabic'] text-sm font-medium text-[var(--yellow)] normal-case tracking-normal">
+                  {d.name}
+                </span>
+                <span className="text-[var(--muted)] text-[10px]">· {d.place}</span>
+              </span>
+            ))}
+          </div>
+          {/* Row 2: right scroll */}
+          <div className="flex gap-3 animate-marquee-right whitespace-nowrap">
+            {[...DARS_DATA.slice(20), ...DARS_DATA, ...DARS_DATA.slice(0, 20)].map((d, i) => (
+              <span
+                key={i}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--surface)] border border-white/10 text-xs font-semibold shrink-0 hover:border-[var(--yellow)] transition-colors"
+              >
+                <span className="text-[var(--teal)] font-mono font-bold text-[10px]">
+                  {String(d.id).padStart(2, '0')}
+                </span>
+                <span className="font-['Noto_Serif_Arabic'] text-sm font-medium text-white normal-case tracking-normal">
+                  {d.name}
+                </span>
+                <span className="text-[var(--muted)] text-[10px]">· {d.district}</span>
+              </span>
+            ))}
           </div>
         </div>
 
-        {/* Mobile: Clean 2-Column List (< 768px) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 md:hidden">
-          {DARS_DATA.map((dars) => (
-            <div
-              key={dars.id}
-              className="bg-[var(--surface)] border border-white/10 p-3.5 flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-[var(--orange)]">
-                  {String(dars.id).padStart(2, '0')}
-                </span>
-                <div>
-                  <span className="text-xs font-bold text-white block">
-                    {dars.name}
-                  </span>
-                  <span className="text-[10px] text-[var(--muted)] uppercase">
-                    {dars.place} · {dars.district}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* Count statement */}
+        <div className="flex items-center justify-center gap-6 pt-4 border-t border-white/10">
+          <div className="text-center">
+            <span className="block text-5xl sm:text-7xl font-black text-[var(--orange)]">40</span>
+            <span className="text-xs uppercase tracking-widest text-[var(--muted)] font-semibold">Affiliated Dars</span>
+          </div>
+          <div className="w-px h-16 bg-white/15" />
+          <div className="text-center">
+            <span className="block text-5xl sm:text-7xl font-black text-[var(--yellow)]">1</span>
+            <span className="text-xs uppercase tracking-widest text-[var(--muted)] font-semibold">Network</span>
+          </div>
+          <div className="w-px h-16 bg-white/15" />
+          <div className="text-center">
+            <span className="block text-5xl sm:text-7xl font-black text-[var(--teal)]">∞</span>
+            <span className="text-xs uppercase tracking-widest text-[var(--muted)] font-semibold">Scholars</span>
+          </div>
         </div>
       </div>
     </section>

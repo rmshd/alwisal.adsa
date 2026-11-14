@@ -1,42 +1,72 @@
 [
   {
     "id": "ustad-aripra",
-    "name": "ഡോ. സി.കെ അബ്ദുറഹ്മാൻ ഫൈസി അരിപ്ര",
-    "role": "മുഖ്യ രക്ഷാധികാരി & ചെയർമാൻ",
-    "org": "SUFFA ദർസ് നെറ്റ്‌വർക്ക് & ADSA",
-    "bio": "കേരളത്തിലെ ദർസ് രംഗത്ത് വിപ്ലവകരമായ മാറ്റങ്ങൾക്ക് നേതൃത്വം നൽകുന്ന പ്രമുഖ പണ്ഡിതനും ചിന്തകനും.",
+    "name": "Dr. C.K. Abdurahman Faizy Aripra",
+    "nameArabic": "د. عبد الرحمن فيضي أريبرا",
+    "role": "Chief Scholar & Host Mudarris",
+    "org": "Alathurpadi Dars · SUFFA Network",
     "isHost": true,
-    "image": "/images/guests/ustad-aripra.webp",
-    "color": "#2F6BFF"
+    "image": "/images/ustad.jpg",
+    "size": "large"
   },
   {
-    "id": "jifri-thangal",
-    "name": "സയ്യിദ് മുഹമ്മദ് ജിഫ്രി മുത്തുക്കോയ തങ്ങൾ",
-    "role": "പ്രസിഡന്റ്",
-    "org": "സമസ്ത കേരള ജംഇയ്യത്തുൽ ഉലമ",
-    "bio": "കേരള മുസ്‌ലിം നവോത്ഥാന പ്രസ്ഥാനത്തിന്റെ അമരക്കാരൻ, ആത്മീയ ആചാര്യൻ.",
+    "id": "guest-3",
+    "name": "Scholar 3",
+    "nameArabic": "",
+    "role": "Distinguished Guest",
+    "org": "SUFFA Dars Network",
     "isHost": false,
-    "image": "/images/guests/jifri-thangal.webp",
-    "color": "#27A66B"
+    "image": "/images/guests/3.webp",
+    "size": "regular"
   },
   {
-    "id": "koyyode-ustad",
-    "name": "കൊയ്യോട് പി. ഉമർ മുസ്ലിയാർ",
-    "role": "ജനറൽ സെക്രട്ടറി",
-    "org": "സമസ്ത കേരള ജംഇയ്യത്തുൽ ഉലമ",
-    "bio": "പണ്ഡിത ശ്രേഷ്ഠൻ, ദാർശനികൻ, വിജ്ഞാന പ്രചാരണ രംഗത്തെ സാരഥി.",
+    "id": "guest-6",
+    "name": "Scholar 6",
+    "nameArabic": "",
+    "role": "Guest Scholar",
+    "org": "SUFFA Dars Network",
     "isHost": false,
-    "image": "/images/guests/koyyode-ustad.webp",
-    "color": "#FFC93C"
+    "image": "/images/guests/6.webp",
+    "size": "regular"
   },
   {
-    "id": "sksf-leaders",
-    "name": "എസ്.കെ.എസ്.എസ്.എഫ് സംസ്ഥാന നേതൃത്വം",
-    "role": "വിശിഷ്ട സാന്നിധ്യം & യൂത്ത് ലീഡർഷിപ്പ്",
-    "org": "SKSSF സംസ്ഥാന കമ്മിറ്റി",
-    "bio": "വിദ്യാർത്ഥി യുവജന ശാക്തീകരണത്തിന് ദിശാബോധം നൽകുന്ന നേതാക്കളുടെ സംഗമം.",
+    "id": "guest-12",
+    "name": "Scholar 12",
+    "nameArabic": "",
+    "role": "Guest Scholar",
+    "org": "SUFFA Dars Network",
     "isHost": false,
-    "image": "/images/guests/skssf-leaders.webp",
-    "color": "#F0584B"
+    "image": "/images/guests/12.webp",
+    "size": "regular"
+  },
+  {
+    "id": "guest-13",
+    "name": "Scholar 13",
+    "nameArabic": "",
+    "role": "Guest Scholar",
+    "org": "SUFFA Dars Network",
+    "isHost": false,
+    "image": "/images/guests/13.webp",
+    "size": "regular"
+  },
+  {
+    "id": "guest-14",
+    "name": "Scholar 14",
+    "nameArabic": "",
+    "role": "Guest Scholar",
+    "org": "SUFFA Dars Network",
+    "isHost": false,
+    "image": "/images/guests/14.webp",
+    "size": "regular"
+  },
+  {
+    "id": "guest-15",
+    "name": "Scholar 15",
+    "nameArabic": "",
+    "role": "Guest Scholar",
+    "org": "SUFFA Dars Network",
+    "isHost": false,
+    "image": "/images/guests/15.webp",
+    "size": "regular"
   }
 ]

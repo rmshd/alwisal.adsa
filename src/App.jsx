@@ -5,16 +5,12 @@ import FloatingWhatsApp from './components/FloatingWhatsApp';
 import TrustStrip from './components/TrustStrip';
 import Hero from './sections/Hero';
 import About from './sections/About';
-import Routine from './sections/Routine';
 import Schedule from './sections/Schedule';
 import Guests from './sections/Guests';
-import Organisers from './sections/Organisers';
 import Dars from './sections/Dars';
 import Register from './sections/Register';
 import Venue from './sections/Venue';
 import Gallery from './sections/Gallery';
-import Faq from './sections/Faq';
-import Contact from './sections/Contact';
 import Closing from './sections/Closing';
 import ArtPreview from './sections/ArtPreview';
 import { initMotion } from './lib/motion';
@@ -84,16 +80,12 @@ export default function App() {
         <Hero />
         <TrustStrip />
         <About />
-        <Routine />
         <Schedule />
         <Guests />
-        <Organisers />
         <Dars />
         <Register />
         <Venue />
         <Gallery />
-        <Faq />
-        <Contact />
         <Closing />
       </main>
     </div>

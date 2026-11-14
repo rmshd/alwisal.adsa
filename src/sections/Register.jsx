@@ -103,8 +103,8 @@ export default function Register() {
 
   const waHref = CONTACT?.whatsapp?.number
     ? `https://wa.me/${CONTACT.whatsapp.number.replace(/\D/g, '')}?text=${encodeURIComponent(
-        CONTACT.whatsapp.message || 'ADSA ക്യാമ്പിനെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു'
-      )}`
+      CONTACT.whatsapp.message || 'ADSA ക്യാമ്പിനെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു'
+    )}`
     : null;
 
   return (
@@ -126,9 +126,9 @@ export default function Register() {
           </div>
           <div className="text-right flex items-center gap-3">
             <span className="px-3.5 py-1.5 bg-[var(--yellow)] text-[var(--ink)] text-xs font-bold uppercase tracking-wider">
-              No Fee · 100% Free
+              Open Registration
             </span>
-            <span className="font-['Reem_Kufi'] text-2xl text-[var(--yellow)] hidden sm:inline">
+            <span className="font-['Noto_Serif_Arabic'] text-2xl text-[var(--yellow)] hidden sm:inline">
               التَّسْجِيلُ
             </span>
           </div>
@@ -343,8 +343,8 @@ export default function Register() {
                 </div>
 
                 <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
-                  <div className="text-xs text-[var(--muted)] font-['Noto_Sans_Malayalam']">
-                    അപേക്ഷകൾ സൗജന്യമാണ്. പ്രവേശന ഫീസ് ഇല്ല.
+                  <div className="text-xs text-[var(--muted)] font-['Noto_Serif_Malayalam']">
+                    Applications are reviewed individually. Limited seats available.
                   </div>
 
                   <Button

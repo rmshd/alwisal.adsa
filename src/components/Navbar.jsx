@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
-import AlWisalMark from '../art/AlWisalMark';
 import { smoothScrollTo } from '../lib/motion';
 import { Menu, X } from 'lucide-react';
 
@@ -121,19 +120,11 @@ export default function Navbar() {
             className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] py-1"
             aria-label="ADSA Camp Homepage"
           >
-            <AlWisalMark
-              variant="nav"
-              color="var(--orange)"
-              className="w-24 sm:w-28 h-auto transition-transform duration-200 group-hover:scale-105"
+            <img
+              src="/images/logo.png"
+              alt="ADSA Camp Logo"
+              className="h-10 w-auto transition-transform duration-200 group-hover:scale-105"
             />
-            <div className="flex flex-col border-l border-white/15 pl-3">
-              <span className="font-bold text-xs sm:text-sm text-white tracking-widest leading-none">
-                ADSA CAMP
-              </span>
-              <span className="text-[10px] font-medium text-[var(--muted)] tracking-wider mt-0.5">
-                2026 EDITION
-              </span>
-            </div>
           </a>
 
           {/* Right: desktop nav links + orange Register button */}
@@ -202,7 +193,7 @@ export default function Navbar() {
       >
         <div className="flex flex-col h-full p-6 pt-24 font-['Poppins']">
           <div className="flex items-center justify-between pb-6 border-b border-white/10">
-            <AlWisalMark variant="nav" color="var(--yellow)" className="w-28 h-auto" />
+            <img src="/images/logo.png" alt="ADSA Camp Logo" className="h-10 w-auto" />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -236,10 +227,10 @@ export default function Navbar() {
               variant="primary"
               className="w-full h-12 text-sm font-bold"
             >
-              Register Now
+              Register
             </Button>
             <p className="text-center text-xs text-[var(--muted)] tracking-wider uppercase">
-              Free Registration · Dec 20–26, 2026
+              Dec 20–26, 2026
             </p>
           </div>
         </div>
@@ -254,7 +245,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between gap-3">
           <div className="text-left leading-tight pl-2">
             <span className="block text-xs font-bold text-white uppercase tracking-wider">ADSA Camp 2026</span>
-            <span className="text-[10px] text-[var(--yellow)] font-medium">Dec 20–26 · Free Entry</span>
+            <span className="text-[10px] text-[var(--yellow)] font-medium">Dec 20–26, 2026</span>
           </div>
           <Button
             href="#register"

@@ -15,9 +15,8 @@
 
   --font-sans: 'Poppins', sans-serif;
   --font-heading: 'Poppins', sans-serif;
-  --font-arabic-display: 'Reem Kufi', sans-serif;
-  --font-arabic-body: 'Amiri', serif;
-  --font-malayalam: 'Noto Sans Malayalam', sans-serif;
+  --font-arabic: 'Noto Serif Arabic', serif;
+  --font-malayalam: 'Noto Serif Malayalam', serif;
 }
 
 :root {
@@ -95,16 +94,36 @@ body {
 }
 
 /* Typography styles */
-.font-reem {
-  font-family: 'Reem Kufi', sans-serif;
-}
-
-.font-amiri {
-  font-family: 'Amiri', serif;
+.font-arabic {
+  font-family: 'Noto Serif Arabic', serif;
 }
 
 .font-malayalam {
-  font-family: 'Noto Sans Malayalam', sans-serif;
+  font-family: 'Noto Serif Malayalam', serif;
+}
+
+/* Marquee animations for Dars section */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.animate-marquee-left {
+  animation: marquee-left 40s linear infinite;
+  display: inline-flex;
+  gap: 0.75rem;
+}
+.animate-marquee-right {
+  animation: marquee-right 45s linear infinite;
+  display: inline-flex;
+  gap: 0.75rem;
+}
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
 }
 
 /* Section Spacing */

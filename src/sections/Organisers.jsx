@@ -68,11 +68,10 @@ export default function Organisers() {
             return (
               <div
                 key={idx}
-                className={`bg-[var(--surface)] border p-6 flex flex-col justify-between space-y-6 ${
-                  org.isChief
+                className={`bg-[var(--surface)] border p-6 flex flex-col justify-between space-y-6 ${org.isChief
                     ? 'border-[var(--orange)]'
                     : 'border-white/10 hover:border-white/20'
-                } transition-colors`}
+                  } transition-colors`}
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
