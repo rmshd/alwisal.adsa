@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" fill="none">
+  <rect width="600" height="450" fill="#24262B"/>
+  <circle cx="300" cy="200" r="160" fill="#2F6BFF" opacity="0.15"/>
+  <!-- Open Bukhari Kitab on Rihal -->
+  <path d="M120 320L300 200L480 320H420L300 240L180 320H120Z" fill="#2F6BFF"/>
+  <path d="M140 220C210 190 280 195 300 215C320 195 390 190 460 220V120C390 90 320 95 300 115C280 95 210 90 140 120V220Z" fill="#F4F2EC"/>
+  <path d="M300 115V215" stroke="#1E1F22" stroke-width="4"/>
+  <circle cx="300" cy="70" r="8" fill="#FFC93C"/>
+  <text x="300" y="390" fill="#FFC93C" font-family="'Noto Sans Malayalam', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">?????? ????</text>
+</svg>

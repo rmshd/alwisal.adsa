@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" fill="none">
+  <rect width="600" height="450" fill="#24262B"/>
+  <circle cx="300" cy="180" r="160" fill="#F0584B" opacity="0.12"/>
+  <!-- Hanging Lamp & Crescent -->
+  <path d="M300 20V90" stroke="#A9ABB3" stroke-width="4"/>
+  <path d="M250 90H350L380 200L300 280L220 200L250 90Z" fill="#FFC93C"/>
+  <circle cx="300" cy="180" r="28" fill="#F0584B"/>
+  <text x="300" y="390" fill="#FFC93C" font-family="'Noto Sans Malayalam', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">??????????????</text>
+</svg>

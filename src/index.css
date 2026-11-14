@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #1E1F22;
+  --color-card: #2A2C31;
+  --color-blue: #2F6BFF;
+  --color-sky: #6CB4FF;
+  --color-navy: #1B3A8A;
+  --color-yellow: #FFC93C;
+  --color-coral: #F0584B;
+  --color-green: #27A66B;
+  --color-pink: #E85DA0;
+  --color-text: #F4F2EC;
+  --color-muted: #A9ABB3;
+
+  --font-heading: 'Anek Malayalam', sans-serif;
+  --font-body: 'Noto Sans Malayalam', sans-serif;
+  --font-sora: 'Sora', sans-serif;
+
+  --radius-card: 24px;
+  --radius-pill: 999px;
+}
+
+:root {
+  --bg: #1E1F22;
+  --card: #2A2C31;
+  --blue: #2F6BFF;
+  --sky: #6CB4FF;
+  --navy: #1B3A8A;
+  --yellow: #FFC93C;
+  --coral: #F0584B;
+  --green: #27A66B;
+  --pink: #E85DA0;
+  --text: #F4F2EC;
+  --muted: #A9ABB3;
+
+  --gutter: 1cm;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  scroll-behavior: auto; /* Handled by Lenis */
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Fluid Heading Utilities */
+.heading-hero {
+  font-family: 'Anek Malayalam', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 6.5vw, 5.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.heading-section {
+  font-family: 'Anek Malayalam', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.85rem, 4.5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.heading-card {
+  font-family: 'Anek Malayalam', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+  line-height: 1.25;
+}
+
+/* Full width section layout */
+.full-width-section {
+  width: 100%;
+  padding-inline: var(--gutter);
+  position: relative;
+}
+
+/* Sticker torn edges */
+.sticker-torn-red {
+  clip-path: polygon(
+    0% 4px, 4% 0%, 9% 3px, 14% 1px, 20% 4px, 27% 1px, 35% 3px, 43% 0%, 51% 4px, 59% 1px, 68% 4px, 76% 1px, 85% 3px, 92% 0%, 100% 3px,
+    99% 25%, 100% 50%, 99% 75%, 100% 96%,
+    93% 100%, 86% 97%, 78% 99%, 70% 96%, 62% 100%, 53% 97%, 45% 100%, 36% 96%, 28% 99%, 20% 96%, 12% 100%, 5% 97%, 0% 100%,
+    1% 75%, 0% 50%, 1% 25%
+  );
+}
+
+.sticker-torn-yellow {
+  clip-path: polygon(
+    0% 2px, 6% 0px, 12% 3px, 19% 1px, 26% 4px, 34% 0px, 42% 3px, 50% 1px, 58% 4px, 67% 1px, 75% 3px, 84% 0px, 92% 3px, 100% 1px,
+    98% 30%, 100% 65%, 98% 98%,
+    92% 96%, 83% 100%, 75% 97%, 66% 99%, 57% 96%, 49% 100%, 40% 97%, 31% 100%, 22% 97%, 14% 99%, 6% 96%, 0% 98%,
+    2% 65%, 0% 30%
+  );
+}
+
+.sticker-torn-green {
+  clip-path: polygon(
+    0% 3px, 7% 1px, 15% 4px, 23% 0px, 31% 3px, 40% 1px, 50% 4px, 60% 0px, 70% 3px, 80% 1px, 90% 4px, 100% 2px,
+    98% 28%, 100% 70%, 98% 97%,
+    91% 100%, 82% 97%, 72% 100%, 63% 97%, 52% 99%, 42% 96%, 32% 100%, 21% 97%, 11% 99%, 0% 97%,
+    2% 68%, 0% 33%
+  );
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

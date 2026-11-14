@@ -1,0 +1,50 @@
+[
+  {
+    "id": "gal-1",
+    "title": "ഉസ്താദിന്റെ ബുഖാരി സബഖ്",
+    "caption": "സുബ്ഹ് നമസ്കാരത്തിന് ശേഷമുള്ള ഏകാഗ്രമായ ഹദീസ് പഠന വേള",
+    "category": "ക്ലാസ്സുകൾ",
+    "image": "/images/gallery/bukhari-sabaq.svg",
+    "aspect": "aspect-[4/3]"
+  },
+  {
+    "id": "gal-2",
+    "title": "കിതാബ് വായന ശിൽപശാല",
+    "caption": "ദർസ് വിദ്യാർത്ഥികൾ ഒത്തുചേർന്ന് നടത്തുന്ന ഗ്രൂപ്പ് ചർച്ചകൾ",
+    "category": "പഠനം",
+    "image": "/images/gallery/study-circle.svg",
+    "aspect": "aspect-[3/4]"
+  },
+  {
+    "id": "gal-3",
+    "title": "മജ്‌ലിസുതസ്കിയ",
+    "caption": "രാത്രി സമയങ്ങളിലെ ആത്മീയ പ്രഭാഷണങ്ങളും ദുആ മജ്‌ലിസും",
+    "category": "ആത്മീയത",
+    "image": "/images/gallery/spiritual-majlis.svg",
+    "aspect": "aspect-[4/3]"
+  },
+  {
+    "id": "gal-4",
+    "title": "അരിപ്ര കാമ്പസ് പ്രഭാതം",
+    "caption": "പച്ചപ്പ് നിറഞ്ഞ മർകസുസ്സഖാഫത്തിൽ ഇസ്‌ലാമിയ്യ കാമ്പസ് അന്തരീക്ഷം",
+    "category": "കാമ്പസ്",
+    "image": "/images/gallery/campus-dawn.svg",
+    "aspect": "aspect-[16/9]"
+  },
+  {
+    "id": "gal-5",
+    "title": "വിശിഷ്ട അതിഥി സംഗമം",
+    "caption": "സമസ്തയുടെ സമുന്നത നേതാക്കളുമായുള്ള സംവാദ വേള",
+    "category": "നേതൃത്വം",
+    "image": "/images/gallery/guest-dialogue.svg",
+    "aspect": "aspect-[4/3]"
+  },
+  {
+    "id": "gal-6",
+    "title": "സൗഹൃദ രാവ് & ചർച്ചകൾ",
+    "caption": "30 ദർസുകളിലെ കൂട്ടുകാരുടെ അനുഭവ പങ്കുവെക്കലുകൾ",
+    "category": "കൂട്ടായ്മ",
+    "image": "/images/gallery/friendship-circle.svg",
+    "aspect": "aspect-[3/4]"
+  }
+]

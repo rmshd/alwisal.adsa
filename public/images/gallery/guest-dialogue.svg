@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" fill="none">
+  <rect width="600" height="450" fill="#24262B"/>
+  <circle cx="300" cy="180" r="160" fill="#2F6BFF" opacity="0.15"/>
+  <!-- Guest Dialogue Podium -->
+  <rect x="220" y="160" width="160" height="150" rx="16" fill="#2A2C31" stroke="#2F6BFF" stroke-width="3"/>
+  <circle cx="300" cy="120" r="35" fill="#FFC93C"/>
+  <text x="300" y="390" fill="#2F6BFF" font-family="'Noto Sans Malayalam', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">??????? ????? ?????</text>
+</svg>

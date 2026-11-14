@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#24262B"/>
+  <!-- Campus Dawn Landscape -->
+  <circle cx="400" cy="220" r="110" fill="#FFC93C" opacity="0.4"/>
+  <path d="M0 340 Q200 240 400 290 T800 270 L800 450 L0 450 Z" fill="#1B263B"/>
+  <!-- Masjid silhouette -->
+  <path d="M360 250L440 250L400 200Z" fill="#27A66B"/>
+  <rect x="375" y="250" width="50" height="40" fill="#F4F2EC"/>
+  <text x="400" y="410" fill="#6CB4FF" font-family="'Noto Sans Malayalam', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">?????? ??????? ???????</text>
+</svg>

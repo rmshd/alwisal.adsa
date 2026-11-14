@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 600" fill="none">
+  <rect width="450" height="600" fill="#24262B"/>
+  <circle cx="225" cy="250" r="150" fill="#FFC93C" opacity="0.12"/>
+  <!-- Chai Glass & Fellowship -->
+  <path d="M160 160H290L260 380H190L160 160Z" fill="#1E1F22" stroke="#F4F2EC" stroke-width="4"/>
+  <path d="M175 240H275L255 360H195L175 240Z" fill="#F0584B"/>
+  <rect x="170" y="210" width="110" height="24" rx="10" fill="#FFC93C"/>
+  <text x="225" y="480" fill="#FFC93C" font-family="'Noto Sans Malayalam', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">????? ????</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" fill="none">
+  <rect width="400" height="480" fill="#2A2C31"/>
+  <circle cx="200" cy="200" r="140" fill="#F0584B" opacity="0.2"/>
+  <circle cx="200" cy="200" r="110" fill="#F0584B" opacity="0.35"/>
+  <g opacity="0.95">
+    <!-- Emblem of Youth & Knowledge: Book, Star, Flag -->
+    <path d="M120 280C160 250 200 260 200 270C200 260 240 250 280 280V160C240 130 200 140 200 150C200 140 160 130 120 160V280Z" fill="#F4F2EC"/>
+    <polygon points="200,90 206,108 225,108 210,119 215,137 200,126 185,137 190,119 175,108 194,108" fill="#FFC93C"/>
+    <!-- Flag / Torch -->
+    <path d="M150 180H250L230 220H170L150 180Z" fill="#27A66B"/>
+  </g>
+  <rect x="40" y="410" width="320" height="44" rx="22" fill="#1E1F22" stroke="#F0584B" stroke-width="2"/>
+  <text x="200" y="437" fill="#F4F2EC" font-family="'Noto Sans Malayalam', sans-serif" font-size="14" font-weight="bold" text-anchor="middle">എസ്.കെ.എസ്.എസ്.എഫ് നേതൃത്വം</text>
+</svg>

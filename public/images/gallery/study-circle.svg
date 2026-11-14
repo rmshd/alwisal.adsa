@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 600" fill="none">
+  <rect width="450" height="600" fill="#24262B"/>
+  <circle cx="225" cy="260" r="150" fill="#27A66B" opacity="0.15"/>
+  <!-- Circle of Books and Study -->
+  <rect x="140" y="240" width="170" height="40" rx="8" fill="#1B3A8A"/>
+  <rect x="150" y="190" width="150" height="40" rx="8" fill="#2F6BFF"/>
+  <rect x="165" y="140" width="120" height="40" rx="8" fill="#27A66B"/>
+  <polygon points="225,80 231,98 250,98 235,109 240,127 225,116 210,127 215,109 200,98 219,98" fill="#FFC93C"/>
+  <text x="225" y="480" fill="#27A66B" font-family="'Noto Sans Malayalam', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">?????? ???? ???????</text>
+</svg>

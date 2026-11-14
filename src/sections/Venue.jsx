@@ -1,0 +1,154 @@
+import React from 'react';
+import { CONFIG } from '../config';
+import Button from '../components/Button';
+import { MasjidIcon, CompassIcon } from '../art/Icons';
+
+export default function Venue() {
+  const { VENUE } = CONFIG;
+
+  return (
+    <section id="venue" className="full-width-section py-24 bg-[var(--bg)]">
+      <div className="flex flex-col gap-12">
+        {/* Header */}
+        <div className="flex flex-col gap-4 max-w-4xl">
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-[2px] bg-[var(--yellow)] inline-block" />
+            <span className="font-heading font-bold text-sm tracking-wider uppercase text-[var(--yellow)]">
+              ക്യാമ്പ് വേദി & റൂട്ട്
+            </span>
+          </div>
+
+          <h2 className="heading-section text-white">
+            ക്യാമ്പ് നടക്കുന്ന <span className="text-[var(--yellow)]">വേദി</span>
+          </h2>
+
+          <p className="font-body text-base sm:text-lg text-[var(--muted)]">
+            പ്രകൃതിരമണീയമായ അന്തരീക്ഷത്തിൽ സ്ഥിതി ചെയ്യുന്ന അരിപ്ര കാമ്പസിൽ വെച്ചാണ് 7 ദിവസത്തെ ക്യാമ്പ് സംഘടിപ്പിച്ചിട്ടുള്ളത്.
+          </p>
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Venue Details Card (7 Cols) */}
+          <div className="lg:col-span-7 bg-[var(--card)] rounded-[24px] p-8 sm:p-10 border border-white/[0.08] shadow-xl flex flex-col justify-between">
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-[var(--blue)]/15 flex items-center justify-center shrink-0">
+                  <MasjidIcon className="w-8 h-8 text-[var(--yellow)]" color="#FFC93C" />
+                </div>
+                <div>
+                  <span className="text-xs font-sora font-semibold text-[var(--sky)] tracking-wider uppercase">
+                    OFFICIAL VENUE
+                  </span>
+                  <h3 className="heading-card text-white text-xl sm:text-2xl mt-0.5">
+                    {VENUE.NAME}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3 py-4 border-y border-white/5 font-body text-base text-[var(--text)]/90">
+                <div className="flex items-start gap-3">
+                  <span className="text-[var(--yellow)] font-bold">സ്ഥലം:</span>
+                  <span>{VENUE.PLACE}, {VENUE.DISTRICT} - {VENUE.PIN}</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[var(--yellow)] font-bold">എത്തിച്ചേരാൻ:</span>
+                  <span>{VENUE.HOW_TO_REACH}</span>
+                </div>
+              </div>
+
+              {/* Transit Options */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                  <span className="text-xs font-sora font-bold text-[var(--yellow)] block mb-1">
+                    ബസ്സ് മാർഗ്ഗം
+                  </span>
+                  <p className="text-xs text-[var(--muted)]">
+                    പെരിന്തൽമണ്ണ അല്ലെങ്കിൽ മഞ്ചേരിയിൽ നിന്ന് നിലമ്പൂർ ബസ്സ് കയറി അരിപ്ര ഇറങ്ങുക.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                  <span className="text-xs font-sora font-bold text-[var(--sky)] block mb-1">
+                    റെയിൽവേ സ്റ്റേഷൻ
+                  </span>
+                  <p className="text-xs text-[var(--muted)]">
+                    അങ്ങാടിപ്പുറം റെയിൽവേ സ്റ്റേഷൻ (10 കി.മീ), തിരൂർ റെയിൽവേ സ്റ്റേഷൻ (38 കി.മീ).
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-white/5 border border-white/5">
+                  <span className="text-xs font-sora font-bold text-[var(--green)] block mb-1">
+                    വിമാനത്താവളം
+                  </span>
+                  <p className="text-xs text-[var(--muted)]">
+                    കോഴിക്കോട് അന്താരാഷ്ട്ര വിമാനത്താവളം (കരിപ്പൂർ - 35 കി.മീ).
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-8 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
+              <Button
+                href={VENUE.GOOGLE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                className="text-sm px-6"
+              >
+                Google Maps തുറക്കുക
+              </Button>
+
+              <span className="text-xs font-sora text-[var(--muted)]">
+                ആവശ്യങ്ങൾക്ക് വിളിക്കുക: {CONFIG.PHONE_DISPLAY}
+              </span>
+            </div>
+          </div>
+
+          {/* Interactive Visual Map Card (5 Cols) */}
+          <div className="lg:col-span-5 bg-[#232730] rounded-[24px] overflow-hidden border border-white/[0.08] shadow-xl p-8 flex flex-col justify-between relative">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-sora font-bold text-[var(--yellow)] tracking-wider uppercase">
+                  LOCATION PINPOINT
+                </span>
+                <span className="px-3 py-1 rounded-full text-[11px] font-sora font-semibold bg-white/5 text-white/80">
+                  ARIPRA, MALAPPURAM
+                </span>
+              </div>
+
+              {/* Styled Minimal Vector Campus Map graphic */}
+              <div className="w-full aspect-[4/3] rounded-2xl bg-[#1A1D23] border border-white/10 relative overflow-hidden flex items-center justify-center p-6">
+                {/* Grid roads */}
+                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#6CB4FF_1px,transparent_1px)] [background-size:16px_16px]" />
+                
+                {/* Curved road */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 300 220" fill="none">
+                  <path d="M-10 180 C80 160 140 120 220 80 T310 20" stroke="#3D4452" strokeWidth="12" />
+                  <path d="M-10 180 C80 160 140 120 220 80 T310 20" stroke="#FFC93C" strokeWidth="2" strokeDasharray="6 6" />
+                  <circle cx="170" cy="105" r="28" fill="#2F6BFF" opacity="0.3" className="animate-ping" />
+                  <circle cx="170" cy="105" r="14" fill="#2F6BFF" />
+                  <circle cx="170" cy="105" r="6" fill="#FFC93C" />
+                </svg>
+
+                <div className="relative z-10 bg-[#1E1F22]/90 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center max-w-[200px]">
+                  <CompassIcon className="w-6 h-6 mx-auto mb-1 text-[var(--yellow)]" color="#FFC93C" />
+                  <span className="font-heading font-bold text-xs text-white block">
+                    മർകസ് കാമ്പസ് അരിപ്ര
+                  </span>
+                  <span className="text-[10px] text-[var(--sky)] font-sora">
+                    ADSA Camp Venue
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-xs text-[var(--muted)] mt-6 text-center">
+              ക്യാമ്പ് വേദിയിലേക്ക് എത്തുന്നവർക്ക് വഴികാട്ടാൻ വാളണ്ടിയർമാർ റെയിൽവേ സ്റ്റേഷനിലും ജംഗ്ഷനിലും സജ്ജമായിരിക്കും.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
