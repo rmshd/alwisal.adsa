@@ -28,7 +28,7 @@ export default function Schedule() {
               مَنْهَجُ الدِّرَاسَةِ وَالبَرَامِجِ
             </span>
             <span className="text-xs text-slate-500 font-medium">
-              Dec 20 – 26, 2026 · Daily Intensive
+              Dec 24 – 30, 2026 · Daily Intensive
             </span>
           </div>
         </div>

@@ -93,7 +93,7 @@ export default function About() {
             <div>
               <span className="text-3xl sm:text-4xl font-bold text-slate-900 block tracking-tight">07</span>
               <span className="text-sm font-semibold text-slate-800 block mt-1">Days of Dawn Sabaq</span>
-              <span className="text-xs text-slate-500 font-normal block mt-0.5">December 20 to 26, 2026</span>
+              <span className="text-xs text-slate-500 font-normal block mt-0.5">December 24 to 30, 2026</span>
             </div>
           </div>
 

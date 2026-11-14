@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import { smoothScrollTo } from '../lib/motion';
 import { Calendar, MapPin, Sparkles } from 'lucide-react';
 
-const CAMP_DATE = new Date('2026-12-20T00:00:00+05:30');
+const CAMP_DATE = new Date('2026-12-24T05:00:00+05:30');
 
 function getDaysToGo() {
   const now = new Date();
@@ -69,7 +69,7 @@ export default function Hero() {
             <span className="text-slate-300 hidden sm:inline">|</span>
             <div className="flex items-center gap-2 text-xs font-medium text-slate-600">
               <Calendar size={14} className="text-amber-700" />
-              <span>Dec 20 – 26, 2026</span>
+              <span>Dec 24 – 30, 2026</span>
             </div>
             <span className="text-slate-300 hidden sm:inline">|</span>
             <div className="flex items-center gap-2 text-xs font-medium text-slate-600">

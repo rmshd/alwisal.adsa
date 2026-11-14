@@ -47,7 +47,7 @@ export default function Closing() {
 
           <div className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-medium text-slate-700 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-amber-600" />
-            <span>Dec 20 – 26, 2026 · Alathurpadi</span>
+            <span>Dec 24 – 30, 2026 · Alathurpadi</span>
           </div>
         </div>
 

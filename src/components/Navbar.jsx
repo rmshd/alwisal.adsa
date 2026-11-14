@@ -1,208 +1,234 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import AlWisalMark from '../art/AlWisalMark';
 import Button from './Button';
-import { smoothScrollTo } from '../lib/motion';
-import { Menu, X } from 'lucide-react';
-
-const NAV_LINKS = [
-  { label: 'Camp', href: '#about', id: 'about' },
-  { label: 'Programme', href: '#programme', id: 'programme' },
-  { label: 'Scholars', href: '#guests', id: 'guests' },
-  { label: 'Venue', href: '#venue', id: 'venue' },
-  { label: 'Gallery', href: '#gallery', id: 'gallery' },
-];
+import { usePreferences } from '../context/PreferencesContext';
+import { useT } from '../context/I18nContext';
+import { getCurrentUser } from '../lib/auth';
+import { Menu, X, SlidersHorizontal, User, Sparkles } from 'lucide-react';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState(getCurrentUser());
+  const location = useLocation();
+
+  const { openPanel } = usePreferences();
+  const { t } = useT();
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 40);
+
+      if (currentScrollY > 150) {
+        if (currentScrollY > lastScrollY && !mobileMenuOpen) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
+      } else {
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    const handleAuthChange = (e) => {
+      setUser(e.detail);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const sectionIds = ['about', 'programme', 'guests', 'venue', 'gallery', 'register'];
-    const observers = [];
-
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveSection(id);
-            }
-          });
-        },
-        { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
-      );
-
-      observer.observe(el);
-      observers.push(observer);
-    });
+    window.addEventListener('alwisal_auth_changed', handleAuthChange);
 
     return () => {
-      observers.forEach((obs) => obs.disconnect());
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('alwisal_auth_changed', handleAuthChange);
     };
-  }, []);
-
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-      const handleKeyDown = (e) => {
-        if (e.key === 'Escape') setMobileMenuOpen(false);
-      };
-      window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        document.body.style.overflow = '';
-        window.removeEventListener('keydown', handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = '';
-    }
   }, [mobileMenuOpen]);
 
-  const handleLinkClick = (e, href) => {
-    e.preventDefault();
+  useEffect(() => {
     setMobileMenuOpen(false);
-    smoothScrollTo(href);
-  };
+  }, [location.pathname]);
+
+  const navLinks = [
+    { label: t('navHome'), path: '/' },
+    { label: t('navAbout'), path: '/about' },
+    { label: t('navSchedule'), path: '/schedule' },
+    { label: t('navDars'), path: '/dars' },
+    { label: t('navGuide'), path: '/guide' },
+  ];
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 h-[72px] transition-all duration-300 font-['Poppins'] ${
+        className={`fixed top-0 left-0 right-0 z-40 h-[72px] transition-transform duration-300 font-['Poppins'] ${
+          isVisible ? 'translate-y-0' : '-translate-y-full'
+        } ${
           isScrolled
-            ? 'bg-white/85 backdrop-blur-md border-b border-slate-200/70 shadow-[0_2px_12px_rgba(0,0,0,0.03)]'
-            : 'bg-transparent'
+            ? 'bg-[#0B1520]/95 backdrop-blur-md border-b border-white/10 shadow-lg'
+            : 'bg-[#0B1520]/60 backdrop-blur-sm'
         }`}
         style={{ paddingInline: 'var(--gutter)' }}
       >
-        <div className="w-full h-full flex items-center justify-between max-w-6xl mx-auto">
-          {/* Logo */}
-          <a
-            href="#hero"
-            onClick={(e) => handleLinkClick(e, '#hero')}
-            className="flex items-center gap-3 group focus-visible:outline-none"
-            aria-label="ADSA Camp"
+        <div className="w-full h-full flex items-center justify-between max-w-[1400px] mx-auto">
+          {/* Brand Link */}
+          <Link
+            to="/"
+            className="flex items-center group focus-visible:outline-none"
+            aria-label="Al-Wisal Home"
           >
-            <img
-              src="/images/logo.png"
-              alt="ADSA Camp Logo"
-              className="h-10 w-auto object-contain transition-transform group-hover:scale-102"
-            />
-          </a>
+            <AlWisalMark variant="nav" color="#F28A2E" secondaryColor="#FDB913" />
+          </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-8" aria-label="Main Navigation">
-            <ul className="flex items-center gap-6 list-none m-0 p-0">
-              {NAV_LINKS.map((link) => {
-                const isActive = activeSection === link.id;
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-6" aria-label="Main Navigation">
+            <ul className="flex items-center gap-1 list-none m-0 p-0">
+              {navLinks.map((link) => {
+                const isActive = location.pathname === link.path;
                 return (
-                  <li key={link.id}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleLinkClick(e, link.href)}
-                      className={`text-sm font-medium transition-colors ${
+                  <li key={link.path}>
+                    <Link
+                      to={link.path}
+                      className={`text-xs uppercase tracking-widest font-bold px-3 py-2 transition-colors ${
                         isActive
-                          ? 'text-amber-700 font-semibold'
-                          : 'text-slate-600 hover:text-slate-900'
+                          ? 'text-[#FDB913]'
+                          : 'text-[#9FB0C3] hover:text-white'
                       }`}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}
             </ul>
 
-            <Button
-              href="#register"
-              onClick={(e) => handleLinkClick(e, '#register')}
-              variant="primary"
-              className="h-10 px-5 text-xs font-semibold"
-            >
-              Register
-            </Button>
+            {/* Quick Actions */}
+            <div className="flex items-center gap-2.5 border-l border-white/15 pl-4">
+              {/* Preferences Button */}
+              <button
+                type="button"
+                onClick={openPanel}
+                className="p-2 text-[#9FB0C3] hover:text-white rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+                title="Preferences (Ctrl+,)"
+                aria-label="Open Preferences"
+              >
+                <SlidersHorizontal size={18} />
+              </button>
+
+              {/* Login / Dashboard Link */}
+              {user ? (
+                <Link
+                  to={user.role === 'admin' ? '/admin' : '/dashboard'}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-bold text-white border border-white/15 transition-colors"
+                >
+                  <User size={14} className="text-[#FDB913]" />
+                  <span>{user.role === 'admin' ? 'Admin Portal' : 'My Pass'}</span>
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="text-xs uppercase tracking-wider font-bold text-[#9FB0C3] hover:text-white px-3 py-2 transition-colors"
+                >
+                  {t('navLogin')}
+                </Link>
+              )}
+
+              {/* Primary Register Button */}
+              <Button
+                href="/#register"
+                variant="primary"
+                className="h-9 px-5 text-xs font-bold bg-[#F28A2E] text-[#0B1520] hover:brightness-110"
+              >
+                {t('navRegister')}
+              </Button>
+            </div>
           </nav>
 
           {/* Mobile hamburger */}
-          <div className="flex items-center gap-3 md:hidden">
-            <Button
-              href="#register"
-              onClick={(e) => handleLinkClick(e, '#register')}
-              variant="primary"
-              className="h-9 px-4 text-xs font-semibold"
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              type="button"
+              onClick={openPanel}
+              className="p-2 text-[#9FB0C3] hover:text-white"
+              aria-label="Open Preferences"
             >
-              Register
-            </Button>
+              <SlidersHorizontal size={20} />
+            </button>
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-slate-900 focus:outline-none"
+              className="p-2 text-white/80 hover:text-white focus:outline-none"
               aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
             >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Full-screen Mobile Menu */}
       <div
-        className={`fixed inset-0 z-50 bg-[#FAF9F6] transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-50 bg-[#0B1520] transition-opacity duration-300 lg:hidden ${
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
         <div className="flex flex-col h-full p-6 pt-20">
-          <div className="flex items-center justify-between pb-6 border-b border-slate-200">
-            <img src="/images/logo.png" alt="ADSA Camp Logo" className="h-9 w-auto" />
+          <div className="flex items-center justify-between pb-6 border-b border-white/10">
+            <AlWisalMark variant="nav" color="#F28A2E" secondaryColor="#FDB913" />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 text-slate-700 hover:text-slate-900"
+              className="p-2 text-white/80 hover:text-white"
               aria-label="Close Menu"
             >
-              <X size={22} />
+              <X size={24} />
             </button>
           </div>
 
           <nav className="flex-1 py-8">
             <ul className="space-y-4">
-              {NAV_LINKS.map((link) => (
-                <li key={link.id}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className="block text-xl font-medium text-slate-800 hover:text-amber-700 transition-colors py-2"
+              {navLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="block text-2xl uppercase tracking-wider font-extrabold text-white hover:text-[#FDB913] transition-colors py-2"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="pt-6 border-t border-slate-200 space-y-3">
+          <div className="pt-6 border-t border-white/10 space-y-3">
+            {user ? (
+              <Link
+                to={user.role === 'admin' ? '/admin' : '/dashboard'}
+                className="w-full h-12 flex items-center justify-center rounded-full bg-white/10 text-white font-bold text-sm border border-white/15"
+              >
+                {user.role === 'admin' ? 'Open Admin Portal' : 'My Pass Dashboard'}
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="w-full h-12 flex items-center justify-center rounded-full bg-white/10 text-white font-bold text-sm border border-white/15"
+              >
+                Student / Admin Login
+              </Link>
+            )}
+
             <Button
-              href="#register"
-              onClick={(e) => handleLinkClick(e, '#register')}
+              href="/#register"
               variant="primary"
-              className="w-full h-11 text-sm font-semibold"
+              className="w-full h-12 text-sm font-bold bg-[#F28A2E] text-[#0B1520]"
             >
-              Register for Camp
+              {t('navRegister')}
             </Button>
-            <p className="text-center text-xs text-slate-500 font-medium">
-              December 20–26, 2026 · Alathurpadi
-            </p>
           </div>
         </div>
       </div>

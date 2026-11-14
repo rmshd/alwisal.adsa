@@ -1,19 +1,35 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Intro from './components/Intro';
+import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
-import TrustStrip from './components/TrustStrip';
-import Hero from './sections/Hero';
-import About from './sections/About';
-import Schedule from './sections/Schedule';
-import Guests from './sections/Guests';
-import Register from './sections/Register';
-import Venue from './sections/Venue';
-import Gallery from './sections/Gallery';
-import Closing from './sections/Closing';
+import PreferencesModal from './components/PreferencesModal';
+import { PreferencesProvider } from './context/PreferencesContext';
+import { I18nProvider } from './context/I18nContext';
 import { initMotion } from './lib/motion';
 
-export default function App() {
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import DarsPage from './pages/DarsPage';
+import SchedulePage from './pages/SchedulePage';
+import GuidePage from './pages/GuidePage';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminPage from './pages/AdminPage';
+import NotFoundPage from './pages/NotFoundPage';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+function MainLayout() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -36,35 +52,55 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] text-slate-900 relative selection:bg-amber-100 selection:text-amber-900 overflow-x-hidden font-['Poppins']">
-      {/* Subtle Intro Animation */}
-      <Intro />
+    <div className="min-h-screen bg-[var(--bg-canvas,#0B1520)] text-[var(--text-main,#FFFFFF)] relative selection:bg-[#FDB913] selection:text-[#0B1520] overflow-x-hidden font-['Poppins'] flex flex-col justify-between">
+      <ScrollToTop />
 
       {/* Top Scroll Progress Bar */}
       <div
-        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-amber-600 origin-left pointer-events-none transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-[#F28A2E] origin-left pointer-events-none transition-transform duration-75 ease-out"
         style={{ transform: `scaleX(${scrollProgress})` }}
         aria-hidden="true"
       />
 
-      {/* Global Navigation Header */}
+      {/* Global Navbar */}
       <Navbar />
+
+      {/* Preferences Dialog */}
+      <PreferencesModal />
 
       {/* Floating WhatsApp Action Button */}
       <FloatingWhatsApp />
 
-      {/* Main Sections */}
-      <main className="w-full relative z-10">
-        <Hero />
-        <TrustStrip />
-        <About />
-        <Schedule />
-        <Guests />
-        <Register />
-        <Venue />
-        <Gallery />
-        <Closing />
+      {/* Main Routed Content */}
+      <main className="w-full flex-grow relative z-10">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/dars" element={<DarsPage />} />
+          <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/guide" element={<GuidePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
+
+      {/* Global Footer */}
+      <Footer />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <PreferencesProvider>
+      <I18nProvider>
+        <BrowserRouter>
+          <MainLayout />
+        </BrowserRouter>
+      </I18nProvider>
+    </PreferencesProvider>
   );
 }

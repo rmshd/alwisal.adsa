@@ -1,68 +1,133 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #FAF9F6;
-  --color-canvas-subtle: #F3F1EC;
-  --color-surface: #FFFFFF;
-  --color-ink: #0F172A;
-  --color-muted: #64748B;
-  --color-accent: #B45309;
-  --color-accent-light: #FEF3C7;
-  --color-emerald: #047857;
+  --color-ink: #0B1520;
+  --color-surface: #121E2D;
+  --color-orange: #F28A2E;
+  --color-yellow: #FDB913;
+  --color-cobalt: #2B45D9;
+  --color-terracotta: #D6452B;
+  --color-teal: #1F7F92;
+  --color-cream: #FBF4DC;
+  --color-white: #FFFFFF;
+  --color-muted: #9FB0C3;
 
   --font-sans: 'Poppins', sans-serif;
-  --font-heading: 'Poppins', sans-serif;
-  --font-arabic: 'Noto Serif Arabic', serif;
-  --font-malayalam: 'Noto Serif Malayalam', serif;
+  --font-arabic-display: 'Reem Kufi', sans-serif;
+  --font-arabic-body: 'Amiri', serif;
+  --font-malayalam: 'Noto Sans Malayalam', sans-serif;
 }
 
 :root {
-  --canvas: #FAF9F6;
-  --canvas-subtle: #F3F1EC;
-  --surface: #FFFFFF;
-  --ink: #0F172A;
-  --muted: #64748B;
-  --accent: #B45309;
-  --accent-hover: #92400E;
-  --accent-light: #FEF3C7;
-  --border: rgba(15, 23, 42, 0.08);
+  --ink: #0B1520;
+  --surface: #121E2D;
+  --orange: #F28A2E;
+  --yellow: #FDB913;
+  --cobalt: #2B45D9;
+  --terracotta: #D6452B;
+  --teal: #1F7F92;
+  --cream: #FBF4DC;
+  --white: #FFFFFF;
+  --muted: #9FB0C3;
 
-  --gutter: clamp(16px, 5vw, 2rem);
+  --bg-canvas: #0B1520;
+  --text-main: #FFFFFF;
+
+  --gutter: clamp(16px, 4vw, 1cm);
+}
+
+/* Theme: Light Cream variant */
+html.theme-cream {
+  --bg-canvas: #FBF4DC;
+  --text-main: #0B1520;
+  --surface: #FFFFFF;
+  --muted: #5A6A7D;
 }
 
 html {
-  background-color: var(--canvas);
-  color: var(--ink);
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
   font-family: 'Poppins', sans-serif;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--canvas);
-  color: var(--ink);
+  background-color: var(--bg-canvas);
+  color: var(--text-main);
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
   width: 100%;
-  -webkit-font-smoothing: antialiased;
 }
 
 /* Typography styles */
-.font-arabic {
-  font-family: 'Noto Serif Arabic', serif;
+.font-reem {
+  font-family: 'Reem Kufi', sans-serif;
+}
+
+.font-amiri {
+  font-family: 'Amiri', serif;
 }
 
 .font-malayalam {
-  font-family: 'Noto Serif Malayalam', serif;
+  font-family: 'Noto Sans Malayalam', sans-serif;
 }
 
-/* Subtle smooth animation */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
+/* 1cm Gutters on Desktop, Responsive */
+.site-gutter {
+  padding-inline: var(--gutter);
+}
+
+/* Crisp 0px radius on tiles */
+.mosaic-tile {
+  border-radius: 0px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+/* Stepped Staircase Edges for Cream Sections */
+.stepped-top {
+  clip-path: polygon(
+    0% 20px, 5% 20px, 5% 10px, 10% 10px, 10% 0px, 90% 0px, 90% 10px, 95% 10px, 95% 20px, 100% 20px,
+    100% 100%, 0% 100%
+  );
+}
+
+.stepped-bottom {
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    100% calc(100% - 20px), 95% calc(100% - 20px), 95% calc(100% - 10px), 90% calc(100% - 10px), 90% 100%,
+    10% 100%, 10% calc(100% - 10px), 5% calc(100% - 10px), 5% calc(100% - 20px), 0% calc(100% - 20px)
+  );
+}
+
+/* Eight-Point Star Lattice Pattern (PatternBg layer) */
+.bg-star-lattice-dark {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l3 8 8-3-3 8 8 3-8 3 3 8-8-3-3 8-3-8-8 3 3-8-8-3 8-3-3-8 8 3z' fill='%23FBF4DC' fill-opacity='0.045' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.bg-star-lattice-cream {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l3 8 8-3-3 8 8 3-8 3 3 8-8-3-3 8-3-8-8 3 3-8-8-3 8-3-3-8 8 3z' fill='%23D6452B' fill-opacity='0.065' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Pill buttons - 999px radius strictly for buttons */
+.btn-pill {
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce), (scripting: none) {
+  html.reduce-motion *,
+  html.reduce-motion ::before,
+  html.reduce-motion ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

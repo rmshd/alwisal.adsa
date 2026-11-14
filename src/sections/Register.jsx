@@ -151,7 +151,7 @@ export default function Register() {
                       Dates & Duration
                     </h4>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      December 20 to 26, 2026 · Seven days full-time retreat
+                      December 24 to 30, 2026 · Seven days full-time retreat
                     </p>
                   </div>
                 </div>
