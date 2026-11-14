@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 import Vine from './art/Vine';
 import Hero from './sections/Hero';
 import About from './sections/About';
@@ -30,6 +31,9 @@ export default function App() {
 
       {/* Global Navigation Header */}
       <Navbar />
+
+      {/* Floating Quick WhatsApp Action Button */}
+      <FloatingWhatsApp />
 
       {/* All 12 Sections */}
       <main className="w-full relative z-10">

@@ -5,6 +5,7 @@ import { MasjidIcon, CompassIcon } from '../art/Icons';
 
 export default function Venue() {
   const { VENUE } = CONFIG;
+  const hasMapsUrl = VENUE.MAPS_URL && VENUE.MAPS_URL.trim() !== '';
 
   return (
     <section id="venue" className="full-width-section py-24 bg-[var(--bg)]">
@@ -23,7 +24,7 @@ export default function Venue() {
           </h2>
 
           <p className="font-body text-base sm:text-lg text-[var(--muted)]">
-            പ്രകൃതിരമണീയമായ അന്തരീക്ഷത്തിൽ സ്ഥിതി ചെയ്യുന്ന അരിപ്ര കാമ്പസിൽ വെച്ചാണ് 7 ദിവസത്തെ ക്യാമ്പ് സംഘടിപ്പിച്ചിട്ടുള്ളത്.
+            ചരിത്രപ്രസിദ്ധമായ ആലത്തൂർപടി ജുമാമസ്ജിദ് ദർസ് കാമ്പസിലാണ് 7 ദിവസത്തെ ക്യാമ്പ് ഒരുക്കിയിട്ടുള്ളത്.
           </p>
         </div>
 
@@ -43,16 +44,19 @@ export default function Venue() {
                   <h3 className="heading-card text-white text-xl sm:text-2xl mt-0.5">
                     {VENUE.NAME}
                   </h3>
+                  <span className="text-xs font-sora text-white/50 block">
+                    {VENUE.NAME_EN}
+                  </span>
                 </div>
               </div>
 
               <div className="flex flex-col gap-3 py-4 border-y border-white/5 font-body text-base text-[var(--text)]/90">
                 <div className="flex items-start gap-3">
-                  <span className="text-[var(--yellow)] font-bold">സ്ഥലം:</span>
-                  <span>{VENUE.PLACE}, {VENUE.DISTRICT} - {VENUE.PIN}</span>
+                  <span className="text-[var(--yellow)] font-bold shrink-0">വിലാസം:</span>
+                  <span>{VENUE.ADDRESS}</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-[var(--yellow)] font-bold">എത്തിച്ചേരാൻ:</span>
+                  <span className="text-[var(--yellow)] font-bold shrink-0">എത്തിച്ചേരാൻ:</span>
                   <span>{VENUE.HOW_TO_REACH}</span>
                 </div>
               </div>
@@ -64,7 +68,7 @@ export default function Venue() {
                     ബസ്സ് മാർഗ്ഗം
                   </span>
                   <p className="text-xs text-[var(--muted)]">
-                    പെരിന്തൽമണ്ണ അല്ലെങ്കിൽ മഞ്ചേരിയിൽ നിന്ന് നിലമ്പൂർ ബസ്സ് കയറി അരിപ്ര ഇറങ്ങുക.
+                    മലപ്പുറം കെ.എസ്.ആർ.ടി.സി / മുനിസിപ്പൽ സ്റ്റാൻഡിൽ നിന്ന് മേൽമുറി ബസ്സ് വഴി ആലത്തൂർപടി ഇറങ്ങുക.
                   </p>
                 </div>
 
@@ -73,7 +77,7 @@ export default function Venue() {
                     റെയിൽവേ സ്റ്റേഷൻ
                   </span>
                   <p className="text-xs text-[var(--muted)]">
-                    അങ്ങാടിപ്പുറം റെയിൽവേ സ്റ്റേഷൻ (10 കി.മീ), തിരൂർ റെയിൽവേ സ്റ്റേഷൻ (38 കി.മീ).
+                    അങ്ങാടിപ്പുറം (25 കി.മീ) / പരപ്പനങ്ങാടി (32 കി.മീ) / കോഴിക്കോട് (48 കി.മീ).
                   </p>
                 </div>
 
@@ -82,44 +86,50 @@ export default function Venue() {
                     വിമാനത്താവളം
                   </span>
                   <p className="text-xs text-[var(--muted)]">
-                    കോഴിക്കോട് അന്താരാഷ്ട്ര വിമാനത്താവളം (കരിപ്പൂർ - 35 കി.മീ).
+                    കോഴിക്കോട് അന്താരാഷ്ട്ര വിമാനത്താവളം (കരിപ്പൂർ - 22 കി.മീ).
                   </p>
                 </div>
               </div>
             </div>
 
             <div className="pt-8 mt-6 border-t border-white/5 flex flex-wrap items-center justify-between gap-4">
-              <Button
-                href={VENUE.GOOGLE_MAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="primary"
-                className="text-sm px-6"
-              >
-                Google Maps തുറക്കുക
-              </Button>
+              {hasMapsUrl && (
+                <Button
+                  href={VENUE.MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="primary"
+                  className="text-sm px-6"
+                >
+                  Google Maps തുറക്കുക
+                </Button>
+              )}
 
-              <span className="text-xs font-sora text-[var(--muted)]">
-                ആവശ്യങ്ങൾക്ക് വിളിക്കുക: {CONFIG.PHONE_DISPLAY}
-              </span>
+              {CONFIG.CONTACT?.phones?.[0] && (
+                <a
+                  href={`tel:${CONFIG.CONTACT.phones[0].number}`}
+                  className="text-xs font-sora text-[var(--muted)] hover:text-white"
+                >
+                  ഹെൽപ്പ്‌ലൈൻ: {CONFIG.CONTACT.phones[0].display}
+                </a>
+              )}
             </div>
           </div>
 
-          {/* Interactive Visual Map Card (5 Cols) */}
+          {/* Location Pinpoint Card (5 Cols) */}
           <div className="lg:col-span-5 bg-[#232730] rounded-[24px] overflow-hidden border border-white/[0.08] shadow-xl p-8 flex flex-col justify-between relative">
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-sora font-bold text-[var(--yellow)] tracking-wider uppercase">
-                  LOCATION PINPOINT
+                  CAMP LOCATION
                 </span>
                 <span className="px-3 py-1 rounded-full text-[11px] font-sora font-semibold bg-white/5 text-white/80">
-                  ARIPRA, MALAPPURAM
+                  {VENUE.PLACE}
                 </span>
               </div>
 
               {/* Styled Minimal Vector Campus Map graphic */}
               <div className="w-full aspect-[4/3] rounded-2xl bg-[#1A1D23] border border-white/10 relative overflow-hidden flex items-center justify-center p-6">
-                {/* Grid roads */}
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#6CB4FF_1px,transparent_1px)] [background-size:16px_16px]" />
                 
                 {/* Curved road */}
@@ -131,20 +141,20 @@ export default function Venue() {
                   <circle cx="170" cy="105" r="6" fill="#FFC93C" />
                 </svg>
 
-                <div className="relative z-10 bg-[#1E1F22]/90 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center max-w-[200px]">
+                <div className="relative z-10 bg-[#1E1F22]/90 backdrop-blur-sm p-4 rounded-xl border border-white/10 text-center max-w-[220px]">
                   <CompassIcon className="w-6 h-6 mx-auto mb-1 text-[var(--yellow)]" color="#FFC93C" />
                   <span className="font-heading font-bold text-xs text-white block">
-                    മർകസ് കാമ്പസ് അരിപ്ര
+                    {VENUE.NAME}
                   </span>
                   <span className="text-[10px] text-[var(--sky)] font-sora">
-                    ADSA Camp Venue
+                    Melmuri, Malappuram
                   </span>
                 </div>
               </div>
             </div>
 
             <p className="text-xs text-[var(--muted)] mt-6 text-center">
-              ക്യാമ്പ് വേദിയിലേക്ക് എത്തുന്നവർക്ക് വഴികാട്ടാൻ വാളണ്ടിയർമാർ റെയിൽവേ സ്റ്റേഷനിലും ജംഗ്ഷനിലും സജ്ജമായിരിക്കും.
+              ക്യാമ്പ് വേദിയിലേക്ക് എത്തുന്ന വിദ്യാർത്ഥികൾക്ക് റെയിൽവേ സ്റ്റേഷനിലും ബസ് സ്റ്റാൻഡിലും സഹായത്തിന് വോളണ്ടിയർമാർ ഉണ്ടായിരിക്കും.
             </p>
           </div>
         </div>

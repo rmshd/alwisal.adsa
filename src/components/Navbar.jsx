@@ -81,6 +81,12 @@ export default function Navbar() {
 
   // Lock scroll when mobile menu is open & listen for Esc
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('mobile-menu-state', { detail: { open: mobileMenuOpen } })
+      );
+    }
+
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
       const handleKeyDown = (e) => {

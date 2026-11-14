@@ -1,6 +1,7 @@
 import React from 'react';
-import { CONFIG } from '../config';
+import { CONFIG, CONTACT } from '../config';
 import Button from '../components/Button';
+import SocialLinksRow from '../components/SocialIcons';
 import {
   KitabIcon,
   RihalIcon,
@@ -14,6 +15,9 @@ import {
 import { smoothScrollTo } from '../lib/motion';
 
 export default function Closing() {
+  const hasPhone = CONTACT.phones && CONTACT.phones.length > 0 && CONTACT.phones[0].number;
+  const primaryPhone = hasPhone ? CONTACT.phones[0] : null;
+
   return (
     <section id="closing" className="full-width-section pt-24 pb-12 bg-[var(--bg)] relative overflow-hidden">
       {/* Decorative backdrop glow */}
@@ -121,45 +125,69 @@ export default function Closing() {
         </div>
 
         {/* SITE FOOTER */}
-        <footer className="w-full pt-16 mt-16 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-sm text-[var(--muted)]">
-          {/* Logo & Info */}
-          <div className="flex items-center gap-3">
-            <img src="/images/logo.svg" alt="ADSA Logo" className="w-9 h-9" />
-            <div className="flex flex-col text-left">
-              <span className="font-heading font-extrabold text-white text-base leading-tight">
-                ADSA ക്യാമ്പ് 2026
-              </span>
-              <span className="text-[11px] font-sora text-[var(--sky)] leading-tight">
-                SUFFA Dars Network · Aripra
-              </span>
+        <footer className="w-full pt-16 mt-16 border-t border-white/10 flex flex-col gap-8 text-sm text-[var(--muted)]">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Logo & ADSA Name */}
+            <div className="flex items-center gap-3">
+              <img src="/images/logo.svg" alt="ADSA Logo" className="w-10 h-10" />
+              <div className="flex flex-col text-left">
+                <span className="font-heading font-extrabold text-white text-lg leading-tight">
+                  ADSA
+                </span>
+                <span className="font-body text-xs text-white/90 leading-tight">
+                  ആലത്തൂർപ്പടി ദർസ് സ്റ്റുഡന്റ്സ് അസോസിയേഷൻ
+                </span>
+                <span className="text-[11px] font-sora text-[var(--sky)] leading-tight mt-0.5">
+                  SUFFA Dars Network · Malappuram, Kerala
+                </span>
+              </div>
             </div>
+
+            {/* Social Icons in Footer */}
+            <SocialLinksRow className="flex items-center gap-3" />
+
+            {/* Phone Link with tel: */}
+            {hasPhone && (
+              <a
+                href={`tel:${primaryPhone.number}`}
+                className="inline-flex items-center gap-2 text-xs font-sora text-white/80 hover:text-[var(--yellow)] transition-colors py-1.5 px-3 rounded-full bg-white/5 border border-white/10"
+                aria-label={`ഫോൺ ചെയ്യുക ${primaryPhone.display || primaryPhone.number}`}
+              >
+                <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span>{primaryPhone.display || primaryPhone.number}</span>
+              </a>
+            )}
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-wrap items-center justify-center gap-5 text-xs font-heading font-medium">
-            <a href="#about" onClick={(e) => { e.preventDefault(); smoothScrollTo('#about'); }} className="hover:text-white transition-colors">
-              ക്യാമ്പ്
-            </a>
-            <a href="#schedule" onClick={(e) => { e.preventDefault(); smoothScrollTo('#schedule'); }} className="hover:text-white transition-colors">
-              ദിനചര്യ
-            </a>
-            <a href="#guests" onClick={(e) => { e.preventDefault(); smoothScrollTo('#guests'); }} className="hover:text-white transition-colors">
-              അതിഥികൾ
-            </a>
-            <a href="#dars" onClick={(e) => { e.preventDefault(); smoothScrollTo('#dars'); }} className="hover:text-white transition-colors">
-              ദർസുകൾ
-            </a>
-            <a href="#venue" onClick={(e) => { e.preventDefault(); smoothScrollTo('#venue'); }} className="hover:text-white transition-colors">
-              വേദി
-            </a>
-            <a href="#register" onClick={(e) => { e.preventDefault(); smoothScrollTo('#register'); }} className="text-[var(--yellow)] hover:underline">
-              രജിസ്ട്രേഷൻ
-            </a>
-          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5 text-xs">
+            {/* Quick Links */}
+            <div className="flex flex-wrap items-center justify-center gap-5 font-heading font-medium">
+              <a href="#about" onClick={(e) => { e.preventDefault(); smoothScrollTo('#about'); }} className="hover:text-white transition-colors">
+                ക്യാമ്പ്
+              </a>
+              <a href="#schedule" onClick={(e) => { e.preventDefault(); smoothScrollTo('#schedule'); }} className="hover:text-white transition-colors">
+                ദിനചര്യ
+              </a>
+              <a href="#guests" onClick={(e) => { e.preventDefault(); smoothScrollTo('#guests'); }} className="hover:text-white transition-colors">
+                അതിഥികൾ
+              </a>
+              <a href="#dars" onClick={(e) => { e.preventDefault(); smoothScrollTo('#dars'); }} className="hover:text-white transition-colors">
+                ദർസുകൾ
+              </a>
+              <a href="#venue" onClick={(e) => { e.preventDefault(); smoothScrollTo('#venue'); }} className="hover:text-white transition-colors">
+                വേദി
+              </a>
+              <a href="#register" onClick={(e) => { e.preventDefault(); smoothScrollTo('#register'); }} className="text-[var(--yellow)] hover:underline">
+                രജിസ്ട്രേഷൻ
+              </a>
+            </div>
 
-          {/* Credit Line */}
-          <div className="text-xs font-sora text-center sm:text-right text-white/50">
-            © 2026 ADSA. All rights reserved.
+            {/* Credit Line */}
+            <div className="font-sora text-center sm:text-right text-white/50">
+              © 2026 ADSA (ആലത്തൂർപ്പടി ദർസ് സ്റ്റുഡന്റ്സ് അസോസിയേഷൻ). All rights reserved.
+            </div>
           </div>
         </footer>
       </div>
