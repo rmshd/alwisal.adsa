@@ -2,31 +2,34 @@ import React from 'react';
 
 export default function Button({
   children,
-  variant = 'primary',
+  variant = 'red',
   href,
   onClick,
   className = '',
   type = 'button',
   disabled = false,
-  showArrow = true,
+  showArrow = false,
   target,
   rel,
   ...props
 }) {
   const baseStyles =
-    'group relative inline-flex items-center justify-center gap-2.5 h-[50px] px-[26px] rounded-full font-heading font-bold text-base transition-all duration-300 cursor-pointer select-none whitespace-nowrap active:scale-[0.98] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] disabled:opacity-50 disabled:pointer-events-none disabled:transform-none';
+    'group relative inline-flex items-center justify-center gap-2 h-[50px] px-7 rounded-[14px] font-sans font-bold text-sm sm:text-base transition-all duration-200 cursor-pointer select-none whitespace-nowrap active:scale-[0.98] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#08090C] disabled:opacity-50 disabled:pointer-events-none disabled:transform-none shadow-md';
 
   let variantStyles = '';
-  if (variant === 'primary' || variant === 'gold') {
+  if (variant === 'red' || variant === 'primary') {
     variantStyles =
-      'bg-gradient-to-r from-[#FFC93C] via-[#FFE27D] to-[#F59E0B] text-[#0B0D12] font-extrabold shadow-[0_0_24px_rgba(255,201,60,0.25)] hover:shadow-[0_0_36px_rgba(255,201,60,0.45)] border border-[#FFE27D]/40';
-  } else if (variant === 'blue') {
+      'bg-[#E62E2D] hover:bg-[#D42221] text-white shadow-[0_8px_20px_rgba(230,46,45,0.35)]';
+  } else if (variant === 'green' || variant === 'emerald') {
     variantStyles =
-      'bg-gradient-to-r from-[#3B82F6] to-[#2563EB] text-white shadow-[0_0_24px_rgba(59,130,246,0.3)] hover:shadow-[0_0_36px_rgba(59,130,246,0.5)] border border-blue-400/30';
+      'bg-[#138A4A] hover:bg-[#0F753E] text-white shadow-[0_8px_20px_rgba(19,138,74,0.35)]';
+  } else if (variant === 'gold') {
+    variantStyles =
+      'bg-[#FFBA08] hover:bg-[#E5A707] text-[#0D0E12] font-extrabold shadow-[0_8px_20px_rgba(255,186,8,0.35)]';
   } else {
     // secondary / glass
     variantStyles =
-      'bg-white/[0.04] hover:bg-white/[0.09] border border-white/15 hover:border-white/30 text-white backdrop-blur-md shadow-sm';
+      'bg-white/[0.08] hover:bg-white/[0.14] border border-white/20 hover:border-white/40 text-white backdrop-blur-md';
   }
 
   const combinedClasses = `${baseStyles} ${variantStyles} ${className}`.trim();
