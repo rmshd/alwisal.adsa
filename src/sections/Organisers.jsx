@@ -35,62 +35,67 @@ const ORGANISERS = [
 
 export default function Organisers() {
   return (
-    <section id="organisers" className="full-width-section section-pad bg-[#08090C] relative overflow-hidden">
-      <div className="flex flex-col gap-12 lg:gap-14 relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col gap-4 max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span className="ds-eyebrow">EXECUTIVE COMMITTEE</span>
-            <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
+    <section
+      id="organisers"
+      className="relative w-full bg-[var(--ink)] text-white font-['Poppins'] py-24 border-t border-white/10"
+      style={{ paddingInline: 'var(--gutter)' }}
+    >
+      <div className="max-w-[1400px] mx-auto space-y-12">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+          <div>
+            <span className="text-xs uppercase tracking-widest font-semibold text-[var(--orange)]">
+              Executive Committee
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white mt-1">
+              Leadership Council
+            </h2>
+          </div>
+          <div className="text-right">
+            <span className="font-['Reem_Kufi'] text-2xl text-[var(--yellow)] block">
               اللَّجْنَةُ التَّنْفِيذِيَّةُ
             </span>
-          </div>
-
-          <h2 className="heading-section text-white">
-            Organising Committee &{' '}
-            <span className="gold-gradient-text block">
-              Leadership Council
+            <span className="text-xs uppercase tracking-wider text-[var(--muted)]">
+              Alathurpadi Dars Students Association
             </span>
-          </h2>
-
-          <p className="font-sans text-base sm:text-lg text-[var(--muted)] leading-relaxed">
-            Convened under the leadership of the Alathurpadi Dars Students Association (ADSA)
-            in partnership with the SUFFA Dars network.
-          </p>
+          </div>
         </div>
 
-        {/* Organisers Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {ORGANISERS.map((item, idx) => {
-            const Icon = item.icon;
+        {/* 4 Organiser Tiles: Crisp 0px radius */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {ORGANISERS.map((org, idx) => {
+            const Icon = org.icon;
             return (
               <div
                 key={idx}
-                className={`p-6 sm:p-7 rounded-[24px] bg-[#12151D]/80 backdrop-blur-xl border ${
-                  item.isChief ? 'border-[var(--gold)]/40 shadow-[0_10px_30px_rgba(223,177,91,0.12)]' : 'border-white/[0.08]'
-                } hover:border-[var(--gold)]/40 transition-all duration-300 flex flex-col justify-between group`}
+                className={`bg-[var(--surface)] border p-6 flex flex-col justify-between space-y-6 ${
+                  org.isChief
+                    ? 'border-[var(--orange)]'
+                    : 'border-white/10 hover:border-white/20'
+                } transition-colors`}
               >
-                <div>
-                  <div className={`w-11 h-11 rounded-2xl ${item.isChief ? 'bg-[var(--gold)]/15 text-[var(--gold)] border border-[var(--gold)]/30' : 'bg-white/5 text-white/80 border border-white/10'} flex items-center justify-center mb-5`}>
-                    <Icon size={20} strokeWidth={1.75} />
-                  </div>
-
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[11px] font-sans font-bold text-[var(--sky)] uppercase tracking-wider">
-                      {item.role}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--yellow)]">
+                      {org.role}
                     </span>
-                    <span className="font-arabic text-xs text-[var(--gold)]">
-                      {item.arabic}
+                    <span className="font-['Reem_Kufi'] text-sm text-[var(--muted)]">
+                      {org.arabic}
                     </span>
                   </div>
-
-                  <h3 className="font-sans font-extrabold text-base sm:text-lg text-white group-hover:text-[var(--gold)] transition-colors leading-snug">
-                    {item.name}
+                  <h3 className="text-base font-bold text-white uppercase tracking-tight">
+                    {org.name}
                   </h3>
+                  <p className="text-xs text-[var(--muted)] leading-relaxed">
+                    {org.title}
+                  </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/[0.07] text-xs font-sans text-[var(--muted)]">
-                  {item.title}
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-[var(--muted)]">
+                  <span className="uppercase tracking-wider font-semibold text-[10px]">
+                    ADSA Executive
+                  </span>
+                  <Icon size={16} strokeWidth={1.5} className="text-[var(--orange)]" />
                 </div>
               </div>
             );

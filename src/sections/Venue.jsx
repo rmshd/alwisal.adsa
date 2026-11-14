@@ -1,66 +1,59 @@
 import React from 'react';
 import { CONFIG } from '../config';
 import Button from '../components/Button';
-import { MapPin, Bus, Train, Plane, Phone, Navigation } from 'lucide-react';
+import { Bus, Train, Plane, MapPin } from 'lucide-react';
 
 export default function Venue() {
   const { VENUE } = CONFIG;
   const hasMapsUrl = VENUE.MAPS_URL && VENUE.MAPS_URL.trim() !== '';
 
   return (
-    <section id="venue" className="full-width-section section-pad bg-[#08090C] border-y border-white/[0.08] relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] rounded-full bg-[var(--sky)]/5 blur-[160px] pointer-events-none" />
-
-      <div className="flex flex-col gap-12 lg:gap-14 relative z-10">
+    <section
+      id="venue"
+      className="relative w-full bg-[var(--ink)] text-white font-['Poppins'] py-24 border-t border-white/10"
+      style={{ paddingInline: 'var(--gutter)' }}
+    >
+      <div className="max-w-[1400px] mx-auto space-y-12">
         {/* Header */}
-        <div className="flex flex-col gap-4 max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span className="ds-eyebrow">CAMPUS & TRAVEL</span>
-            <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+          <div>
+            <span className="text-xs uppercase tracking-widest font-semibold text-[var(--orange)]">
+              Location & Access
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white mt-1">
+              Campus Venue
+            </h2>
+          </div>
+          <div className="text-right">
+            <span className="font-['Reem_Kufi'] text-2xl text-[var(--yellow)] block">
               مَقَرُّ المَخَيَّمِ
             </span>
-          </div>
-
-          <h2 className="heading-section text-white">
-            The Venerated Grounds of{' '}
-            <span className="gold-gradient-text block">
-              Alathurpadi Juma Masjid
+            <span className="text-xs uppercase tracking-wider text-[var(--muted)]">
+              Alathurpadi Juma Masjid · Melmuri
             </span>
-          </h2>
-
-          <p className="font-sans text-base sm:text-lg text-[var(--muted)] leading-relaxed">
-            The 7-day residential camp takes place at the historic Alathurpadi Juma Masjid & Dars campus
-            in Melmuri, Malappuram — renowned for its spiritual serenity, expansive courtyard, and scholarly heritage.
-          </p>
+          </div>
         </div>
 
-        {/* Real Mosque Photography Featured Card */}
-        <div className="relative rounded-[32px] overflow-hidden border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] aspect-[16/9] sm:aspect-[21/9] bg-[#12151D] group">
+        {/* Real Masjid Photo Feature */}
+        <div className="relative aspect-[16/9] sm:aspect-[21/9] bg-[var(--surface)] border border-white/10 overflow-hidden group">
           <img
-            src="/images/masjid-real.jpg"
-            alt="Alathurpadi Juma Masjid Historic Campus"
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            src="/images/masjid.jpg"
+            alt="Alathurpadi Juma Masjid Campus"
+            className="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08090C] via-[#08090C]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/40 to-transparent" />
 
-          {/* Floating Campus Badge */}
-          <div className="absolute top-6 left-6 flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#08090C]/85 backdrop-blur-md border border-white/15 text-xs font-sans font-bold text-white shadow-xl">
-            <MapPin size={14} className="text-[var(--gold)]" />
-            <span>ALATHOORPADI JUMA MASJID · MELMURI</span>
-          </div>
-
-          {/* Bottom Details Overlay */}
+          {/* Details Bar */}
           <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div className="flex flex-col">
-              <span className="font-arabic text-sm text-[var(--gold)]">
-                المَسْجِدُ الجَامِعُ بِالأَلْثُورْبَادِي
+            <div className="space-y-1">
+              <span className="text-xs uppercase font-bold tracking-widest text-[var(--yellow)]">
+                Historic Mosque & Dars Seat
               </span>
-              <h3 className="font-sans font-extrabold text-xl sm:text-3xl text-white">
-                Alathurpadi Dars Campus
+              <h3 className="text-xl sm:text-3xl font-bold text-white uppercase tracking-tight">
+                Alathurpadi Juma Masjid
               </h3>
-              <p className="font-sans text-xs sm:text-sm text-white/80 mt-0.5">
+              <p className="text-xs sm:text-sm text-[var(--muted)] max-w-xl">
                 Melmuri Post, Malappuram, Kerala, India — PIN 676517
               </p>
             </div>
@@ -71,7 +64,7 @@ export default function Venue() {
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="primary"
-                className="text-xs uppercase tracking-wider font-extrabold px-6 h-[46px] shrink-0"
+                className="h-11 px-6 text-xs font-bold"
               >
                 Open Google Maps ↗
               </Button>
@@ -79,41 +72,41 @@ export default function Venue() {
           </div>
         </div>
 
-        {/* Transit Routes Grid in Poppins */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="p-6 sm:p-7 rounded-[24px] bg-[#12151D]/80 backdrop-blur-xl border border-white/[0.08] hover:border-[var(--gold)]/35 transition-all">
-            <div className="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 mb-4">
-              <Bus size={22} strokeWidth={1.75} />
+        {/* Transit Connectivity Grid: 3 crisp tiles */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-[var(--surface)] border border-white/10 p-6 space-y-3">
+            <div className="w-10 h-10 bg-[var(--orange)]/15 text-[var(--orange)] flex items-center justify-center">
+              <Bus size={20} strokeWidth={1.5} />
             </div>
-            <h4 className="font-sans font-extrabold text-base text-white mb-1.5">
+            <h4 className="text-base font-bold uppercase tracking-wide text-white">
               By Road / Bus
             </h4>
-            <p className="font-sans text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-              Arrive at Malappuram KSRTC / Municipal Bus Stand, then board any Melmuri / Vengara bus directly to Alathurpadi stop (3 km).
+            <p className="text-xs text-[var(--muted)] leading-relaxed">
+              Arrive at Malappuram KSRTC / Municipal Bus Stand, then take any Melmuri / Vengara bus directly to Alathurpadi stop (3 km).
             </p>
           </div>
 
-          <div className="p-6 sm:p-7 rounded-[24px] bg-[#12151D]/80 backdrop-blur-xl border border-white/[0.08] hover:border-[var(--gold)]/35 transition-all">
-            <div className="w-12 h-12 rounded-2xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-sky-400 mb-4">
-              <Train size={22} strokeWidth={1.75} />
+          <div className="bg-[var(--surface)] border border-white/10 p-6 space-y-3">
+            <div className="w-10 h-10 bg-[var(--yellow)]/15 text-[var(--yellow)] flex items-center justify-center">
+              <Train size={20} strokeWidth={1.5} />
             </div>
-            <h4 className="font-sans font-extrabold text-base text-white mb-1.5">
-              By Railway
+            <h4 className="text-base font-bold uppercase tracking-wide text-white">
+              By Rail
             </h4>
-            <p className="font-sans text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-              Angadipuram Railway Station (25 km) or Parappanangadi Railway Station (32 km). Direct bus and taxi connections are readily accessible.
+            <p className="text-xs text-[var(--muted)] leading-relaxed">
+              Angadipuram (25 km) or Parappanangadi (32 km) railway stations. Direct connecting buses and taxis run regularly.
             </p>
           </div>
 
-          <div className="p-6 sm:p-7 rounded-[24px] bg-[#12151D]/80 backdrop-blur-xl border border-white/[0.08] hover:border-[var(--gold)]/35 transition-all">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 mb-4">
-              <Plane size={22} strokeWidth={1.75} />
+          <div className="bg-[var(--surface)] border border-white/10 p-6 space-y-3">
+            <div className="w-10 h-10 bg-[var(--teal)]/15 text-[var(--teal)] flex items-center justify-center">
+              <Plane size={20} strokeWidth={1.5} />
             </div>
-            <h4 className="font-sans font-extrabold text-base text-white mb-1.5">
+            <h4 className="text-base font-bold uppercase tracking-wide text-white">
               By Air
             </h4>
-            <p className="font-sans text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-              Calicut International Airport (CCJ / Karipur) is located just 22 km away. Camp reception volunteers will assist arriving scholar candidates.
+            <p className="text-xs text-[var(--muted)] leading-relaxed">
+              Calicut International Airport (CCJ / Karipur) is located just 22 km away. Onboarding reception volunteers assist incoming scholars.
             </p>
           </div>
         </div>

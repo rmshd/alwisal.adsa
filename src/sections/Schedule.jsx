@@ -1,114 +1,201 @@
 import React, { useState } from 'react';
 import SCHEDULE_DATA from '../data/schedule.json';
-import { Calendar, Clock, User, Sparkles } from 'lucide-react';
+import BlockNumeral from '../art/BlockNumeral';
+import CalligraphyBand from '../art/CalligraphyBand';
+import CircuitLines from '../art/CircuitLines';
+
+const DAY_COLORS = [
+  { bg: 'bg-[var(--orange)]', text: 'text-[var(--ink)]', border: 'border-[var(--ink)]/20', dark: false },
+  { bg: 'bg-[var(--yellow)]', text: 'text-[var(--ink)]', border: 'border-[var(--ink)]/20', dark: false },
+  { bg: 'bg-[var(--cobalt)]', text: 'text-white', border: 'border-white/20', dark: true },
+  { bg: 'bg-[var(--terracotta)]', text: 'text-white', border: 'border-white/20', dark: true },
+  { bg: 'bg-[var(--teal)]', text: 'text-white', border: 'border-white/20', dark: true },
+  { bg: 'bg-[var(--ink)]', text: 'text-white', border: 'border-white/20', dark: true },
+  { bg: 'bg-[var(--sky)]', text: 'text-[var(--ink)]', border: 'border-[var(--ink)]/20', dark: false },
+];
 
 export default function Schedule() {
-  const [activeDayIndex, setActiveDayIndex] = useState(0);
-  const activeDay = SCHEDULE_DATA[activeDayIndex] || SCHEDULE_DATA[0];
+  const [activeDay, setActiveDay] = useState(1);
 
   return (
-    <section id="schedule" className="full-width-section section-pad bg-[#08090C] relative overflow-hidden">
-      <div className="flex flex-col gap-12 lg:gap-14 relative z-10">
-        {/* Section Header */}
-        <div className="flex flex-col gap-4 max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span className="ds-eyebrow">ACADEMIC ITINERARY</span>
-            <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
-              جَدْوَلُ المَخَيَّمِ
-            </span>
-          </div>
+    <section
+      id="programme"
+      className="relative w-full bg-[var(--cream)] text-[var(--ink)] font-['Poppins'] py-16 sm:py-24 stepped-top stepped-bottom overflow-hidden my-12"
+    >
+      {/* Top Terracotta Calligraphy Scribble Band */}
+      <div className="w-full mb-6">
+        <CalligraphyBand className="w-full h-8 sm:h-12" />
+      </div>
 
-          <h2 className="heading-section text-white">
-            7-Day Curated Academic{' '}
-            <span className="gold-gradient-text block">
-              Schedule & Modules
-            </span>
-          </h2>
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 space-y-10 relative z-10">
+        {/* Top CircuitLines Header */}
+        <div className="space-y-4">
+          <CircuitLines className="w-full h-12 max-w-xl" />
 
-          <p className="font-sans text-base sm:text-lg text-[var(--muted)] leading-relaxed">
-            A comprehensive curriculum spanning classical Hadith hermeneutics, Fiqh jurisprudence,
-            Tazkiyah spiritual ethics, and contemporary discourse.
-          </p>
-        </div>
-
-        {/* Day Tabs Carousel / Strip in Poppins */}
-        <div className="w-full overflow-x-auto pb-2 scrollbar-none">
-          <div className="flex items-center gap-2.5 min-w-max p-2 rounded-[20px] bg-white/[0.03] border border-white/[0.08] backdrop-blur-md">
-            {SCHEDULE_DATA.map((dayItem, idx) => {
-              const isActive = idx === activeDayIndex;
-
-              return (
-                <button
-                  key={dayItem.day}
-                  type="button"
-                  onClick={() => setActiveDayIndex(idx)}
-                  className={`px-5 py-3 rounded-[15px] font-sans text-xs transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? 'bg-gradient-to-r from-[#DFB15B] to-[#A37F30] text-[#08090C] font-extrabold shadow-[0_0_20px_rgba(223,177,91,0.35)]'
-                      : 'text-white/70 hover:text-white hover:bg-white/5 font-semibold'
-                  }`}
-                >
-                  <span className="opacity-70 mr-1.5 uppercase">DAY 0{dayItem.day}</span>
-                  <span className="font-bold text-sm">· {dayItem.name}</span>
-                </button>
-              );
-            })}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[var(--ink)]/15 pb-6">
+            <div>
+              <span className="text-xs uppercase tracking-widest font-bold text-[var(--terracotta)]">
+                Academic Curriculum
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight text-[var(--ink)] mt-1">
+                Seven-Day Programme
+              </h2>
+            </div>
+            <div className="text-right">
+              <span className="font-['Reem_Kufi'] text-2xl sm:text-3xl text-[var(--terracotta)] block">
+                مَنْهَجُ الدِّرَاسَةِ
+              </span>
+              <span className="text-xs uppercase tracking-wider text-[var(--ink)]/70 font-semibold">
+                Dec 20 – 26, 2026 · Alathurpadi
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Schedule Panel: High-End Glass Panel */}
-        <div className="p-6 sm:p-10 rounded-[28px] bg-[#12151D]/80 backdrop-blur-xl border border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.6)] flex flex-col gap-6">
-          {/* Header row in panel */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-white/[0.08]">
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-xl bg-[var(--gold)]/10 border border-[var(--gold)]/25 flex items-center justify-center text-[var(--gold)]">
-                <Calendar size={20} />
-              </div>
-              <div>
-                <span className="font-sans font-bold text-xs text-[var(--sky)] uppercase tracking-wider block">
-                  DAY 0{activeDay.day} · {activeDay.date}
-                </span>
-                <h3 className="font-sans font-extrabold text-xl sm:text-2xl text-white mt-0.5">
-                  {activeDay.name} — <span className="text-[var(--gold)]">{activeDay.theme}</span>
-                </h3>
-              </div>
-            </div>
+        {/* 7 Vertical Tiles: Horizontal Accordion (Desktop) / Vertical (Mobile) */}
+        <div className="hidden lg:flex gap-3 h-[520px] w-full">
+          {SCHEDULE_DATA.map((item, index) => {
+            const dayNum = String(item.day).padStart(2, '0');
+            const isActive = activeDay === item.day;
+            const style = DAY_COLORS[index % DAY_COLORS.length];
+            const isClosing = item.day === 7;
 
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-sans font-semibold text-white/90">
-              <Sparkles size={14} className="text-[var(--gold)]" />
-              <span>Fajr · Quran · Bukhari Sabaq</span>
-            </div>
-          </div>
-
-          {/* Clean Sessions List */}
-          <div className="flex flex-col gap-2">
-            {activeDay.sessions.map((sess, idx) => (
+            return (
               <div
-                key={idx}
-                className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-6 p-4 sm:p-5 rounded-[18px] hover:bg-white/[0.035] transition-colors items-center border border-transparent hover:border-white/[0.07]"
+                key={item.day}
+                onClick={() => setActiveDay(item.day)}
+                className={`relative cursor-pointer transition-all duration-300 overflow-hidden flex flex-col justify-between p-6 ${
+                  style.bg
+                } ${style.text} ${
+                  isActive ? 'flex-[4] shadow-xl' : 'flex-[1] hover:brightness-105 opacity-90'
+                }`}
               >
-                {/* Time (3 cols) */}
-                <div className="md:col-span-3 flex items-center gap-2.5 font-sans text-sm font-bold text-white/90">
-                  <span className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[var(--gold)] shrink-0">
-                    <Clock size={15} />
+                {/* Header */}
+                <div className="flex items-center justify-between border-b border-current/20 pb-4">
+                  <div>
+                    <span className="text-xs uppercase font-extrabold tracking-widest block opacity-75">
+                      {isClosing ? 'FINALE' : `DAY ${dayNum}`}
+                    </span>
+                    <span className="text-sm font-bold truncate block">
+                      {isClosing ? 'Closing Session' : item.date}
+                    </span>
+                  </div>
+                  <BlockNumeral value={dayNum} className="h-10 w-auto shrink-0" />
+                </div>
+
+                {/* Content: Expanded when active */}
+                {isActive ? (
+                  <div className="my-auto py-4 space-y-4 overflow-y-auto pr-2">
+                    <div className="space-y-1">
+                      <span className="text-xs uppercase tracking-wider font-semibold opacity-70">
+                        Dawn Foundation
+                      </span>
+                      <p className="text-sm font-bold leading-snug">
+                        {item.fixedMorning}
+                      </p>
+                    </div>
+
+                    <div className="space-y-3 pt-3 border-t border-current/15">
+                      {item.sessions.map((sess, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className="flex items-baseline justify-between gap-4 text-xs sm:text-sm py-1.5 border-b border-current/10"
+                        >
+                          <span className="font-mono font-bold shrink-0 opacity-80">
+                            {sess.time}
+                          </span>
+                          <span className="font-semibold flex-1 px-2">
+                            {sess.title}
+                          </span>
+                          <span className="text-xs opacity-75 truncate max-w-[160px] text-right font-medium">
+                            {sess.speaker}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="my-auto flex items-center justify-center py-6">
+                    <span className="writing-vertical-rl rotate-180 text-sm font-bold tracking-widest uppercase opacity-75">
+                      {isClosing ? 'Closing Ceremony' : `Session ${dayNum}`}
+                    </span>
+                  </div>
+                )}
+
+                {/* Footer of tile */}
+                <div className="pt-3 border-t border-current/20 flex items-center justify-between text-xs font-semibold">
+                  <span className="uppercase tracking-wider">
+                    {isClosing ? 'Grand Finale' : `${item.sessions.length} Lectures`}
                   </span>
-                  <span>{sess.time}</span>
-                </div>
-
-                {/* Session Title (6 cols) */}
-                <div className="md:col-span-6 font-sans font-bold text-base sm:text-lg text-white">
-                  {sess.title}
-                </div>
-
-                {/* Speaker (3 cols) */}
-                <div className="md:col-span-3 flex items-center md:justify-end gap-2 text-sm font-sans text-[var(--muted)]">
-                  <User size={15} className="text-white/40 shrink-0" />
-                  <span className="truncate">{sess.speaker}</span>
+                  <span>{isActive ? '● Active' : 'Expand →'}</span>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
+
+        {/* Mobile Accordion (< 1024px) */}
+        <div className="flex flex-col gap-3 lg:hidden">
+          {SCHEDULE_DATA.map((item, index) => {
+            const dayNum = String(item.day).padStart(2, '0');
+            const isActive = activeDay === item.day;
+            const style = DAY_COLORS[index % DAY_COLORS.length];
+            const isClosing = item.day === 7;
+
+            return (
+              <div
+                key={item.day}
+                className={`overflow-hidden transition-all duration-200 ${style.bg} ${style.text}`}
+              >
+                <button
+                  type="button"
+                  onClick={() => setActiveDay(isActive ? null : item.day)}
+                  className="w-full p-4 flex items-center justify-between text-left focus:outline-none"
+                >
+                  <div className="flex items-center gap-4">
+                    <BlockNumeral value={dayNum} className="h-8 w-auto" />
+                    <div>
+                      <span className="text-[10px] uppercase font-bold tracking-widest block opacity-75">
+                        {isClosing ? 'Closing Session' : `Day ${dayNum} · ${item.date}`}
+                      </span>
+                      <span className="text-base font-bold">
+                        {isClosing ? 'Grand Finale & Dua' : item.name}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-xl font-bold">{isActive ? '−' : '+'}</span>
+                </button>
+
+                {isActive && (
+                  <div className="p-4 pt-0 space-y-3 border-t border-current/15">
+                    <p className="text-xs font-medium opacity-80 pt-2">
+                      {item.fixedMorning}
+                    </p>
+                    <div className="space-y-2">
+                      {item.sessions.map((sess, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className="flex flex-col text-xs py-1.5 border-b border-current/10"
+                        >
+                          <div className="flex justify-between font-bold">
+                            <span>{sess.time}</span>
+                            <span className="opacity-75">{sess.speaker}</span>
+                          </div>
+                          <span className="font-medium mt-0.5">{sess.title}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Bottom Terracotta Calligraphy Scribble Band */}
+      <div className="w-full mt-8">
+        <CalligraphyBand className="w-full h-8 sm:h-12" />
       </div>
     </section>
   );

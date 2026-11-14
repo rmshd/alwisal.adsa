@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
+import AlWisalMark from '../art/AlWisalMark';
 import { smoothScrollTo } from '../lib/motion';
 import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
-  { label: 'About', href: '#about', id: 'about' },
-  { label: 'Schedule', href: '#schedule', id: 'schedule' },
-  { label: 'Scholars', href: '#guests', id: 'guests' },
-  { label: 'Dars Network', href: '#dars', id: 'dars' },
-  { label: 'Campus Venue', href: '#venue', id: 'venue' },
+  { label: 'Camp', href: '#about', id: 'about' },
+  { label: 'Routine', href: '#routine', id: 'routine' },
+  { label: 'Programme', href: '#programme', id: 'programme' },
+  { label: 'Guests', href: '#guests', id: 'guests' },
+  { label: 'Dars', href: '#dars', id: 'dars' },
+  { label: 'Gallery', href: '#gallery', id: 'gallery' },
 ];
 
 export default function Navbar() {
@@ -23,7 +25,7 @@ export default function Navbar() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 80);
+      setIsScrolled(currentScrollY > 60);
       setShowMobileBottomBar(currentScrollY > 400);
 
       if (currentScrollY > 150) {
@@ -44,7 +46,7 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   useEffect(() => {
-    const sectionIds = ['about', 'schedule', 'guests', 'dars', 'venue', 'register'];
+    const sectionIds = ['about', 'routine', 'programme', 'guests', 'dars', 'gallery', 'register'];
     const observers = [];
 
     sectionIds.forEach((id) => {
@@ -102,192 +104,167 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 h-[76px] transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 h-[72px] transition-all duration-300 font-['Poppins'] ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${
           isScrolled
-            ? 'bg-[#08090C]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]'
+            ? 'bg-[var(--ink)]/90 backdrop-blur-md border-b border-white/10'
             : 'bg-transparent'
         }`}
         style={{ paddingInline: 'var(--gutter)' }}
       >
-        <div className="w-full h-full flex items-center justify-between">
-          {/* Logo & Brand */}
+        <div className="w-full h-full flex items-center justify-between max-w-[1400px] mx-auto">
+          {/* Left: AlWisalMark nav variant + ADSA CAMP */}
           <a
             href="#hero"
             onClick={(e) => handleLinkClick(e, '#hero')}
-            className="flex items-center gap-3.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] rounded-xl py-1 px-1.5"
+            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] py-1"
             aria-label="ADSA Camp Homepage"
           >
-            <div className="relative">
-              <div className="absolute -inset-1 rounded-full bg-[var(--gold)]/20 blur-sm opacity-0 group-hover:opacity-100 transition-opacity" />
-              <img
-                src="/images/logo.svg"
-                alt="ADSA Logo"
-                className="w-10 h-10 relative transition-transform duration-300 group-hover:scale-105 shrink-0"
-                width="40"
-                height="40"
-              />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight leading-tight group-hover:text-[var(--gold)] transition-colors">
-                  ADSA CAMP
-                </span>
-                <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
-                  مخيم أَدْسَا
-                </span>
-              </div>
-              <span className="text-[10px] font-sans font-semibold text-[var(--sky)] tracking-widest uppercase leading-none">
-                SUFFA DARS NETWORK
+            <AlWisalMark
+              variant="nav"
+              color="var(--orange)"
+              className="w-24 sm:w-28 h-auto transition-transform duration-200 group-hover:scale-105"
+            />
+            <div className="flex flex-col border-l border-white/15 pl-3">
+              <span className="font-bold text-xs sm:text-sm text-white tracking-widest leading-none">
+                ADSA CAMP
+              </span>
+              <span className="text-[10px] font-medium text-[var(--muted)] tracking-wider mt-0.5">
+                2026 EDITION
               </span>
             </div>
           </a>
 
-          {/* Desktop Nav Links (Hidden < 1024px) */}
-          <nav className="hidden lg:flex items-center gap-7" aria-label="Main Navigation">
-            <ul className="flex items-center gap-1.5 list-none m-0 p-1.5 rounded-full bg-white/[0.03] border border-white/[0.07] backdrop-blur-md">
+          {/* Right: desktop nav links + orange Register button */}
+          <nav className="hidden lg:flex items-center gap-6" aria-label="Main Navigation">
+            <ul className="flex items-center gap-1 list-none m-0 p-1">
               {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
-                  <li key={link.id} className="relative">
+                  <li key={link.id}>
                     <a
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className={`relative font-sans text-xs font-semibold py-2 px-4 rounded-full transition-all duration-200 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)] ${
+                      className={`text-xs uppercase tracking-widest font-semibold px-3 py-2 transition-colors ${
                         isActive
-                          ? 'text-white bg-white/10 shadow-inner'
-                          : 'text-[var(--text)]/75 hover:text-white hover:bg-white/5'
+                          ? 'text-[var(--yellow)]'
+                          : 'text-[var(--muted)] hover:text-white'
                       }`}
                     >
                       {link.label}
-                      {isActive && (
-                        <span
-                          className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] shadow-[0_0_8px_#DFB15B] inline-block"
-                          aria-hidden="true"
-                        />
-                      )}
                     </a>
                   </li>
                 );
               })}
             </ul>
 
-            {/* Desktop CTA */}
             <Button
               href="#register"
               onClick={(e) => handleLinkClick(e, '#register')}
               variant="primary"
-              className="h-[44px] px-6 text-xs tracking-wider uppercase font-bold"
-            >
-              Register Free
-            </Button>
-          </nav>
-
-          {/* Mobile Toggle (< 1024px) */}
-          <div className="flex items-center gap-3 lg:hidden">
-            <Button
-              href="#register"
-              onClick={(e) => handleLinkClick(e, '#register')}
-              variant="primary"
-              className="h-[38px] px-4 text-xs font-bold sm:inline-flex hidden"
+              className="h-[38px] px-5 text-xs font-bold"
             >
               Register
             </Button>
+          </nav>
+
+          {/* Mobile hamburger button */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <Button
+              href="#register"
+              onClick={(e) => handleLinkClick(e, '#register')}
+              variant="primary"
+              className="h-[34px] px-4 text-[11px] font-bold sm:inline-flex hidden"
+            >
+              Register
+            </Button>
+
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
+              className="p-2 text-white/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)]"
               aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X size={20} strokeWidth={1.75} /> : <Menu size={20} strokeWidth={1.75} />}
+              {mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Full-Screen Mobile Drawer */}
+      {/* Mobile Drawer Menu */}
       <div
-        className={`fixed inset-0 z-50 bg-[#08090C] flex flex-col justify-between transition-all duration-300 lg:hidden ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
+        className={`fixed inset-0 z-50 bg-[var(--ink)] transition-opacity duration-300 lg:hidden ${
+          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ padding: 'max(1.5rem, var(--gutter))' }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile Navigation"
+        aria-hidden={!mobileMenuOpen}
       >
-        {/* Drawer Header */}
-        <div className="flex items-center justify-between pb-6 border-b border-white/10">
-          <div className="flex items-center gap-3">
-            <img src="/images/logo.svg" alt="ADSA Logo" className="w-10 h-10" />
-            <div className="flex flex-col">
-              <span className="font-heading font-extrabold text-lg text-white">ADSA CAMP 2026</span>
-              <span className="font-arabic text-xs text-[var(--gold)]">المخيم السنوي للطلبة</span>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(false)}
-            className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]"
-            aria-label="Close menu"
-          >
-            <X size={20} strokeWidth={1.75} />
-          </button>
-        </div>
-
-        {/* Drawer Links */}
-        <nav className="flex flex-col justify-center gap-4 my-auto py-8">
-          {NAV_LINKS.map((link, idx) => (
-            <a
-              key={link.id}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              style={{ transitionDelay: `${idx * 40}ms` }}
-              className={`font-heading text-2xl font-bold py-2 flex items-center justify-between border-b border-white/5 transition-all ${
-                activeSection === link.id ? 'text-[var(--gold)]' : 'text-white/90 hover:text-white'
-              }`}
+        <div className="flex flex-col h-full p-6 pt-24 font-['Poppins']">
+          <div className="flex items-center justify-between pb-6 border-b border-white/10">
+            <AlWisalMark variant="nav" color="var(--yellow)" className="w-28 h-auto" />
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 text-white/80 hover:text-white"
+              aria-label="Close Menu"
             >
-              <span>{link.label}</span>
-              <span className="text-xs font-sans text-[var(--sky)] font-normal">0{idx + 1}</span>
-            </a>
-          ))}
-        </nav>
+              <X size={24} strokeWidth={1.5} />
+            </button>
+          </div>
 
-        {/* Drawer Footer CTA */}
-        <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+          <nav className="flex-1 py-8">
+            <ul className="space-y-4">
+              {NAV_LINKS.map((link) => (
+                <li key={link.id}>
+                  <a
+                    href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className="block text-xl uppercase tracking-wider font-bold text-white hover:text-[var(--yellow)] transition-colors py-2"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="pt-6 border-t border-white/10 space-y-3">
+            <Button
+              href="#register"
+              onClick={(e) => handleLinkClick(e, '#register')}
+              variant="primary"
+              className="w-full h-12 text-sm font-bold"
+            >
+              Register Now
+            </Button>
+            <p className="text-center text-xs text-[var(--muted)] tracking-wider uppercase">
+              Free Registration · Dec 20–26, 2026
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Sticky Bottom CTA */}
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-30 p-3 bg-[var(--ink)]/95 border-t border-white/10 transition-transform duration-300 lg:hidden ${
+          showMobileBottomBar && !mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="text-left leading-tight pl-2">
+            <span className="block text-xs font-bold text-white uppercase tracking-wider">ADSA Camp 2026</span>
+            <span className="text-[10px] text-[var(--yellow)] font-medium">Dec 20–26 · Free Entry</span>
+          </div>
           <Button
             href="#register"
             onClick={(e) => handleLinkClick(e, '#register')}
             variant="primary"
-            className="w-full text-sm uppercase tracking-wider font-bold"
+            className="h-10 px-6 text-xs font-bold"
           >
-            Register Now (Free Entry)
+            Register
           </Button>
-          <p className="text-center text-xs text-[var(--muted)] font-sans">
-            SUFFA Dars Network · Dr. C K Abdurahman Faizy Aripra
-          </p>
         </div>
-      </div>
-
-      {/* Sticky Bottom Mobile Bar */}
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-30 p-3 bg-[#08090C]/95 backdrop-blur-md border-t border-white/10 transition-transform duration-300 md:hidden flex items-center justify-between gap-3 ${
-          showMobileBottomBar && !mobileMenuOpen ? 'translate-y-0' : 'translate-y-full'
-        }`}
-      >
-        <div className="flex flex-col pl-2">
-          <span className="text-xs font-bold text-[var(--gold)]">Admission Free</span>
-          <span className="text-[11px] text-[var(--muted)]">Limited Seats Available</span>
-        </div>
-        <Button
-          href="#register"
-          onClick={(e) => handleLinkClick(e, '#register')}
-          variant="primary"
-          className="h-[42px] px-5 text-xs font-bold shrink-0"
-        >
-          Register Free
-        </Button>
       </div>
     </>
   );

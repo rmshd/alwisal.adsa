@@ -37,31 +37,34 @@ export default function Gallery() {
   }, [activeImageIndex, handleClose, handleNext, handlePrev]);
 
   return (
-    <section id="gallery" className="full-width-section section-pad bg-[#08090C] border-y border-white/[0.08] relative overflow-hidden">
-      <div className="flex flex-col gap-12 lg:gap-14 relative z-10">
+    <section
+      id="gallery"
+      className="relative w-full bg-[var(--ink)] text-white font-['Poppins'] py-24 border-t border-white/10"
+      style={{ paddingInline: 'var(--gutter)' }}
+    >
+      <div className="max-w-[1400px] mx-auto space-y-12">
         {/* Header */}
-        <div className="flex flex-col gap-4 max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span className="ds-eyebrow">CAMP ARCHIVES</span>
-            <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+          <div>
+            <span className="text-xs uppercase tracking-widest font-semibold text-[var(--orange)]">
+              Visual Chronicles
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white mt-1">
+              Camp Archives & Gallery
+            </h2>
+          </div>
+          <div className="text-right">
+            <span className="font-['Reem_Kufi'] text-2xl text-[var(--yellow)] block">
               مَعْرِضُ الصُّوَرِ
             </span>
-          </div>
-
-          <h2 className="heading-section text-white">
-            Chronicles of Classical{' '}
-            <span className="gold-gradient-text block">
-              Dars Life & Fellowship
+            <span className="text-xs uppercase tracking-wider text-[var(--muted)]">
+              Moments of Scholarship & Brotherhood
             </span>
-          </h2>
-
-          <p className="font-sans text-base sm:text-lg text-[var(--muted)] leading-relaxed">
-            Moments captured from previous camp cohorts, dawn Bukhari recitations, and campus fellowship.
-          </p>
+          </div>
         </div>
 
-        {/* Responsive Grid with Glass Depth */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Mosaic Image Grid: Crisp 0px radius */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {GALLERY_ITEMS.map((item, idx) => (
             <div
               key={item.id}
@@ -74,25 +77,25 @@ export default function Gallery() {
                   setActiveImageIndex(idx);
                 }
               }}
-              className="rounded-[24px] overflow-hidden border border-white/[0.08] hover:border-[var(--gold)]/40 bg-[#12151D]/80 backdrop-blur-xl transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 group shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+              className="bg-[var(--surface)] border border-white/10 overflow-hidden cursor-pointer group transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="w-full aspect-[4/3] bg-[#0E1118] overflow-hidden relative">
+              <div className="w-full aspect-[4/3] overflow-hidden relative bg-[var(--ink)]">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                  className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                   loading="lazy"
                 />
-                <span className="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-sans font-bold bg-[#08090C]/85 backdrop-blur-md border border-white/10 text-white/90">
+                <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-[var(--ink)]/90 text-[var(--yellow)] border border-white/10">
                   {item.category}
                 </span>
               </div>
 
-              <div className="p-5 sm:p-6 flex flex-col justify-between">
-                <h3 className="font-sans font-extrabold text-base sm:text-lg text-white group-hover:text-[var(--gold)] transition-colors">
+              <div className="p-4 sm:p-5 space-y-1 border-t border-white/10">
+                <h3 className="text-sm font-bold uppercase tracking-wide text-white group-hover:text-[var(--yellow)] transition-colors">
                   {item.title}
                 </h3>
-                <p className="font-sans text-xs text-[var(--muted)] mt-1.5 line-clamp-1">
+                <p className="text-xs text-[var(--muted)] line-clamp-1">
                   {item.caption}
                 </p>
               </div>
@@ -103,7 +106,7 @@ export default function Gallery() {
         {/* Accessible Keyboard-friendly Lightbox */}
         {selectedItem && (
           <div
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 sm:p-8 backdrop-blur-md"
+            className="fixed inset-0 z-50 bg-[var(--ink)]/95 flex items-center justify-center p-4 sm:p-8 backdrop-blur-md"
             role="dialog"
             aria-modal="true"
             aria-label={selectedItem.title}
@@ -111,47 +114,47 @@ export default function Gallery() {
             <button
               type="button"
               onClick={handleClose}
-              className="absolute top-6 right-6 z-10 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors cursor-pointer"
+              className="absolute top-6 right-6 z-10 p-2.5 bg-white/10 text-white hover:bg-[var(--orange)] hover:text-[var(--ink)] transition-colors cursor-pointer"
               aria-label="Close dialog"
             >
-              <X size={24} strokeWidth={1.75} />
+              <X size={22} strokeWidth={1.5} />
             </button>
 
             <button
               type="button"
               onClick={handlePrev}
-              className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors cursor-pointer"
+              className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-10 p-2.5 bg-white/10 text-white hover:bg-[var(--orange)] hover:text-[var(--ink)] transition-colors cursor-pointer"
               aria-label="Previous image"
             >
-              <ChevronLeft size={24} strokeWidth={1.75} />
+              <ChevronLeft size={22} strokeWidth={1.5} />
             </button>
 
             <button
               type="button"
               onClick={handleNext}
-              className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors cursor-pointer"
+              className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 p-2.5 bg-white/10 text-white hover:bg-[var(--orange)] hover:text-[var(--ink)] transition-colors cursor-pointer"
               aria-label="Next image"
             >
-              <ChevronRight size={24} strokeWidth={1.75} />
+              <ChevronRight size={22} strokeWidth={1.5} />
             </button>
 
             <div className="max-w-4xl w-full flex flex-col items-center gap-4">
-              <div className="w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-[20px] bg-[#12151D] border border-white/10 p-2">
+              <div className="w-full max-h-[70vh] flex items-center justify-center overflow-hidden bg-[var(--surface)] border border-white/15 p-2">
                 <img
                   src={selectedItem.image}
                   alt={selectedItem.title}
-                  className="max-h-[65vh] w-auto max-w-full object-contain rounded-[14px]"
+                  className="max-h-[65vh] w-auto max-w-full object-contain"
                 />
               </div>
 
-              <div className="text-center max-w-xl">
-                <span className="text-xs font-sans font-bold px-3.5 py-1 rounded-full bg-white/10 text-white/90 inline-block mb-2">
+              <div className="text-center max-w-xl space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 bg-[var(--surface)] text-[var(--yellow)] border border-white/10 inline-block mb-1">
                   {selectedItem.category}
                 </span>
-                <h3 className="font-sans font-extrabold text-xl text-white">
+                <h3 className="text-lg font-bold uppercase text-white">
                   {selectedItem.title}
                 </h3>
-                <p className="font-sans text-xs sm:text-sm text-[var(--muted)] mt-1">
+                <p className="text-xs text-[var(--muted)]">
                   {selectedItem.caption}
                 </p>
               </div>

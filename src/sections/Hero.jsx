@@ -1,58 +1,57 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Button from '../components/Button';
-import { CONFIG } from '../config';
-import { isReducedMotion, smoothScrollTo } from '../lib/motion';
-import { TornPaperTicket, ReferenceStyleEventHeader } from '../components/TornShapes';
-import { CheckCircle2, MapPin } from 'lucide-react';
+import AlWisalMark from '../art/AlWisalMark';
+import PetalCircle from '../art/PetalCircle';
+import NestedDiamonds from '../art/NestedDiamonds';
+import NestedSquares from '../art/NestedSquares';
+import Checker from '../art/Checker';
+import Star8 from '../art/Star8';
+import DotGrid from '../art/DotGrid';
+import StripeBlock from '../art/StripeBlock';
+import { smoothScrollTo, isReducedMotion } from '../lib/motion';
 
 export default function Hero() {
   const heroRef = useRef(null);
-  const leftColRef = useRef(null);
-  const visualRef = useRef(null);
-
-  const [daysToGo, setDaysToGo] = useState(36);
-
-  useEffect(() => {
-    const campDate = new Date(CONFIG.CAMP_START_DATE).getTime();
-    const now = new Date().getTime();
-    const diff = campDate - now;
-
-    if (diff > 0) {
-      setDaysToGo(Math.ceil(diff / (1000 * 60 * 60 * 24)));
-    } else {
-      setDaysToGo(0);
-    }
-  }, []);
+  const mosaicRef = useRef(null);
+  const textRef = useRef(null);
 
   useEffect(() => {
     if (isReducedMotion() || !heroRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        leftColRef.current?.children || [],
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          stagger: 0.1,
-          ease: 'power3.out',
-          delay: 0.1,
-        }
-      );
+      // Mosaic stagger reveal
+      if (mosaicRef.current) {
+        gsap.fromTo(
+          mosaicRef.current.children,
+          { opacity: 0, scale: 0.92, y: 20 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.06,
+            ease: 'power3.out',
+            delay: 0.1,
+          }
+        );
+      }
 
-      gsap.fromTo(
-        visualRef.current,
-        { opacity: 0, scale: 0.95 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: 'power3.out',
-          delay: 0.2,
-        }
-      );
+      // Text panel slide up
+      if (textRef.current) {
+        gsap.fromTo(
+          textRef.current.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            stagger: 0.08,
+            ease: 'power3.out',
+            delay: 0.2,
+          }
+        );
+      }
     }, heroRef);
 
     return () => ctx.revert();
@@ -62,139 +61,151 @@ export default function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative w-full min-h-[100svh] flex items-center bg-[#07090C] overflow-hidden pt-[92px] pb-16 lg:pb-0"
+      className="relative w-full min-h-[100svh] flex items-center bg-[var(--ink)] text-white font-['Poppins'] pt-[84px] pb-12 lg:py-0 overflow-hidden"
       style={{ paddingInline: 'var(--gutter)' }}
     >
-      {/* Misty Dark Forest & Mosque Courtyard Backdrop */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <img
-          src="/images/masjid-real.jpg"
-          alt="Alathurpadi Courtyard Landscape"
-          className="w-full h-full object-cover filter brightness-[0.22] contrast-125 scale-105"
-        />
-        {/* Dark misty overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#07090C] via-[#07090C]/80 to-[#07090C]/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(19,138,74,0.06)_0%,transparent_70%)]" />
-      </div>
+      <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto">
+        {/* LEFT 42% (5 cols on 12-col grid): 4x4 Geometric Tile Mosaic with real photography */}
+        <div className="lg:col-span-5 order-2 lg:order-1 flex justify-center">
+          <div
+            ref={mosaicRef}
+            className="grid grid-cols-4 grid-rows-4 gap-2.5 w-full max-w-[460px] aspect-square select-none"
+          >
+            {/* Cell (1-2 cols, 1-3 rows): Ustad real photo tile (2x3 largest) */}
+            <div className="col-span-2 row-span-3 relative overflow-hidden bg-[var(--surface)] border border-white/10 group">
+              <img
+                src="/images/ustad.jpg"
+                alt="Sheikh Al-Usthad Alathurpadi"
+                className="w-full h-full object-cover object-[center_20%] filter contrast-110 brightness-95 group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-2.5 left-2.5 right-2.5">
+                <span className="block text-[10px] uppercase font-bold tracking-wider text-[var(--yellow)]">
+                  Usthad
+                </span>
+                <span className="block text-xs font-semibold text-white tracking-wide truncate">
+                  Alathurpadi Dars
+                </span>
+              </div>
+            </div>
 
-      {/* 12-Column Responsive Layout */}
-      <div className="w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center my-auto">
-        {/* LEFT 7 COLS: Typography + Reference Date Strip + Buttons + Torn Ticket */}
-        <div
-          ref={leftColRef}
-          className="lg:col-span-7 flex flex-col justify-center gap-6 min-w-0"
-        >
-          {/* Top Arabic Invocation & Network Tag */}
-          <div className="flex flex-wrap items-center gap-3 select-none">
-            <span className="font-arabic text-xl sm:text-2xl text-[var(--gold)] tracking-wide">
-              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-            </span>
+            {/* Cell (col 3, row 1): PetalCircle (slow spin, orange/terracotta) */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center hover:bg-[var(--orange)] group transition-colors duration-200">
+              <PetalCircle className="w-full h-full group-hover:brightness-0 group-hover:invert" />
+            </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.08] border border-white/15 backdrop-blur-md text-xs font-sans text-white">
-              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse shadow-[0_0_8px_#10B981]" />
-              <span className="font-bold tracking-wider uppercase text-[10px]">
-                SUFFA DARS NETWORK
+            {/* Cell (col 4, row 1): NestedDiamonds (cobalt/sky) */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center">
+              <NestedDiamonds className="w-full h-full" />
+            </div>
+
+            {/* Cell (col 3, row 2): Star8 (yellow) */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center">
+              <Star8 className="w-full h-full" />
+            </div>
+
+            {/* Cell (col 4, row 2): Checker (navy/white) */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center">
+              <Checker className="w-full h-full" />
+            </div>
+
+            {/* Cell (col 3, row 3): NestedSquares (orange/yellow) */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center">
+              <NestedSquares className="w-full h-full" />
+            </div>
+
+            {/* Cell (col 4, row 3): DotGrid */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center">
+              <DotGrid className="w-full h-full" />
+            </div>
+
+            {/* Cell (cols 1-2, row 4): Masjid Real Photo Tile */}
+            <div className="col-span-2 relative overflow-hidden bg-[var(--surface)] border border-white/10 group">
+              <img
+                src="/images/masjid.jpg"
+                alt="Alathurpadi Dars Campus"
+                className="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/80 to-transparent" />
+              <span className="absolute bottom-2 left-2 text-[9px] uppercase tracking-wider text-white font-medium">
+                Campus Venue
               </span>
             </div>
-          </div>
 
-          {/* Monumental Poppins Heading */}
-          <h1 className="font-sans font-extrabold text-[clamp(2.4rem,4.8vw,5.2rem)] leading-[1.08] text-white tracking-tight [text-wrap:balance]">
-            7 DAYS OF SACRED{' '}
-            <span className="text-[#FFBA08] block">
-              SANCTUARY & HADITH
-            </span>
-          </h1>
+            {/* Cell (col 3, row 4): StripeBlock */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center">
+              <StripeBlock className="w-full h-full" />
+            </div>
 
-          <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed max-w-xl">
-            The annual residential scholar retreat at the historic Alathurpadi Juma Masjid Campus.
-            Daily Sahih al-Bukhari transmission, fiqh discourse, and spiritual brotherhood under <span className="text-white font-bold">Dr. C.K. Abdurahman Faizy Aripra</span>.
-          </p>
-
-          {/* THE REFERENCE COMPONENT BLOCK: Event Header + Torn Yellow Ticket */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-2 pb-2 p-5 sm:p-6 rounded-[24px] bg-[#0E1219]/80 backdrop-blur-xl border border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.5)]">
-            {/* Left: Vertical Line + Next Edition + Red Ripped Date + Location */}
-            <ReferenceStyleEventHeader
-              editionLabel="Next Edition:"
-              dateText={CONFIG.CAMP_DATES_LABEL}
-              locationText="Alathurpadi, Melmuri (Malappuram)"
-            />
-
-            {/* Right: The Yellow Torn-Paper Ticket with Giant Days */}
-            <div className="self-center sm:self-auto shrink-0">
-              <TornPaperTicket days={daysToGo} label="DAYS TO GO" />
+            {/* Cell (col 4, row 4): PetalCircle miniature */}
+            <div className="bg-[var(--surface)] border border-white/10 p-2 flex items-center justify-center">
+              <PetalCircle className="w-full h-full" />
             </div>
           </div>
+        </div>
 
-          {/* THE TWO REFERENCE BUTTONS: Solid Red & Solid Green */}
-          <div className="flex flex-wrap items-center gap-4 pt-1">
+        {/* RIGHT 58% (7 cols on 12-col grid): Ink Panel with Typography & Actions */}
+        <div
+          ref={textRef}
+          className="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-center gap-6 text-left"
+        >
+          {/* Top Yellow Arabic Bismillah */}
+          <div className="flex items-center gap-3">
+            <span className="font-['Reem_Kufi'] text-xl sm:text-2xl text-[var(--yellow)] tracking-wider">
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </span>
+          </div>
+
+          {/* Kufic Wordmark + English Title */}
+          <div className="space-y-3">
+            <AlWisalMark
+              variant="hero"
+              color="var(--yellow)"
+              className="w-48 sm:w-60 h-auto"
+            />
+            <h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold tracking-tight uppercase leading-[0.95] text-white">
+              ADSA CAMP <span className="text-[var(--orange)]">2026</span>
+            </h1>
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg text-[var(--muted)] font-normal max-w-xl leading-relaxed">
+            A seven-day residential camp for SUFFA Dars graduates, immersing hearts in sacred knowledge and spiritual brotherhood.
+          </p>
+
+          {/* Date Chip */}
+          <div className="inline-flex items-center gap-2.5 self-start px-4 py-1.5 bg-[var(--surface)] border border-white/10 text-xs sm:text-sm font-medium tracking-wide">
+            <span className="w-2 h-2 rounded-full bg-[var(--orange)] animate-pulse" />
+            <span className="text-white">Dec 20–26, 2026</span>
+            <span className="text-[var(--muted)]">·</span>
+            <span className="text-[var(--yellow)] font-semibold">Free Registration</span>
+          </div>
+
+          {/* Action Row */}
+          <div className="flex flex-wrap items-center gap-5 pt-2">
             <Button
               href="#register"
               onClick={(e) => {
                 e.preventDefault();
                 smoothScrollTo('#register');
               }}
-              variant="red"
-              className="text-sm px-8 h-[52px]"
+              variant="primary"
+              className="h-12 px-8 text-sm font-bold shadow-none"
             >
-              Book Your Seat (Free)
+              Register Now
             </Button>
 
-            <Button
-              href="#venue"
+            <a
+              href="#programme"
               onClick={(e) => {
                 e.preventDefault();
-                smoothScrollTo('#venue');
+                smoothScrollTo('#programme');
               }}
-              variant="green"
-              className="text-sm px-8 h-[52px]"
+              className="text-xs uppercase tracking-widest font-semibold text-[var(--muted)] hover:text-white transition-colors py-2 flex items-center gap-2 group"
             >
-              Plan Your Trip
-            </Button>
-          </div>
-
-          {/* Quick Perks Line */}
-          <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-white/70">
-            <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 size={15} className="text-[#10B981]" /> 30 Dars Consortium
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 size={15} className="text-[#10B981]" /> Morning Bukhari Sabaq
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <CheckCircle2 size={15} className="text-[#10B981]" /> Free Boarding & Food
-            </span>
-          </div>
-        </div>
-
-        {/* RIGHT 5 COLS: Real Photograph of Ustad & Mosque Pedestal */}
-        <div
-          ref={visualRef}
-          className="lg:col-span-5 flex items-center justify-center lg:justify-end min-w-0"
-        >
-          <div className="relative w-full max-w-[380px] sm:max-w-[420px] flex flex-col gap-4">
-            {/* Real Ustad Portrait Showcase */}
-            <div className="relative rounded-[28px] overflow-hidden border border-amber-400/30 bg-[#12151D] shadow-[0_25px_60px_rgba(0,0,0,0.85)] aspect-[4/5] group">
-              <img
-                src="/images/ustad-real.jpg"
-                alt="Dr. C.K. Abdurahman Faizy Aripra in Majlis"
-                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07090C] via-[#07090C]/50 to-transparent" />
-
-              {/* Scholar Pedestal Overlay */}
-              <div className="absolute bottom-5 left-5 right-5 p-4 rounded-[18px] bg-[#07090C]/85 backdrop-blur-xl border border-white/15">
-                <span className="font-arabic text-xs text-[var(--gold)] block">
-                  فضيلة الشيخ الدكتور عبد الرحمن الفايزي العريبراوي
-                </span>
-                <h3 className="font-sans font-extrabold text-base sm:text-lg text-white mt-0.5">
-                  Dr. C.K. Abdurahman Faizy Aripra
-                </h3>
-                <span className="text-[11px] font-sans font-bold text-[var(--sky)] uppercase tracking-wider block mt-0.5">
-                  Chief Mudarris & Member, Samastha Mushawara
-                </span>
-              </div>
-            </div>
+              <span>Explore Programme</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
           </div>
         </div>
       </div>

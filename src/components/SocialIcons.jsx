@@ -8,7 +8,7 @@ const MALAYALAM_LABELS = {
   twitter: 'എക്സ് (ട്വിറ്റർ) പ്രൊഫൈൽ കാണുക',
 };
 
-export function SocialIcon({ id, className = "w-5 h-5" }) {
+export function SocialIcon({ id, className = "w-4 h-4" }) {
   switch (id) {
     case 'facebook':
       return (
@@ -45,17 +45,17 @@ export default function SocialLinksRow({ className = "flex items-center gap-3" }
   if (activeSocials.length === 0) return null;
 
   return (
-    <div className={className} role="list" aria-label="സോഷ്യൽ മീഡിയ ലിങ്കുകൾ">
+    <div className={className} role="list" aria-label="Official Social Links">
       {activeSocials.map((item) => (
         <a
           key={item.id}
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={MALAYALAM_LABELS[item.id] || `${item.label} സന്ദർശിക്കുക`}
-          className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 text-white/80 hover:text-white hover:bg-[var(--blue)]/20 hover:border-[var(--sky)]/50 transition-all duration-200 flex items-center justify-center hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] shadow-sm"
+          aria-label={MALAYALAM_LABELS[item.id] || `${item.label} Page`}
+          className="w-9 h-9 bg-[var(--surface)] border border-white/10 text-white/80 hover:text-[var(--yellow)] hover:border-[var(--yellow)] transition-colors flex items-center justify-center focus-visible:outline-none"
         >
-          <SocialIcon id={item.id} className="w-5 h-5" />
+          <SocialIcon id={item.id} className="w-4 h-4" />
         </a>
       ))}
     </div>

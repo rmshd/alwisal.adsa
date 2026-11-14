@@ -1,146 +1,139 @@
 import React from 'react';
 import { CONFIG, CONTACT } from '../config';
 import Button from '../components/Button';
+import AlWisalMark from '../art/AlWisalMark';
+import StackedDiamonds from '../art/StackedDiamonds';
 import SocialLinksRow from '../components/SocialIcons';
 import { smoothScrollTo } from '../lib/motion';
-import { Phone, Heart } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 export default function Closing() {
   const hasPhone = CONTACT.phones && CONTACT.phones.length > 0 && CONTACT.phones[0].number;
   const primaryPhone = hasPhone ? CONTACT.phones[0] : null;
 
   return (
-    <section id="closing" className="w-full bg-[#08090C] relative overflow-hidden">
-      {/* FULL-BLEED GRAND SPIRITUAL CLOSING BANNER WITH REAL PHOTO */}
+    <section id="closing" className="w-full bg-[var(--ink)] font-['Poppins'] text-white">
+      {/* Statement Slide */}
       <div
-        className="relative w-full min-h-[540px] lg:min-h-[620px] flex items-center justify-center overflow-hidden border-t border-white/[0.08]"
+        className="relative w-full py-24 sm:py-32 border-t border-white/10 overflow-hidden"
         style={{ paddingInline: 'var(--gutter)' }}
       >
-        {/* Full-bleed Photo Background with Mosque and Atmospheric Lighting */}
-        <div className="absolute inset-0 -z-10">
-          <img
-            src="/images/masjid-real.jpg"
-            alt="Alathurpadi Campus Grounds"
-            className="w-full h-full object-cover filter brightness-[0.16] contrast-125 scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#08090C] via-[#08090C]/80 to-[#08090C]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[var(--gold)]/10 blur-[180px] pointer-events-none" />
-        </div>
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          {/* Left: StackedDiamonds & Tight crop of Ustad photo tile */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-4 items-center">
+            {/* StackedDiamonds */}
+            <div className="bg-[var(--surface)] border border-white/10 p-6 flex items-center justify-center aspect-[3/4]">
+              <StackedDiamonds className="w-full h-auto max-h-[300px]" />
+            </div>
 
-        {/* Content: Real Ustad Portrait + Sacred Prayer + Final CTA */}
-        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center gap-7 py-16 sm:py-20">
-          {/* Ustad Real Photo Avatar */}
-          <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-tr from-[var(--gold)] via-yellow-200 to-[var(--gold-dark)] shadow-[0_0_40px_rgba(223,177,91,0.35)]">
-            <div className="w-full h-full rounded-full overflow-hidden bg-[#12151D] border-2 border-[#08090C]">
+            {/* Tight Crop of Ustad Photo as Tile */}
+            <div className="bg-[var(--surface)] border border-white/10 aspect-[3/4] relative overflow-hidden group">
               <img
-                src="/images/ustad-real.jpg"
-                alt="Dr. C.K. Abdurahman Faizy Aripra"
-                className="w-full h-full object-cover object-top"
+                src="/images/ustad.jpg"
+                alt="Sheikh Alathurpadi"
+                className="w-full h-full object-cover object-[center_18%] filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                 loading="lazy"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-transparent to-transparent opacity-80" />
+              <div className="absolute bottom-3 left-3 right-3 text-left">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[var(--yellow)] block">
+                  Usthad
+                </span>
+                <span className="text-xs font-semibold text-white truncate block">
+                  Dr. C.K. Abdurahman Faizy
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="ds-eyebrow">VALEDICTORY DUA</span>
-            <span className="font-arabic text-sm text-[var(--gold)] opacity-80">
-              دُعَاءُ الخِتَامِ
+          {/* Right: Huge Yellow Arabic "العِلْمُ نُورٌ" + Statement + Register */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <span className="font-['Reem_Kufi'] text-5xl sm:text-7xl xl:text-8xl text-[var(--yellow)] block leading-tight tracking-wider">
+              العِلْمُ نُورٌ
             </span>
-          </div>
 
-          {/* Sacred Arabic Closing Prayer */}
-          <div className="font-arabic text-2xl sm:text-3xl lg:text-4xl text-[var(--gold-light)] leading-relaxed max-w-3xl [text-wrap:balance]">
-            "اللَّهُمَّ اجْعَلْ جَمْعَنَا هَٰذَا جَمْعًا مَرْحُومًا، وَتَفَرُّقَنَا مِنْ بَعْدِهِ تَفَرُّقًا مَعْصُومًا"
-          </div>
+            <div className="space-y-2">
+              <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+                See you at the camp.
+              </h2>
+              <p className="text-sm sm:text-base text-[var(--muted)] max-w-xl leading-relaxed">
+                Seven days of dawn-to-dusk companionship in knowledge, brotherhood, and devotion at Alathurpadi Juma Masjid campus.
+              </p>
+            </div>
 
-          <p className="font-sans font-bold text-lg sm:text-2xl text-white [text-wrap:balance] max-w-2xl">
-            "May Allah make this sacred gathering a perpetual vessel of knowledge, mercy, and service to the Ummah. Amin."
-          </p>
+            <div className="pt-4 flex flex-wrap items-center gap-4">
+              <Button
+                href="#register"
+                onClick={(e) => {
+                  e.preventDefault();
+                  smoothScrollTo('#register');
+                }}
+                variant="primary"
+                className="h-12 px-8 text-xs font-bold"
+              >
+                Register Now · Free Entry
+              </Button>
 
-          <div className="flex flex-col items-center gap-1">
-            <span className="font-sans font-extrabold text-base sm:text-lg text-white">
-              Dr. C.K. Abdurahman Faizy Aripra
-            </span>
-            <span className="text-xs font-sans text-[var(--sky)] uppercase tracking-wider font-semibold">
-              Chief Mudarris, Alathurpadi Dars · Member, Samastha Mushawara
-            </span>
-          </div>
-
-          <div className="pt-2">
-            <Button
-              href="#register"
-              onClick={(e) => {
-                e.preventDefault();
-                smoothScrollTo('#register');
-              }}
-              variant="primary"
-              className="text-xs uppercase tracking-widest font-extrabold px-10 h-[56px] shadow-[0_0_35px_rgba(223,177,91,0.4)]"
-            >
-              Register Candidate Scholar (Free Entry)
-            </Button>
+              <a
+                href="#hero"
+                onClick={(e) => {
+                  e.preventDefault();
+                  smoothScrollTo('#hero');
+                }}
+                className="text-xs uppercase tracking-widest font-semibold text-[var(--muted)] hover:text-white transition-colors py-2"
+              >
+                Back to Top ↑
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* CLEAN MINIMAL FOOTER */}
-      <footer className="full-width-section py-12 border-t border-white/[0.08] text-sm text-[var(--muted)] bg-[#050608]">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* ADSA Name & Malayalam Title */}
-          <div className="flex flex-col text-center md:text-left">
-            <div className="flex items-baseline gap-2 justify-center md:justify-start">
-              <span className="font-sans font-extrabold text-xl text-white">
-                ADSA CAMP 2026
-              </span>
-              <span className="font-arabic text-sm text-[var(--gold)]">
-                مخيم أَدْسَا
-              </span>
+      {/* Footer */}
+      <footer className="w-full py-12 border-t border-white/10 bg-[#070E16]" style={{ paddingInline: 'var(--gutter)' }}>
+        <div className="max-w-[1400px] mx-auto space-y-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-white/10">
+            {/* Brand */}
+            <div className="flex items-center gap-3">
+              <AlWisalMark variant="nav" color="var(--yellow)" className="w-24 h-auto" />
+              <div className="border-l border-white/15 pl-3">
+                <span className="font-bold text-sm text-white tracking-widest block">
+                  ADSA CAMP 2026
+                </span>
+                <span className="text-[10px] text-[var(--muted)] tracking-wider">
+                  Alathurpadi Dars Students Association
+                </span>
+              </div>
             </div>
-            <span className="font-sans text-xs text-white/80 mt-0.5">
-              Alathurpadi Dars Students Association
-            </span>
-            <span className="text-[11px] font-sans text-[var(--sky)]">
-              SUFFA Dars Network · Melmuri, Malappuram, Kerala
-            </span>
+
+            {/* Socials */}
+            <div className="flex items-center gap-3">
+              <SocialLinksRow className="flex items-center gap-2.5" />
+            </div>
+
+            {/* Phone */}
+            {hasPhone && (
+              <a
+                href={`tel:${primaryPhone.number}`}
+                className="inline-flex items-center gap-2 text-xs font-semibold text-white/80 hover:text-[var(--yellow)] transition-colors py-2 px-4 rounded-full bg-white/5 border border-white/10"
+              >
+                <Phone size={14} strokeWidth={1.5} className="text-[var(--yellow)]" />
+                <span>{primaryPhone.display || primaryPhone.number}</span>
+              </a>
+            )}
           </div>
 
-          {/* Social Icons */}
-          <SocialLinksRow className="flex items-center gap-3" />
-
-          {/* Phone Link */}
-          {hasPhone && (
-            <a
-              href={`tel:${primaryPhone.number}`}
-              className="inline-flex items-center gap-2 text-xs font-sans font-semibold text-white/80 hover:text-[var(--gold)] transition-colors py-2.5 px-5 rounded-full bg-white/5 border border-white/10"
-              aria-label={`Call ${primaryPhone.display || primaryPhone.number}`}
-            >
-              <Phone size={14} strokeWidth={1.5} className="text-[var(--gold)]" />
-              <span>{primaryPhone.display || primaryPhone.number}</span>
-            </a>
-          )}
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 mt-8 border-t border-white/[0.05] text-xs font-sans">
-          <div className="flex flex-wrap items-center justify-center gap-6 text-white/70">
-            <a href="#about" onClick={(e) => { e.preventDefault(); smoothScrollTo('#about'); }} className="hover:text-white transition-colors">
-              About
-            </a>
-            <a href="#schedule" onClick={(e) => { e.preventDefault(); smoothScrollTo('#schedule'); }} className="hover:text-white transition-colors">
-              Schedule
-            </a>
-            <a href="#guests" onClick={(e) => { e.preventDefault(); smoothScrollTo('#guests'); }} className="hover:text-white transition-colors">
-              Scholars
-            </a>
-            <a href="#dars" onClick={(e) => { e.preventDefault(); smoothScrollTo('#dars'); }} className="hover:text-white transition-colors">
-              Dars Network
-            </a>
-            <a href="#register" onClick={(e) => { e.preventDefault(); smoothScrollTo('#register'); }} className="text-[var(--gold)] hover:underline font-bold">
-              Register Free
-            </a>
-          </div>
-
-          <div className="text-center sm:text-right text-white/40">
-            © 2026 ADSA. All rights reserved.
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--muted)]">
+            <p>
+              © 2026 Alathurpadi Dars Students Association (ADSA). All rights reserved.
+            </p>
+            <div className="flex gap-4">
+              <a href="#about" onClick={(e) => { e.preventDefault(); smoothScrollTo('#about'); }} className="hover:text-white">Camp</a>
+              <a href="#routine" onClick={(e) => { e.preventDefault(); smoothScrollTo('#routine'); }} className="hover:text-white">Routine</a>
+              <a href="#programme" onClick={(e) => { e.preventDefault(); smoothScrollTo('#programme'); }} className="hover:text-white">Programme</a>
+              <a href="#guests" onClick={(e) => { e.preventDefault(); smoothScrollTo('#guests'); }} className="hover:text-white">Guests</a>
+              <a href="#dars" onClick={(e) => { e.preventDefault(); smoothScrollTo('#dars'); }} className="hover:text-white">Dars Network</a>
+            </div>
           </div>
         </div>
       </footer>

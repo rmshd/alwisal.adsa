@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
+import Intro from './components/Intro';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import TrustStrip from './components/TrustStrip';
-import Vine from './art/Vine';
 import Hero from './sections/Hero';
 import About from './sections/About';
+import Routine from './sections/Routine';
 import Schedule from './sections/Schedule';
 import Guests from './sections/Guests';
 import Organisers from './sections/Organisers';
@@ -15,12 +16,23 @@ import Gallery from './sections/Gallery';
 import Faq from './sections/Faq';
 import Contact from './sections/Contact';
 import Closing from './sections/Closing';
+import ArtPreview from './sections/ArtPreview';
 import { initMotion } from './lib/motion';
 
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isArtRoute, setIsArtRoute] = useState(false);
 
   useEffect(() => {
+    // Check if on /art or #art preview
+    if (
+      typeof window !== 'undefined' &&
+      (window.location.pathname === '/art' || window.location.hash === '#art')
+    ) {
+      setIsArtRoute(true);
+      return;
+    }
+
     const lenis = initMotion();
 
     const handleScroll = () => {
@@ -39,28 +51,32 @@ export default function App() {
     };
   }, []);
 
+  if (isArtRoute) {
+    return <ArtPreview />;
+  }
+
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)] relative selection:bg-[var(--yellow)] selection:text-[var(--bg)] overflow-x-hidden">
+    <div className="min-h-screen bg-[var(--ink)] text-white relative selection:bg-[var(--orange)] selection:text-[var(--ink)] overflow-x-hidden font-['Poppins']">
+      {/* 1.8s Once-only Intro Animation */}
+      <Intro />
+
       {/* Thin Top Scroll Progress Bar */}
       <div
-        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-[var(--yellow)] origin-left pointer-events-none transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-[var(--orange)] origin-left pointer-events-none transition-transform duration-75 ease-out"
         style={{ transform: `scaleX(${scrollProgress})` }}
         aria-hidden="true"
       />
 
-      {/* Subtle Film Grain Texture Overlay */}
+      {/* Subtle Film Grain Texture Overlay (2%) */}
       <div
         className="pointer-events-none fixed inset-0 z-50 bg-grain select-none"
         aria-hidden="true"
       />
 
-      {/* Long winding Vine spine */}
-      <Vine />
-
       {/* Global Navigation Header */}
       <Navbar />
 
-      {/* Floating Quick WhatsApp Action Button */}
+      {/* Floating WhatsApp Action Button */}
       <FloatingWhatsApp />
 
       {/* Main Sections */}
@@ -68,6 +84,7 @@ export default function App() {
         <Hero />
         <TrustStrip />
         <About />
+        <Routine />
         <Schedule />
         <Guests />
         <Organisers />
