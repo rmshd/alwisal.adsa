@@ -63,19 +63,21 @@ export default function Navbar() {
       {/* CREATIVE FLOATING GLASS NAVBAR (DESKTOP & TABLET) */}
       <header
         role="banner"
-        className="fixed top-4 inset-x-0 mx-auto z-40 hidden md:flex items-center justify-between max-w-5xl px-5 py-2.5 rounded-full bg-[#0B1520]/85 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.5)] border border-[#FDB913]/30 hover:border-[#FDB913]/50 transition-all duration-300"
+        className="fixed top-4 inset-x-0 mx-auto z-40 hidden md:flex items-center justify-between max-w-5xl px-5 py-2 rounded-full bg-[#0B1520]/85 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.5)] border border-[#FDB913]/30 hover:border-[#FDB913]/50 transition-all duration-300"
       >
-        {/* Left: Official Al-Wisal Logo image (logo.png) */}
+        {/* Left: Official Al-Wisal Logo image with light rounded pill so black text is clear */}
         <Link
           to="/"
-          className="flex items-center gap-3 shrink-0 focus:outline-none group"
+          className="flex items-center shrink-0 focus:outline-none group"
           aria-label="Al-Wisal 2026 Home"
         >
-          <img
-            src="/images/logo.png"
-            alt="Al-Wisal 2026 Logo"
-            className="h-8 lg:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-          />
+          <div className="bg-white/95 hover:bg-white px-3.5 py-1 rounded-full shadow-sm flex items-center transition-all group-hover:scale-105">
+            <img
+              src="/images/logo.png"
+              alt="Al-Wisal 2026 Logo"
+              className="h-6 lg:h-7 w-auto object-contain"
+            />
+          </div>
         </Link>
 
         {/* Center: Clean Nav Links */}
@@ -187,9 +189,11 @@ export default function Navbar() {
       </header>
 
       {/* MOBILE FLOATING BAR */}
-      <header className="fixed top-3 inset-x-4 z-40 md:hidden flex items-center justify-between px-4 py-2.5 rounded-full bg-[#0B1520]/90 backdrop-blur-md shadow-2xl border border-[#FDB913]/35 text-white">
-        <Link to="/" className="flex items-center gap-2">
-          <img src="/images/logo.png" alt="Al-Wisal Logo" className="h-7 w-auto object-contain" />
+      <header className="fixed top-3 inset-x-4 z-40 md:hidden flex items-center justify-between px-3.5 py-2 rounded-full bg-[#0B1520]/90 backdrop-blur-md shadow-2xl border border-[#FDB913]/35 text-white">
+        <Link to="/" className="flex items-center">
+          <div className="bg-white/95 px-2.5 py-0.5 rounded-full shadow-sm flex items-center">
+            <img src="/images/logo.png" alt="Al-Wisal Logo" className="h-5 w-auto object-contain" />
+          </div>
         </Link>
 
         <div className="flex items-center gap-1.5">

@@ -54,34 +54,31 @@ export default function Hero() {
     <section
       id="home"
       aria-label="Camp Hero"
-      className="relative min-h-[92vh] flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-[#070C12] text-white font-['Poppins']"
+      className="relative min-h-[100dvh] flex flex-col justify-center items-center text-center px-4 pt-32 pb-12 sm:pt-36 sm:pb-16 overflow-hidden bg-[#070C12] text-white font-['Poppins']"
     >
-      {/* Calm, serene ambient lighting (minimal & soft) */}
+      {/* Calm, serene ambient lighting */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FDB913]/[0.07] rounded-full blur-[160px]"
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#FDB913]/[0.08] rounded-full blur-[160px]"
       />
 
       <div className="relative z-10 max-w-3xl mx-auto space-y-6 flex flex-col items-center">
-        {/* Minimal Emblem */}
-        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl p-2.5 bg-white/[0.04] border border-white/10 shadow-lg flex items-center justify-center backdrop-blur-md">
+        {/* Main Al-Wisal Logo - Prominently Large, No Border, No Box */}
+        <div className="transition-transform duration-300 hover:scale-105">
           <img
             src="/images/favicon.png"
-            alt="Al-Wisal"
-            className="w-full h-full object-contain"
+            alt="Al-Wisal Logo"
+            className="h-24 sm:h-32 md:h-40 w-auto object-contain drop-shadow-[0_4px_30px_rgba(253,185,19,0.35)]"
           />
         </div>
 
-        {/* Clean, Majestic Typography */}
-        <div className="space-y-2">
-          <p className="font-arabic text-3xl sm:text-4xl text-[#FDB913] font-medium leading-none tracking-wide" dir="rtl">
-            الوصال
-          </p>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white uppercase leading-none">
-            AL-WISAL ’26
+        {/* Clean Tagline Directly Below */}
+        <div className="space-y-1">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-[0.25em] text-[#FDB913] uppercase">
+            TOWARDS THE BELOVED
           </h1>
-          <p className="text-sm sm:text-base md:text-lg font-semibold tracking-[0.25em] text-[#FDB913] uppercase pt-1">
-            Towards the Beloved
+          <p className="text-xs sm:text-sm text-neutral-400 italic">
+            A Transition &amp; Leadership Residential Sanctuary · Rooted in Ilm
           </p>
         </div>
 
@@ -140,7 +137,7 @@ export default function Hero() {
           <a
             href="#register"
             onClick={scrollToRegister}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FDB913] hover:bg-[#FDB913]/90 text-[#070C12] font-bold text-sm tracking-wide shadow-lg shadow-[#FDB913]/20 hover:scale-105 active:scale-95 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#FDB913] hover:bg-[#FDB913]/90 text-[#070C12] font-bold text-sm tracking-wide shadow-lg shadow-[#FDB913]/20 hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <span>Register Now</span>
             <ArrowRight className="w-4 h-4" />
@@ -149,7 +146,7 @@ export default function Hero() {
           {/* Quick utility buttons */}
           <button
             onClick={() => setIsCalendarOpen(true)}
-            className="p-3 rounded-full bg-white/[0.04] hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-colors"
+            className="p-3 rounded-full bg-white/[0.04] hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-colors cursor-pointer"
             title="Add to Calendar"
             aria-label="Add to Calendar"
           >
@@ -158,7 +155,7 @@ export default function Hero() {
 
           <button
             onClick={() => openReminderModal()}
-            className="relative p-3 rounded-full bg-white/[0.04] hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-colors"
+            className="relative p-3 rounded-full bg-white/[0.04] hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-colors cursor-pointer"
             title="Set Reminder"
             aria-label="Set Reminder"
           >
@@ -172,7 +169,7 @@ export default function Hero() {
 
           <button
             onClick={() => setIsShareOpen(true)}
-            className="p-3 rounded-full bg-white/[0.04] hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-colors"
+            className="p-3 rounded-full bg-white/[0.04] hover:bg-white/10 border border-white/10 text-neutral-300 hover:text-white transition-colors cursor-pointer"
             title="Share Camp"
             aria-label="Share Camp"
           >
