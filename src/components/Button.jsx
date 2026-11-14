@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Button({
   children,
-  variant = 'primary', // 'primary' (orange), 'yellow', 'secondary' (glass/outline), 'white'
+  variant = 'primary', // 'primary' (vivid orange), 'yellow', 'dark', 'secondary' (clean outline)
   href,
   onClick,
   className = '',
@@ -13,20 +13,21 @@ export default function Button({
   rel,
   ...props
 }) {
-  // 999px only on buttons (as required: "Radius 0 on tiles (crisp), 999px only on buttons")
   const baseStyles =
-    'group inline-flex items-center justify-center gap-2 rounded-full font-["Poppins"] font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer select-none whitespace-nowrap active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] disabled:opacity-50 disabled:pointer-events-none';
+    'group inline-flex items-center justify-center gap-2 rounded-full font-["Poppins"] font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer select-none whitespace-nowrap active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] disabled:opacity-50 disabled:pointer-events-none shadow-sm hover:shadow-md';
 
   let variantStyles = '';
-  if (variant === 'primary' || variant === 'orange' || variant === 'red') {
-    variantStyles = 'bg-[var(--orange)] text-[var(--ink)] hover:brightness-110';
+  if (variant === 'primary' || variant === 'orange') {
+    variantStyles = 'bg-[var(--orange)] text-white hover:bg-[#e04810]';
   } else if (variant === 'yellow' || variant === 'gold') {
-    variantStyles = 'bg-[var(--yellow)] text-[var(--ink)] hover:brightness-105';
+    variantStyles = 'bg-[var(--yellow)] text-slate-900 hover:brightness-105';
+  } else if (variant === 'dark' || variant === 'ink') {
+    variantStyles = 'bg-[var(--ink)] text-white hover:bg-slate-800';
   } else if (variant === 'white') {
-    variantStyles = 'bg-white text-[var(--ink)] hover:bg-[var(--cream)]';
+    variantStyles = 'bg-white text-[var(--ink)] hover:bg-[var(--canvas-subtle)] border border-slate-200';
   } else {
-    // secondary / outline / glass
-    variantStyles = 'bg-white/[0.06] hover:bg-white/[0.12] border border-white/20 text-white';
+    // secondary / outline
+    variantStyles = 'bg-transparent hover:bg-slate-900/5 border-2 border-[var(--ink)] text-[var(--ink)]';
   }
 
   const combinedClasses = `${baseStyles} ${variantStyles} ${className}`.trim();

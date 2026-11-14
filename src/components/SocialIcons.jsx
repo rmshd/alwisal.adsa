@@ -5,7 +5,7 @@ const MALAYALAM_LABELS = {
   facebook: 'ഫേസ്ബുക്ക് പേജ് സന്ദർശിക്കുക',
   instagram: 'ഇൻസ്റ്റാഗ്രാം പേജ് സന്ദർശിക്കുക',
   youtube: 'യൂട്യൂബ് ചാനൽ കാണുക',
-  twitter: 'എക്സ് (ട്വിറ്റർ) പ്രൊഫൈൽ കാണുക',
+  twitter: 'എക്സ് പ്രൊഫൈൽ കാണുക',
 };
 
 export function SocialIcon({ id, className = "w-4 h-4" }) {
@@ -53,7 +53,7 @@ export default function SocialLinksRow({ className = "flex items-center gap-3" }
           target="_blank"
           rel="noopener noreferrer"
           aria-label={MALAYALAM_LABELS[item.id] || `${item.label} Page`}
-          className="w-9 h-9 bg-[var(--surface)] border border-white/10 text-white/80 hover:text-[var(--yellow)] hover:border-[var(--yellow)] transition-colors flex items-center justify-center focus-visible:outline-none"
+          className="w-10 h-10 bg-white border-2 border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--orange)] hover:text-white shadow-[2px_2px_0px_#0F172A] transition-all flex items-center justify-center focus-visible:outline-none cursor-pointer"
         >
           <SocialIcon id={item.id} className="w-4 h-4" />
         </a>

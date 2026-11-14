@@ -37,7 +37,7 @@ export default function FloatingWhatsApp() {
       } bottom-[84px] md:bottom-8 right-4 md:right-8 flex items-center gap-3`}
     >
       {/* Label Pill on Desktop */}
-      <span className="hidden lg:inline-flex items-center px-4 py-2 rounded-full bg-[#08090C]/90 backdrop-blur-md border border-white/10 text-xs font-sans font-bold text-white shadow-xl pointer-events-none select-none">
+      <span className="hidden lg:inline-flex items-center px-4 py-2 rounded-full bg-white border-2 border-[var(--ink)] text-xs font-sans font-bold text-[var(--ink)] shadow-[3px_3px_0px_#0F172A] pointer-events-none select-none">
         WhatsApp Helpdesk
       </span>
 

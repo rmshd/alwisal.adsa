@@ -7,7 +7,6 @@ import Hero from './sections/Hero';
 import About from './sections/About';
 import Schedule from './sections/Schedule';
 import Guests from './sections/Guests';
-import Dars from './sections/Dars';
 import Register from './sections/Register';
 import Venue from './sections/Venue';
 import Gallery from './sections/Gallery';
@@ -52,18 +51,18 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--ink)] text-white relative selection:bg-[var(--orange)] selection:text-[var(--ink)] overflow-x-hidden font-['Poppins']">
+    <div className="min-h-screen bg-[var(--canvas)] text-[var(--ink)] relative selection:bg-[var(--yellow)] selection:text-[var(--ink)] overflow-x-hidden font-['Poppins']">
       {/* 1.8s Once-only Intro Animation */}
       <Intro />
 
-      {/* Thin Top Scroll Progress Bar */}
+      {/* Top Scroll Progress Bar */}
       <div
-        className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-[var(--orange)] origin-left pointer-events-none transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 right-0 h-[3px] z-50 bg-[var(--orange)] origin-left pointer-events-none transition-transform duration-75 ease-out"
         style={{ transform: `scaleX(${scrollProgress})` }}
         aria-hidden="true"
       />
 
-      {/* Subtle Film Grain Texture Overlay (2%) */}
+      {/* Subtle Film Grain Texture Overlay */}
       <div
         className="pointer-events-none fixed inset-0 z-50 bg-grain select-none"
         aria-hidden="true"
@@ -82,7 +81,6 @@ export default function App() {
         <About />
         <Schedule />
         <Guests />
-        <Dars />
         <Register />
         <Venue />
         <Gallery />

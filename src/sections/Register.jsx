@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import DARS_LIST from '../data/dars.json';
 import { CONFIG, CONTACT } from '../config';
 import Button from '../components/Button';
 import NestedDiamonds from '../art/NestedDiamonds';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Calendar, MapPin, Users, Award } from 'lucide-react';
 
 export default function Register() {
   const [formData, setFormData] = useState({
     name: '',
     district: '',
     higherStudy: '',
-    dars: '',
     phone: '',
     parentPhone: '',
     honeypot: '',
@@ -46,7 +44,6 @@ export default function Register() {
     const errs = {};
     if (!formData.name.trim()) errs.name = 'Full name is required';
     if (!formData.district) errs.district = 'Select your home district';
-    if (!formData.dars) errs.dars = 'Select your SUFFA Dars';
     if (!formData.phone.trim()) {
       errs.phone = 'Mobile / WhatsApp number is required';
     } else if (!validatePhone(formData.phone)) {
@@ -110,204 +107,224 @@ export default function Register() {
   return (
     <section
       id="register"
-      className="relative w-full bg-[var(--ink)] text-white font-['Poppins'] py-24 border-t border-white/10"
+      className="relative w-full bg-[var(--canvas-subtle)] text-[var(--ink)] font-['Poppins'] py-20 sm:py-28 border-t-2 border-[var(--ink)]"
       style={{ paddingInline: 'var(--gutter)' }}
     >
       <div className="max-w-[1400px] mx-auto space-y-12">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-6">
+
+        {/* Section Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-[var(--ink)] pb-6">
           <div>
-            <span className="text-xs uppercase tracking-widest font-semibold text-[var(--orange)]">
-              Admission
+            <span className="text-xs uppercase tracking-widest font-extrabold text-[var(--orange)] block mb-1">
+              ADMISSION APPLICATION
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white mt-1">
+            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[var(--ink)]">
               Camp Registration
             </h2>
           </div>
           <div className="text-right flex items-center gap-3">
-            <span className="px-3.5 py-1.5 bg-[var(--yellow)] text-[var(--ink)] text-xs font-bold uppercase tracking-wider">
+            <span className="px-3.5 py-1.5 bg-[var(--yellow)] text-[var(--ink)] text-xs font-black uppercase tracking-wider border border-[var(--ink)]">
               Open Registration
             </span>
-            <span className="font-['Noto_Serif_Arabic'] text-2xl text-[var(--yellow)] hidden sm:inline">
+            <span className="font-['Noto_Serif_Arabic'] text-2xl font-bold text-[var(--ink)] hidden sm:inline" dir="rtl">
               التَّسْجِيلُ
             </span>
           </div>
         </div>
 
-        {/* Main Grid: NestedDiamonds Tile Left, Form Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left: Shape Tile & Camp Info */}
-          <div className="lg:col-span-4 bg-[var(--surface)] border border-white/10 p-8 flex flex-col justify-between space-y-8">
-            <div className="space-y-4">
-              <span className="text-xs uppercase font-bold tracking-widest text-[var(--yellow)]">
-                Participant Eligibility
-              </span>
-              <h3 className="text-xl font-bold uppercase text-white tracking-tight">
-                For SUFFA Dars Graduates
-              </h3>
-              <p className="text-xs text-[var(--muted)] leading-relaxed">
-                Open exclusively to graduating delegates and scholars from the 30 affiliated SUFFA Dars institutions across Kerala.
-              </p>
-            </div>
+        {/* Main Grid: Overview Left, Form Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-            <div className="w-48 mx-auto py-4">
-              <NestedDiamonds className="w-full h-full" />
-            </div>
+          {/* Left Column: Camp Summary & Geometric Card */}
+          <div className="lg:col-span-5 space-y-6">
+            <div className="bg-white border-2 border-[var(--ink)] shadow-[5px_5px_0px_#0F172A] p-6 space-y-6">
+              <div className="flex items-center justify-between pb-4 border-b border-[var(--ink)]/10">
+                <span className="text-xs uppercase font-black tracking-widest text-[var(--orange)]">
+                  Camp Guidelines
+                </span>
+                <span className="text-xs font-bold text-[var(--muted)]">
+                  Dec 20–26, 2026
+                </span>
+              </div>
 
-            <div className="space-y-2 border-t border-white/10 pt-4 text-xs text-[var(--muted)]">
-              <div className="flex justify-between">
-                <span>Camp Dates</span>
-                <span className="text-white font-semibold">Dec 20–26, 2026</span>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 bg-[var(--canvas)] border border-[var(--ink)] flex items-center justify-center shrink-0 text-[var(--orange)]">
+                    <Calendar size={18} strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--ink)]">
+                      Duration
+                    </h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">
+                      7 Days residential retreat · Dawn to Dusk immersion
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 bg-[var(--canvas)] border border-[var(--ink)] flex items-center justify-center shrink-0 text-[#1E40AF]">
+                    <Users size={18} strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--ink)]">
+                      Target Delegates
+                    </h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">
+                      Graduated scholars of the SUFFA Dars network
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 bg-[var(--canvas)] border border-[var(--ink)] flex items-center justify-center shrink-0 text-[#4D6A34]">
+                    <MapPin size={18} strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--ink)]">
+                      Venue & Boarding
+                    </h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">
+                      Alathurpadi Juma Masjid Campus · Full Boarding Included
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 bg-[var(--canvas)] border border-[var(--ink)] flex items-center justify-center shrink-0 text-[#7C3AED]">
+                    <Award size={18} strokeWidth={2} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--ink)]">
+                      Selection Process
+                    </h4>
+                    <p className="text-xs text-[var(--muted)] mt-0.5">
+                      Applications reviewed individually · Limited delegates
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span>Food & Boarding</span>
-                <span className="text-[var(--yellow)] font-semibold">Complimentary</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Location</span>
-                <span className="text-white font-semibold">Alathurpadi Campus</span>
+
+              {/* Decorative Nested Diamonds Tile */}
+              <div className="pt-4 border-t border-[var(--ink)]/10 flex items-center justify-center bg-[var(--canvas)] p-4 border border-[var(--ink)]/20">
+                <NestedDiamonds className="w-24 h-24 text-[var(--orange)]" />
               </div>
             </div>
           </div>
 
-          {/* Right: Registration Form Panel */}
-          <div className="lg:col-span-8 bg-[var(--surface)] border border-white/10 p-6 sm:p-10">
+          {/* Right Column: Admission Form */}
+          <div className="lg:col-span-7 bg-white border-2 border-[var(--ink)] shadow-[6px_6px_0px_#0F172A] p-6 sm:p-10">
             {isSuccess ? (
-              <div className="py-12 flex flex-col items-center text-center space-y-6">
-                <div className="w-16 h-16 bg-[var(--orange)]/20 text-[var(--orange)] flex items-center justify-center">
-                  <CheckCircle2 size={36} />
+              <div className="py-12 text-center space-y-6">
+                <div className="w-16 h-16 bg-[#4D6A34]/15 border-2 border-[#4D6A34] text-[#4D6A34] mx-auto flex items-center justify-center shadow-[3px_3px_0px_#0F172A]">
+                  <CheckCircle2 size={36} strokeWidth={2} />
                 </div>
-                <div className="space-y-2 max-w-md">
-                  <h3 className="text-2xl font-bold uppercase tracking-tight text-white">
+                <div className="space-y-2 max-w-md mx-auto">
+                  <h3 className="text-2xl font-black uppercase tracking-tight text-[var(--ink)]">
                     Registration Submitted
                   </h3>
-                  <p className="text-sm text-[var(--muted)]">
-                    Honoured brother <strong className="text-white">{formData.name}</strong>, your application has been received. Our reception team will coordinate onboarding details.
-                  </p>
-                  <p className="font-['Noto_Sans_Malayalam'] text-xs text-[var(--yellow)] pt-2">
-                    താങ്കളുടെ രജിസ്ട്രേഷൻ വിജയകരമായി പൂർത്തിയായി. വിവരങ്ങൾ വാട്സാപ്പ് വഴി അറിയിക്കും.
+                  <p className="text-sm text-[var(--muted)] leading-relaxed">
+                    Alhamdulillah! Your application has been received. Our camp committee will contact you with confirmation and travel guidelines.
                   </p>
                 </div>
 
                 {waHref && (
-                  <Button
-                    href={waHref}
-                    target="_blank"
-                    variant="primary"
-                    className="h-11 px-8 text-xs font-bold"
-                  >
-                    Contact Coordinator on WhatsApp
-                  </Button>
+                  <div className="pt-4">
+                    <Button
+                      href={waHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variant="primary"
+                      className="h-12 px-8 text-xs font-extrabold"
+                    >
+                      Connect on WhatsApp
+                    </Button>
+                  </div>
                 )}
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Honeypot field */}
+                {/* Honeypot */}
                 <input
                   type="text"
                   name="honeypot"
                   value={formData.honeypot}
                   onChange={handleChange}
                   className="hidden"
-                  tabIndex="-1"
+                  tabIndex={-1}
                   autoComplete="off"
                 />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Student Name */}
-                  <div className="space-y-2 sm:col-span-2">
-                    <label className="block text-xs uppercase font-bold tracking-wider text-[var(--muted)]">
-                      Student Full Name *
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {/* Full Name */}
+                  <div className="space-y-1.5 sm:col-span-2">
+                    <label className="block text-xs uppercase font-extrabold tracking-wider text-[var(--ink)]">
+                      Full Name *
                     </label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="e.g. Muhammad Al-Ameen"
-                      className="w-full bg-[var(--ink)] border border-white/15 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--yellow)]"
+                      placeholder="Enter your full name"
+                      className="w-full bg-[var(--canvas)] border-2 border-[var(--ink)] px-4 py-3 text-sm text-[var(--ink)] placeholder-[var(--muted)] focus:outline-none focus:bg-white focus:border-[var(--orange)] font-medium"
                     />
                     {errors.name && (
-                      <span className="text-[11px] text-[var(--orange)] font-medium block">
+                      <span className="text-[11px] text-[var(--terracotta)] font-bold block">
                         {errors.name}
                       </span>
                     )}
                   </div>
 
-                  {/* Native District */}
-                  <div className="space-y-2">
-                    <label className="block text-xs uppercase font-bold tracking-wider text-[var(--muted)]">
-                      Native District *
+                  {/* District */}
+                  <div className="space-y-1.5 sm:col-span-2">
+                    <label className="block text-xs uppercase font-extrabold tracking-wider text-[var(--ink)]">
+                      Home District *
                     </label>
                     <select
                       name="district"
                       value={formData.district}
                       onChange={handleChange}
-                      className="w-full bg-[var(--ink)] border border-white/15 px-4 py-3 text-sm text-white focus:outline-none focus:border-[var(--yellow)]"
+                      className="w-full bg-[var(--canvas)] border-2 border-[var(--ink)] px-4 py-3 text-sm text-[var(--ink)] focus:outline-none focus:bg-white focus:border-[var(--orange)] font-medium"
                     >
-                      <option value="">Select District</option>
-                      {districtsList.map((dist) => (
-                        <option key={dist} value={dist}>
-                          {dist}
+                      <option value="">Select your District</option>
+                      {districtsList.map((d) => (
+                        <option key={d} value={d}>
+                          {d}
                         </option>
                       ))}
                     </select>
                     {errors.district && (
-                      <span className="text-[11px] text-[var(--orange)] font-medium block">
+                      <span className="text-[11px] text-[var(--terracotta)] font-bold block">
                         {errors.district}
                       </span>
                     )}
                   </div>
 
-                  {/* Current Dars */}
-                  <div className="space-y-2">
-                    <label className="block text-xs uppercase font-bold tracking-wider text-[var(--muted)]">
-                      Current SUFFA Dars *
-                    </label>
-                    <select
-                      name="dars"
-                      value={formData.dars}
-                      onChange={handleChange}
-                      className="w-full bg-[var(--ink)] border border-white/15 px-4 py-3 text-sm text-white focus:outline-none focus:border-[var(--yellow)]"
-                    >
-                      <option value="">Select Affiliated Dars</option>
-                      {DARS_LIST.map((d) => (
-                        <option key={d.id} value={d.name}>
-                          {d.name} ({d.place})
-                        </option>
-                      ))}
-                    </select>
-                    {errors.dars && (
-                      <span className="text-[11px] text-[var(--orange)] font-medium block">
-                        {errors.dars}
-                      </span>
-                    )}
-                  </div>
-
                   {/* Student Mobile */}
-                  <div className="space-y-2">
-                    <label className="block text-xs uppercase font-bold tracking-wider text-[var(--muted)]">
-                      Student Mobile / WhatsApp *
+                  <div className="space-y-1.5">
+                    <label className="block text-xs uppercase font-extrabold tracking-wider text-[var(--ink)]">
+                      Mobile / WhatsApp *
                     </label>
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="10-digit mobile number"
+                      placeholder="10-digit number"
                       maxLength={10}
-                      className="w-full bg-[var(--ink)] border border-white/15 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--yellow)] font-mono"
+                      className="w-full bg-[var(--canvas)] border-2 border-[var(--ink)] px-4 py-3 text-sm text-[var(--ink)] placeholder-[var(--muted)] focus:outline-none focus:bg-white focus:border-[var(--orange)] font-mono font-medium"
                     />
                     {errors.phone && (
-                      <span className="text-[11px] text-[var(--orange)] font-medium block">
+                      <span className="text-[11px] text-[var(--terracotta)] font-bold block">
                         {errors.phone}
                       </span>
                     )}
                   </div>
 
                   {/* Parent Mobile */}
-                  <div className="space-y-2">
-                    <label className="block text-xs uppercase font-bold tracking-wider text-[var(--muted)]">
+                  <div className="space-y-1.5">
+                    <label className="block text-xs uppercase font-extrabold tracking-wider text-[var(--ink)]">
                       Parent / Guardian Mobile *
                     </label>
                     <input
@@ -315,21 +332,21 @@ export default function Register() {
                       name="parentPhone"
                       value={formData.parentPhone}
                       onChange={handleChange}
-                      placeholder="10-digit guardian number"
+                      placeholder="Guardian number"
                       maxLength={10}
-                      className="w-full bg-[var(--ink)] border border-white/15 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--yellow)] font-mono"
+                      className="w-full bg-[var(--canvas)] border-2 border-[var(--ink)] px-4 py-3 text-sm text-[var(--ink)] placeholder-[var(--muted)] focus:outline-none focus:bg-white focus:border-[var(--orange)] font-mono font-medium"
                     />
                     {errors.parentPhone && (
-                      <span className="text-[11px] text-[var(--orange)] font-medium block">
+                      <span className="text-[11px] text-[var(--terracotta)] font-bold block">
                         {errors.parentPhone}
                       </span>
                     )}
                   </div>
 
                   {/* Higher Study Interest */}
-                  <div className="space-y-2 sm:col-span-2">
-                    <label className="block text-xs uppercase font-bold tracking-wider text-[var(--muted)]">
-                      Higher Studies Aspirations (Optional)
+                  <div className="space-y-1.5 sm:col-span-2">
+                    <label className="block text-xs uppercase font-extrabold tracking-wider text-[var(--ink)]">
+                      Academic Aspirations (Optional)
                     </label>
                     <input
                       type="text"
@@ -337,28 +354,29 @@ export default function Register() {
                       value={formData.higherStudy}
                       onChange={handleChange}
                       placeholder="e.g. Hadith Specialisation / Fatwa Studies / Qira'at"
-                      className="w-full bg-[var(--ink)] border border-white/15 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[var(--yellow)]"
+                      className="w-full bg-[var(--canvas)] border-2 border-[var(--ink)] px-4 py-3 text-sm text-[var(--ink)] placeholder-[var(--muted)] focus:outline-none focus:bg-white focus:border-[var(--orange)] font-medium"
                     />
                   </div>
                 </div>
 
-                <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
-                  <div className="text-xs text-[var(--muted)] font-['Noto_Serif_Malayalam']">
-                    Applications are reviewed individually. Limited seats available.
+                <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t-2 border-[var(--ink)]/15">
+                  <div className="text-xs text-[var(--muted)] font-medium">
+                    Limited seats · Reviewed upon receipt
                   </div>
 
                   <Button
                     type="submit"
                     variant="primary"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto h-12 px-10 text-xs font-bold"
+                    className="w-full sm:w-auto h-12 px-10 text-xs font-black shadow-[4px_4px_0px_#0F172A]"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
                   </Button>
                 </div>
               </form>
             )}
           </div>
+
         </div>
       </div>
     </section>
