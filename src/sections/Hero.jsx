@@ -64,17 +64,17 @@ export default function Hero() {
         >
           {/* Eyebrow & Stickers Row */}
           <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 select-none">
-            <span className="text-xs font-sora font-semibold tracking-wider text-[var(--sky)] uppercase bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+            <span className="text-xs font-sora font-semibold tracking-wider text-white/80 uppercase bg-white/5 border border-white/10 px-3 py-1 rounded-full">
               SUFFA DARS NETWORK
             </span>
 
-            {/* Red Date Label */}
-            <div className="bg-[var(--coral)] text-white px-3.5 py-1 rounded-full font-heading font-bold text-xs tracking-wide shadow-sm">
+            {/* Date Sticker in Yellow */}
+            <div className="bg-[var(--yellow)] text-[var(--bg)] px-3.5 py-1 rounded-full font-heading font-bold text-xs tracking-wide">
               {CONFIG.CAMP_DATES_LABEL}
             </div>
 
-            {/* Tilted Yellow Countdown */}
-            <div className="bg-[var(--yellow)] text-[var(--bg)] px-3.5 py-1 rounded-full font-sora font-extrabold text-xs tracking-wider uppercase shadow-sm">
+            {/* Countdown Badge */}
+            <div className="bg-white/10 border border-white/15 text-white px-3.5 py-1 rounded-full font-sora font-semibold text-xs tracking-wider uppercase">
               {daysRemaining > 0 ? `${daysRemaining} ദിവസം ബാക്കി` : 'ക്യാമ്പ് തുടങ്ങി'}
             </div>
 
@@ -86,8 +86,7 @@ export default function Hero() {
 
           {/* Headline (clamp font size, text-wrap balance, no overflow) */}
           <h1 className="font-heading font-bold text-[clamp(2.4rem,4.8vw,5.2rem)] leading-[1.12] text-white tracking-tight [text-wrap:balance] max-w-3xl">
-            ഉസ്താദിനൊപ്പം{' '}
-            <span className="text-[var(--yellow)] whitespace-nowrap">ഏഴ് ദിനങ്ങൾ</span>
+            ഉസ്താദിനൊപ്പം ഏഴ് <span className="text-[var(--yellow)]">ദിനങ്ങൾ</span>
           </h1>
 
           {/* Subtext (Malayalam-safe line-height 1.4) */}
@@ -184,7 +183,7 @@ export default function Hero() {
                   e.currentTarget.src = '/images/ustad-cutout.svg';
                 }}
                 alt={CONFIG.USTAD_NAME}
-                className="w-full h-auto object-contain filter drop-shadow-2xl"
+                className="w-full h-auto object-contain"
                 width="340"
                 height="420"
                 loading="eager"

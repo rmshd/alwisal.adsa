@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { smoothScrollTo } from '../lib/motion';
+import { Menu, X } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'ക്യാമ്പ്', href: '#about', id: 'about' },
-  { label: 'ദിനചര്യ', href: '#schedule', id: 'schedule' },
+  { label: 'ദിനചര്യ', href: '#daily', id: 'daily' },
+  { label: 'ഷെഡ്യൂൾ', href: '#schedule', id: 'schedule' },
   { label: 'അതിഥികൾ', href: '#guests', id: 'guests' },
   { label: 'ദർസുകൾ', href: '#dars', id: 'dars' },
   { label: 'ഗാലറി', href: '#gallery', id: 'gallery' },
@@ -52,7 +54,7 @@ export default function Navbar() {
 
   // Active section tracking via IntersectionObserver
   useEffect(() => {
-    const sectionIds = ['about', 'schedule', 'guests', 'dars', 'gallery', 'register'];
+    const sectionIds = ['about', 'daily', 'schedule', 'guests', 'dars', 'gallery', 'register'];
     const observers = [];
 
     sectionIds.forEach((id) => {
@@ -115,7 +117,7 @@ export default function Navbar() {
           isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${
           isScrolled
-            ? 'bg-[#1E1F22]/85 backdrop-blur-md border-b border-white/[0.08] shadow-lg'
+            ? 'bg-[#1E1F22]/90 backdrop-blur-md border-b border-white/[0.08]'
             : 'bg-transparent'
         }`}
         style={{ paddingInline: 'var(--gutter)' }}
@@ -125,29 +127,29 @@ export default function Navbar() {
           <a
             href="#hero"
             onClick={(e) => handleLinkClick(e, '#hero')}
-            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] rounded-xl py-1 px-1.5"
+            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] rounded-xl py-1 px-1.5"
             aria-label="ADSA ക്യാമ്പ് ഹോംപേജ്"
           >
             <img
               src="/images/logo.svg"
               alt="ADSA Logo"
-              className="w-10 h-10 transition-transform duration-200 group-hover:scale-105 shrink-0"
-              width="40"
-              height="40"
+              className="w-9 h-9 transition-transform duration-200 group-hover:scale-105 shrink-0"
+              width="36"
+              height="36"
             />
             <div className="flex flex-col">
-              <span className="font-heading font-extrabold text-xl text-white tracking-tight leading-tight">
+              <span className="font-heading font-extrabold text-lg text-white tracking-tight leading-tight">
                 ADSA ക്യാമ്പ്
               </span>
-              <span className="text-[11px] font-sora font-medium text-[var(--sky)] tracking-wider uppercase leading-none">
+              <span className="text-[10px] font-sora font-medium text-[var(--sky)] tracking-wider uppercase leading-none">
                 SUFFA Dars
               </span>
             </div>
           </a>
 
-          {/* Desktop Nav Links (Hidden < 900px) */}
+          {/* Desktop Nav Links (Hidden < 1024px) */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main Navigation">
-            <ul className="flex items-center gap-7 list-none m-0 p-0">
+            <ul className="flex items-center gap-6 list-none m-0 p-0">
               {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
@@ -155,14 +157,14 @@ export default function Navbar() {
                     <a
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link.href)}
-                      className={`relative font-body text-base font-medium py-2 px-1 transition-colors duration-200 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] rounded-md ${
+                      className={`relative font-body text-sm py-2 px-1 transition-colors duration-200 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] rounded-md ${
                         isActive ? 'text-white font-semibold' : 'text-[var(--text)]/80 hover:text-white'
                       }`}
                     >
                       {link.label}
                       {isActive && (
                         <span
-                          className="w-1.5 h-1.5 rounded-full bg-[var(--yellow)] animate-pulse inline-block"
+                          className="w-1.5 h-1.5 rounded-full bg-[var(--yellow)] inline-block"
                           aria-hidden="true"
                         />
                       )}
@@ -177,42 +179,36 @@ export default function Navbar() {
               href="#register"
               onClick={(e) => handleLinkClick(e, '#register')}
               variant="primary"
-              className="h-[44px] px-6 text-sm"
+              className="h-[42px] px-6 text-xs"
             >
               രജിസ്റ്റർ ചെയ്യൂ
             </Button>
           </nav>
 
-          {/* Mobile Hamburger Toggle (< 900px) */}
+          {/* Mobile Hamburger Toggle (< 1024px) */}
           <div className="flex items-center gap-3 lg:hidden">
             <Button
               href="#register"
               onClick={(e) => handleLinkClick(e, '#register')}
               variant="primary"
-              className="h-[40px] px-4 text-xs font-semibold sm:inline-flex hidden"
+              className="h-[38px] px-4 text-xs font-semibold sm:inline-flex hidden"
             >
               രജിസ്റ്റർ
             </Button>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)]"
+              className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)]"
               aria-label={mobileMenuOpen ? 'മെനു അടയ്ക്കുക' : 'മെനു തുറക്കുക'}
               aria-expanded={mobileMenuOpen}
             >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {mobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+              {mobileMenuOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Full-Screen Mobile Drawer (< 900px) */}
+      {/* Full-Screen Mobile Drawer (< 1024px) */}
       <div
         className={`fixed inset-0 z-50 bg-[var(--bg)] flex flex-col justify-between transition-all duration-300 lg:hidden ${
           mobileMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
@@ -225,35 +221,33 @@ export default function Navbar() {
         {/* Drawer Header */}
         <div className="flex items-center justify-between pb-6 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <img src="/images/logo.svg" alt="ADSA Logo" className="w-10 h-10" />
-            <span className="font-heading font-extrabold text-xl text-white">ADSA ക്യാമ്പ്</span>
+            <img src="/images/logo.svg" alt="ADSA Logo" className="w-9 h-9" />
+            <span className="font-heading font-extrabold text-lg text-white">ADSA ക്യാമ്പ്</span>
           </div>
           <button
             type="button"
             onClick={() => setMobileMenuOpen(false)}
-            className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)]"
+            className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)]"
             aria-label="മെനു അടയ്ക്കുക"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X size={20} strokeWidth={1.5} />
           </button>
         </div>
 
         {/* Drawer Links */}
-        <nav className="flex flex-col justify-center gap-6 my-auto py-8">
+        <nav className="flex flex-col justify-center gap-5 my-auto py-8">
           {NAV_LINKS.map((link, idx) => (
             <a
               key={link.id}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link.href)}
               style={{ transitionDelay: `${idx * 40}ms` }}
-              className={`font-heading text-2xl sm:text-3xl font-bold py-2 flex items-center justify-between border-b border-white/5 transition-all ${
+              className={`font-heading text-2xl font-bold py-2 flex items-center justify-between border-b border-white/5 transition-all ${
                 activeSection === link.id ? 'text-[var(--yellow)]' : 'text-white/90 hover:text-white'
               }`}
             >
               <span>{link.label}</span>
-              <span className="text-sm font-sora text-[var(--sky)] font-normal">0{idx + 1}</span>
+              <span className="text-xs font-sora text-[var(--sky)] font-normal">0{idx + 1}</span>
             </a>
           ))}
         </nav>
@@ -264,7 +258,7 @@ export default function Navbar() {
             href="#register"
             onClick={(e) => handleLinkClick(e, '#register')}
             variant="primary"
-            className="w-full text-base"
+            className="w-full text-sm"
           >
             രജിസ്റ്റർ ചെയ്യൂ (സൗജന്യം)
           </Button>
@@ -288,7 +282,7 @@ export default function Navbar() {
           href="#register"
           onClick={(e) => handleLinkClick(e, '#register')}
           variant="primary"
-          className="h-[44px] px-5 text-sm shrink-0"
+          className="h-[42px] px-5 text-xs shrink-0"
         >
           രജിസ്റ്റർ ചെയ്യൂ
         </Button>

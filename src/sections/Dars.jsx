@@ -1,121 +1,81 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DARS_LIST from '../data/dars.json';
-import {
-  MasjidIcon,
-  KitabIcon,
-  RihalIcon,
-  MinaretIcon,
-  LampIcon,
-  StarIcon,
-  PalmIcon,
-  DatesIcon,
-  QalamIcon,
-} from '../art/Icons';
-
-const ICON_MAP = {
-  masjid: MasjidIcon,
-  kitab: KitabIcon,
-  rihal: RihalIcon,
-  minaret: MinaretIcon,
-  lamp: LampIcon,
-  star: StarIcon,
-  palm: PalmIcon,
-  dates: DatesIcon,
-  qalam: QalamIcon,
-};
+import { GraduationCap } from 'lucide-react';
 
 export default function Dars() {
-  const [selectedDistrict, setSelectedDistrict] = useState('എല്ലാം');
+  const row1 = DARS_LIST.slice(0, 15);
+  const row2 = DARS_LIST.slice(15, 30);
 
-  const districts = ['എല്ലാം', ...new Set(DARS_LIST.map((d) => d.district))];
-
-  const filteredDars =
-    selectedDistrict === 'എല്ലാം'
-      ? DARS_LIST
-      : DARS_LIST.filter((d) => d.district === selectedDistrict);
+  // Duplicate items for seamless continuous infinite marquee loop
+  const marqueeRow1 = [...row1, ...row1];
+  const marqueeRow2 = [...row2, ...row2];
 
   return (
-    <section id="dars" className="full-width-section py-24 bg-[var(--bg)]">
-      <div className="flex flex-col gap-12">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-          <div className="flex flex-col gap-4 max-w-3xl">
-            <div className="flex items-center gap-3">
-              <span className="w-8 h-[2px] bg-[var(--yellow)] inline-block" />
-              <span className="font-heading font-bold text-sm tracking-wider uppercase text-[var(--yellow)]">
-                SUFFA ദർസ് നെറ്റ്‌വർക്ക്
-              </span>
-            </div>
+    <section id="dars" className="full-width-section section-pad bg-[var(--bg)] overflow-hidden">
+      <div className="flex flex-col gap-12 lg:gap-14">
+        {/* Section Header */}
+        <div className="flex flex-col gap-4 max-w-3xl">
+          <span className="ds-eyebrow">SUFFA ദർസ് നെറ്റ്‌വർക്ക്</span>
 
-            <h2 className="heading-section text-white">
-              30 ദർസുകളുടെ <span className="text-[var(--yellow)]">മഹാ ശൃംഖല</span>
-            </h2>
+          <h2 className="heading-h2 text-white">
+            30 ദർസുകളുടെ <span className="text-[var(--yellow)]">ശൃംഖല</span>
+          </h2>
 
-            <p className="font-body text-base sm:text-lg text-[var(--muted)]">
-              ഡോ. സി.കെ അബ്ദുറഹ്മാൻ ഫൈസി അരിപ്ര ഉസ്താദിന്റെ മേൽനോട്ടത്തിൽ പ്രവർത്തിക്കുന്ന 30 ദർസുകൾ.
-              ഓരോ ദർസിൽ നിന്നുമുള്ള തെരഞ്ഞെടുക്കപ്പെട്ട വിദ്യാർത്ഥികളാണ് ഈ ക്യാമ്പിൽ ഒന്നിക്കുന്നത്.
-            </p>
-          </div>
-
-          <div className="px-5 py-2.5 rounded-2xl bg-[var(--card)] border border-white/10 text-right shrink-0">
-            <span className="block font-sora font-extrabold text-2xl text-[var(--yellow)]">30 ദർസ്</span>
-            <span className="text-xs text-[var(--muted)] font-body">സംസ്ഥാനത്തുടനീളം</span>
-          </div>
+          <p className="body-editorial">
+            ഉസ്താദ് ഡോ. സി.കെ അബ്ദുറഹ്മാൻ ഫൈസി അരിപ്രയുടെ മേൽനോട്ടത്തിൽ പ്രവർത്തിക്കുന്ന 30 ദർസുകളിലെ
+            വിദ്യാർത്ഥികൾ ഒത്തുചേരുന്ന മഹത്തായ ക്യാമ്പ്.
+          </p>
         </div>
 
-        {/* District Filter Chips */}
-        <div className="flex flex-wrap items-center gap-2">
-          {districts.map((dist) => (
-            <button
-              key={dist}
-              type="button"
-              onClick={() => setSelectedDistrict(dist)}
-              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-heading font-bold transition-all cursor-pointer ${
-                selectedDistrict === dist
-                  ? 'bg-[var(--blue)] text-white shadow-md'
-                  : 'bg-[var(--card)] text-white/70 hover:text-white border border-white/5 hover:border-white/20'
-              }`}
-            >
-              {dist} {dist !== 'എല്ലാം' && `(${DARS_LIST.filter((d) => d.district === dist).length})`}
-            </button>
-          ))}
-        </div>
+        {/* Two-Row Infinite Marquee (Opposite Directions, Pauses on Hover) */}
+        <div className="flex flex-col gap-4 w-full relative">
+          {/* Subtle fade edges on sides */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[var(--bg)] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[var(--bg)] to-transparent z-10 pointer-events-none" />
 
-        {/* 30 Dars Chips Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {filteredDars.map((item) => {
-            const IconComp = ICON_MAP[item.icon] || KitabIcon;
-            return (
-              <div
-                key={item.id}
-                className="group relative bg-[var(--card)] rounded-[20px] p-5 border border-white/[0.06] hover:border-[var(--sky)]/50 transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl flex flex-col justify-between cursor-default"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-sora font-bold text-[var(--muted)] group-hover:text-[var(--sky)] transition-colors">
-                      #{String(item.id).padStart(2, '0')}
+          {/* Row 1: Scrolling Left */}
+          <div className="w-full overflow-hidden">
+            <div className="animate-marquee-left pause-hover gap-3.5 flex">
+              {marqueeRow1.map((item, idx) => (
+                <div
+                  key={`r1-${idx}`}
+                  className="flex items-center gap-3 px-5 py-3 rounded-[16px] bg-[var(--card)] border border-white/[0.08] hover:border-white/25 transition-all select-none shrink-0"
+                >
+                  <GraduationCap size={18} strokeWidth={1.5} className="text-white/60 shrink-0" />
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-heading font-bold text-sm text-white whitespace-nowrap">
+                      {item.name}
                     </span>
-                    <span className="w-8 h-8 rounded-xl bg-white/5 group-hover:bg-[var(--blue)]/20 flex items-center justify-center transition-colors">
-                      <IconComp className="w-5 h-5 text-[var(--yellow)]" color="#FFC93C" />
+                    <span className="font-sora text-xs text-[var(--muted)] whitespace-nowrap">
+                      ({item.place})
                     </span>
                   </div>
-
-                  <h3 className="font-heading font-bold text-base text-white group-hover:text-[var(--yellow)] transition-colors line-clamp-2 leading-snug">
-                    {item.name}
-                  </h3>
                 </div>
+              ))}
+            </div>
+          </div>
 
-                <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs">
-                  <span className="text-[var(--sky)] font-heading font-medium">
-                    {item.place}
-                  </span>
-                  <span className="text-[10px] font-sora px-2 py-0.5 rounded-full bg-white/5 text-[var(--muted)]">
-                    {item.district}
-                  </span>
+          {/* Row 2: Scrolling Right */}
+          <div className="w-full overflow-hidden">
+            <div className="animate-marquee-right pause-hover gap-3.5 flex">
+              {marqueeRow2.map((item, idx) => (
+                <div
+                  key={`r2-${idx}`}
+                  className="flex items-center gap-3 px-5 py-3 rounded-[16px] bg-[var(--card)] border border-white/[0.08] hover:border-white/25 transition-all select-none shrink-0"
+                >
+                  <GraduationCap size={18} strokeWidth={1.5} className="text-white/60 shrink-0" />
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-heading font-bold text-sm text-white whitespace-nowrap">
+                      {item.name}
+                    </span>
+                    <span className="font-sora text-xs text-[var(--muted)] whitespace-nowrap">
+                      ({item.place})
+                    </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
